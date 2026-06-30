@@ -1,843 +1,649 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAS — Digital Access Systems | Defensa Proactiva contra Phishing</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --negro: #020202; --negro-suave: #0a0a0a; --rojo: #ff003c; --rojo-suave: #ff1744;
-            --rojo-tenue: rgba(255,0,60,0.08); --azul: #448aff; --azul-profundo: #0d47a1;
-            --indigo: #536dfe; --indigo-profundo: #1a237e; --plata: #e0e0e0; --blanco: #ffffff;
-            --gris-metal: #b0b0b0; --gris-oscuro: #1a1a1a; --gris-card: #141414;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif; background-color: var(--negro); color: var(--blanco);
-            overflow-x: hidden; line-height: 1.6;
-        }
-        #particles-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none; opacity: 0.35;
-        }
-        nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000; padding: 1.5rem 5%;
-            display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2,2,2,0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease;
-        }
-        nav.scrolled { padding: 1rem 5%; background: rgba(2,2,2,0.9); }
-        .logo {
-            font-weight: 900; font-size: 1.6rem; letter-spacing: -0.06em;
-            background: linear-gradient(135deg, var(--blanco), var(--gris-metal));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a {
-            color: var(--gris-metal); text-decoration: none; font-weight: 500; font-size: 0.9rem;
-            transition: color 0.3s ease; position: relative;
-        }
-        .nav-links a:hover { color: var(--blanco); }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
-            background: var(--blanco); transition: width 0.3s ease;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        .btn-metallic {
-            display: inline-flex; align-items: center; justify-content: center; padding: 1rem 2.5rem;
-            font-family: 'Inter', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--blanco);
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
-            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 100px; cursor: pointer;
-            position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-            text-decoration: none; letter-spacing: 0.02em;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.08);
-        }
-        .btn-metallic::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
-            transition: left 0.7s ease;
-        }
-        .btn-metallic:hover::before { left: 100%; }
-        .btn-metallic:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 40px rgba(255,255,255,0.12), 0 0 30px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.15);
-            border-color: rgba(255,255,255,0.5);
-            background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.06));
-        }
-        .btn-metallic:active { transform: translateY(-1px); }
-        .btn-glow-rojo:hover { box-shadow: 0 0 40px rgba(255,0,60,0.35), 0 10px 40px rgba(255,0,60,0.15); border-color: var(--rojo); }
-        .btn-glow-azul:hover { box-shadow: 0 0 40px rgba(68,138,255,0.35), 0 10px 40px rgba(68,138,255,0.15); border-color: var(--azul); }
-        .btn-glow-indigo:hover { box-shadow: 0 0 40px rgba(83,109,254,0.35), 0 10px 40px rgba(83,109,254,0.15); border-color: var(--indigo); }
-        .btn-glow-plata:hover { box-shadow: 0 0 40px rgba(224,224,224,0.3), 0 10px 40px rgba(224,224,224,0.1); border-color: var(--plata); }
-        section { position: relative; z-index: 1; padding: 7rem 5%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-        .section-label { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 1.5rem; opacity: 0.7; }
-        .section-title { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin-bottom: 2rem; }
-        .section-subtitle { font-size: 1.2rem; font-weight: 400; color: var(--gris-metal); max-width: 600px; margin-bottom: 3rem; line-height: 1.7; }
-        .section-divider { position: relative; width: 100%; height: 100px; z-index: 2; overflow: hidden; }
-        .section-divider svg { position: absolute; width: 100%; height: 100%; }
-        .hero {
-            min-height: 100vh; text-align: center; align-items: center;
-            background: radial-gradient(ellipse at center, rgba(15,15,15,1) 0%, rgba(2,2,2,1) 70%); position: relative;
-        }
-        .hero-content { position: relative; z-index: 2; }
-        .hero-pretitle {
-            font-size: 0.85rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase;
-            color: var(--gris-metal); margin-bottom: 2rem; opacity: 0; animation: fadeInUp 0.8s ease 0.2s forwards;
-        }
-        .hero-title {
-            font-size: clamp(3.5rem, 10vw, 8rem); font-weight: 900; letter-spacing: -0.06em; line-height: 0.95;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(180deg, var(--blanco) 0%, var(--gris-metal) 100%);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 60px rgba(255,255,255,0.08)); opacity: 0; animation: fadeInUp 0.8s ease 0.4s forwards;
-        }
-        .hero-subtitle {
-            font-size: clamp(1rem, 2vw, 1.4rem); color: var(--gris-metal); font-weight: 300;
-            margin-bottom: 3.5rem; letter-spacing: 0.05em; opacity: 0; animation: fadeInUp 0.8s ease 0.6s forwards;
-        }
-        .hero-btn { opacity: 0; animation: fadeInUp 0.8s ease 0.8s forwards; position: relative; }
-        .hero-btn::after { content: '↓'; margin-left: 0.5rem; display: inline-block; animation: bounceDown 2s ease infinite; }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes bounceDown { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
-        .stats-dashboard { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 3rem 0; }
-        .stat-item {
-            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-            backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px;
-            padding: 2rem; cursor: pointer; transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
-            position: relative; overflow: hidden;
-        }
-        .stat-item::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-            background: linear-gradient(90deg, transparent, var(--rojo), transparent); opacity: 0.7;
-        }
-        .stat-item:hover { transform: translateY(-8px) scale(1.02); border-color: rgba(255,0,60,0.4);
-            box-shadow: 0 20px 50px rgba(255,0,60,0.15), 0 0 30px rgba(255,0,60,0.05);
-        }
-        .stat-item:hover .stat-number { filter: drop-shadow(0 0 15px rgba(255,0,60,0.4)); }
-        .stat-number {
-            font-size: 3rem; font-weight: 900; line-height: 1; margin-bottom: 0.75rem;
-            background: linear-gradient(180deg, var(--blanco), var(--gris-metal));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; transition: filter 0.3s ease;
-        }
-        .stat-desc { font-size: 0.85rem; color: var(--gris-metal); font-weight: 500; line-height: 1.5; }
-        .stat-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; margin-top: 1.25rem; overflow: hidden; }
-        .stat-bar-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--rojo), #ff6b6b); width: 0;
-            transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
-        }
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 9999;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-        }
-        .modal-overlay.active { opacity: 1; pointer-events: all; }
-        .modal-content {
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a); border: 1px solid rgba(255,0,60,0.3);
-            border-radius: 32px; padding: 3rem; max-width: 600px; width: 90%; position: relative;
-            transform: scale(0.9); transition: transform 0.3s ease;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(255,0,60,0.1);
-        }
-        .modal-overlay.active .modal-content { transform: scale(1); }
-        .modal-close {
-            position: absolute; top: 1.5rem; right: 1.5rem; width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-            color: var(--gris-metal); font-size: 1.2rem; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
-        }
-        .modal-close:hover { background: rgba(255,0,60,0.2); color: var(--blanco); border-color: var(--rojo); }
-        .modal-title { font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--blanco); }
-        .modal-number { font-size: 3.5rem; font-weight: 900; margin: 1rem 0;
-            background: linear-gradient(180deg, var(--rojo-suave), var(--rojo));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
-        .modal-chart { width: 100%; height: 120px; margin: 1.5rem 0;
-            background: rgba(255,0,60,0.05); border-radius: 16px;
-            border: 1px solid rgba(255,0,60,0.15); position: relative; overflow: hidden;
-            display: flex; align-items: flex-end; justify-content: space-around; padding: 0 1rem 0;
-        }
-        .modal-chart-bar { width: 10%; border-radius: 4px 4px 0 0;
-            background: linear-gradient(to top, var(--rojo), rgba(255,0,60,0.3));
-            transition: height 1s ease; height: 0;
-        }
-        .modal-text { color: var(--gris-metal); font-size: 0.95rem; line-height: 1.7; }
-        .modal-source { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08);
-            font-size: 0.8rem; color: rgba(255,255,255,0.4);
-        }
-        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-        .retro-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
-        }
-        .retro-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--rojo), transparent); opacity: 0.8;
-        }
-        .retro-card:hover { transform: translateY(-6px); border-color: rgba(255,0,60,0.35);
-            box-shadow: 0 15px 40px rgba(255,0,60,0.12);
-        }
-        .retro-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 1rem; color: var(--blanco); padding-left: 0.5rem; }
-        .retro-card p { color: var(--gris-metal); font-size: 0.92rem; line-height: 1.7; padding-left: 0.5rem; }
-        .tree-container { margin-top: 4rem; padding: 3rem;
-            background: linear-gradient(135deg, rgba(255,0,60,0.04), rgba(0,0,0,0.3));
-            border-radius: 32px; border: 1px solid rgba(255,0,60,0.18); position: relative; overflow: hidden;
-        }
-        .tree-title { text-align: center; font-size: 1.4rem; font-weight: 700; margin-bottom: 2.5rem; color: var(--rojo-suave); }
-        .tree-diagram { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
-        .tree-trunk {
-            background: linear-gradient(135deg, rgba(255,0,60,0.15), rgba(255,0,60,0.05));
-            border: 1px solid rgba(255,0,60,0.3); border-radius: 16px; padding: 1.5rem 3rem;
-            font-weight: 700; font-size: 1.05rem; text-align: center; max-width: 650px; width: 100%; backdrop-filter: blur(10px);
-        }
-        .tree-branches, .tree-roots { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; width: 100%; max-width: 900px; }
-        .tree-branch, .tree-root { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
-            padding: 1rem; text-align: center; font-size: 0.9rem; color: var(--gris-metal);
-        }
-        .tree-root { background: rgba(255,0,60,0.06); border-color: rgba(255,0,60,0.2); }
-        #escudo { background: linear-gradient(180deg, var(--negro) 0%, rgba(68,138,255,0.08) 40%, rgba(13,71,161,0.05) 100%);
-            border-top: 1px solid rgba(68,138,255,0.2);
-        }
-        #escudo .section-label { color: var(--azul); }
-        #escudo .section-title { background: linear-gradient(135deg, var(--blanco), var(--azul)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #escudo .retro-card::before { background: linear-gradient(to bottom, var(--azul), transparent); }
-        #escudo .retro-card:hover { border-color: rgba(68,138,255,0.35); box-shadow: 0 15px 40px rgba(68,138,255,0.1); }
-        .justification-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-        .justification-card {
-            background: linear-gradient(135deg, rgba(68,138,255,0.06), rgba(255,255,255,0.02));
-            border: 1px solid rgba(68,138,255,0.15); border-radius: 20px; padding: 2rem; transition: all 0.3s ease;
-        }
-        .justification-card:hover { transform: translateY(-5px); border-color: rgba(68,138,255,0.4); box-shadow: 0 15px 35px rgba(68,138,255,0.1); }
-        .justification-card h4 { color: var(--azul); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .justification-card p { color: var(--gris-metal); font-size: 0.88rem; line-height: 1.6; }
-        #proceso { background: linear-gradient(180deg, var(--negro) 0%, rgba(83,109,254,0.06) 40%, rgba(26,35,126,0.04) 100%);
-            border-top: 1px solid rgba(83,109,254,0.2);
-        }
-        #proceso .section-label { color: var(--indigo); }
-        #proceso .section-title { background: linear-gradient(135deg, var(--blanco), var(--indigo)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .carousel-container { position: relative; margin-top: 3rem;
-            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-            border: 1px solid rgba(255,255,255,0.1); border-radius: 32px; padding: 3rem; overflow: hidden;
-        }
-        .carousel-slides { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
-        .carousel-slide { min-width: 100%; padding: 1rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .carousel-slide-number {
-            width: 60px; height: 60px; border-radius: 50%;
-            background: linear-gradient(135deg, rgba(83,109,254,0.2), rgba(83,109,254,0.05));
-            border: 2px solid var(--indigo); display: flex; align-items: center; justify-content: center;
-            font-weight: 800; font-size: 1.3rem; color: var(--indigo); margin-bottom: 2rem; flex-shrink: 0;
-        }
-        .carousel-slide h3 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; color: var(--blanco); }
-        .carousel-slide p { color: var(--gris-metal); font-size: 1rem; line-height: 1.8; max-width: 600px; }
-        .carousel-slide .slide-link {
-            margin-top: 1.5rem; padding: 0.6rem 1.5rem; background: rgba(83,109,254,0.1);
-            border: 1px solid rgba(83,109,254,0.3); border-radius: 100px; color: var(--indigo);
-            font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease;
-        }
-        .carousel-slide .slide-link:hover { background: rgba(83,109,254,0.2); border-color: var(--indigo); color: var(--blanco); }
-        .carousel-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
-        .carousel-btn {
-            width: 48px; height: 48px; border-radius: 50%; background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.15); color: var(--gris-metal); font-size: 1.2rem;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
-        }
-        .carousel-btn:hover { background: rgba(83,109,254,0.15); border-color: var(--indigo); color: var(--indigo); transform: scale(1.1); }
-        .carousel-dots { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.5rem; }
-        .carousel-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.15); cursor: pointer; transition: all 0.3s ease; }
-        .carousel-dot.active { background: var(--indigo); width: 24px; border-radius: 4px; }
-        .bpmn-placeholder { margin-top: 4rem; padding: 3rem;
-            background: linear-gradient(135deg, rgba(83,109,254,0.04), rgba(0,0,0,0.2));
-            border-radius: 32px; border: 2px dashed rgba(83,109,254,0.25); text-align: center;
-        }
-        .bpmn-placeholder h3 { color: var(--indigo); margin-bottom: 1rem; font-size: 1.3rem; }
-        .bpmn-placeholder p { color: var(--gris-metal); font-size: 0.9rem; }
-        #retroalimentacion { background: linear-gradient(180deg, var(--negro) 0%, rgba(224,224,224,0.06) 30%, rgba(255,255,255,0.02) 100%);
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-        #retroalimentacion .section-label { color: var(--plata); }
-        #retroalimentacion .section-title { background: linear-gradient(135deg, var(--blanco), var(--plata)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        #retroalimentacion .section-subtitle { color: rgba(255,255,255,0.65); }
-        .quote-box {
-            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
-            border-left: 4px solid var(--plata); border-radius: 0 20px 20px 0; padding: 2.5rem; margin: 3rem 0;
-            font-size: 1.2rem; font-weight: 600; font-style: italic; color: var(--blanco);
-            backdrop-filter: blur(10px); position: relative;
-        }
-        .quote-box::before { content: '"'; position: absolute; top: -5px; left: 20px;
-            font-size: 4rem; color: rgba(255,255,255,0.08); font-family: serif;
-        }
-        .feedback-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-        .feedback-card {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 2rem;
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1); position: relative; overflow: hidden;
-        }
-        .feedback-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-            background: linear-gradient(to bottom, var(--plata), transparent);
-        }
-        .feedback-card:hover { border-color: rgba(255,255,255,0.3); box-shadow: 0 15px 35px rgba(255,255,255,0.08); transform: translateY(-5px); }
-        .feedback-card h4 { color: var(--plata); font-size: 1.05rem; font-weight: 700; margin-bottom: 1rem; padding-left: 0.5rem; }
-        .feedback-card p { color: var(--gris-metal); font-size: 0.9rem; line-height: 1.7; padding-left: 0.5rem; }
-        .feedback-card .tag {
-            display: inline-block; padding: 0.3rem 0.9rem; background: rgba(255,255,255,0.08);
-            border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--blanco);
-            margin-top: 1rem; margin-left: 0.5rem; border: 1px solid rgba(255,255,255,0.15);
-        }
-        footer { background: var(--negro); border-top: 1px solid rgba(255,255,255,0.06);
-            padding: 4rem 5%; text-align: center; color: var(--gris-metal); font-size: 0.9rem; position: relative; z-index: 1;
-        }
-        footer .logo { margin-bottom: 1rem; display: inline-block; }
-        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
-        .fade-in.visible { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
-        @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .stats-dashboard { grid-template-columns: 1fr; }
-            .cards-grid { grid-template-columns: 1fr; }
-            .justification-grid { grid-template-columns: 1fr; }
-            .feedback-grid { grid-template-columns: 1fr; }
-            .tree-branches, .tree-roots { grid-template-columns: 1fr; }
-            section { padding: 5rem 5%; }
-            .carousel-container { padding: 2rem 1.5rem; }
-            .modal-content { padding: 2rem; }
-        }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--negro); }
-        ::-webkit-scrollbar-thumb { background: var(--gris-oscuro); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--gris-metal); }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>DAS — Digital Access Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --n0:#020202;--n1:#0a0a0a;--n2:#111;--n3:#1a1a1a;--n4:#222;
+  --r:#ff003c;--rs:#ff1744;--rt:rgba(255,0,60,0.06);
+  --b:#448aff;--bd:#0d47a1;--bt:rgba(68,138,255,0.08);
+  --i:#536dfe;--it:rgba(83,109,254,0.08);
+  --p:#e0e0e0;--w:#fff;--g:#b0b0b0;--gd:#666;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',sans-serif;background:var(--n0);color:var(--w);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+#pc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.3}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 1rem;background:rgba(2,2,2,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:all .3s ease}
+nav.scrolled{background:rgba(2,2,2,.95);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:0 auto}
+.logo{font-weight:900;font-size:1.4rem;letter-spacing:-.06em;background:linear-gradient(135deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0}
+.nav-pills{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 .25rem}
+.nav-pills::-webkit-scrollbar{display:none}
+.nav-pills a{flex-shrink:0;padding:.5rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--g);text-decoration:none;white-space:nowrap;transition:all .3s ease;border:1px solid transparent}
+.nav-pills a:hover,.nav-pills a.active{color:var(--w);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+
+/* BTN */
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2.2rem;font-family:'Inter',sans-serif;font-weight:600;font-size:.9rem;color:var(--w);background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:100px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08)}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transition:left .7s ease}
+.btn:hover::before{left:100%}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,255,255,.1),0 0 30px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.06))}
+.btn-glow-r:hover{box-shadow:0 0 40px rgba(255,0,60,.3),0 10px 40px rgba(255,0,60,.12);border-color:var(--r)}
+.btn-glow-b:hover{box-shadow:0 0 40px rgba(68,138,255,.3),0 10px 40px rgba(68,138,255,.12);border-color:var(--b)}
+.btn-glow-p:hover{box-shadow:0 0 40px rgba(224,224,224,.2),0 10px 40px rgba(224,224,224,.08);border-color:var(--p)}
+.btn .arrow{display:inline-block;animation:bounce 2s ease infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+
+/* SECTIONS */
+section{position:relative;z-index:1;padding:6rem 1.25rem}
+.sec-inner{max-width:1200px;margin:0 auto}
+.lbl{font-size:.75rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.25rem;opacity:.6}
+.tit{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:1.25rem}
+.sub{font-size:1.05rem;font-weight:400;color:var(--g);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+
+/* DIVIDER */
+.div{position:relative;width:100%;height:80px;z-index:2;overflow:hidden;line-height:0}
+.div svg{position:absolute;width:100%;height:100%}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.25rem 4rem;background:radial-gradient(ellipse at 50% 30%,rgba(20,20,20,1) 0%,rgba(2,2,2,1) 70%)}
+.hero-pre{font-size:.8rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--g);margin-bottom:1.5rem;opacity:0;animation:fu .8s ease .2s forwards}
+.hero-tit{font-size:clamp(4rem,15vw,10rem);font-weight:900;letter-spacing:-.06em;line-height:.9;margin-bottom:1rem;background:linear-gradient(180deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 50px rgba(255,255,255,.06));opacity:0;animation:fu .8s ease .4s forwards}
+.hero-sub{font-size:clamp(.9rem,2.5vw,1.3rem);color:var(--g);font-weight:300;margin-bottom:3rem;letter-spacing:.03em;opacity:0;animation:fu .8s ease .6s forwards}
+.hero-btn{opacity:0;animation:fu .8s ease .8s forwards}
+@keyframes fu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* STATS DASHBOARD */
+.stats-wrap{position:relative;margin:2.5rem 0;overflow:hidden}
+.stats-track{display:flex;gap:1rem;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:grab}
+.stats-track:active{cursor:grabbing}
+.stat-card{flex:0 0 85%;max-width:320px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2rem;position:relative;overflow:hidden;transition:all .4s ease}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--r),transparent);opacity:.7}
+.stat-card:active{transform:scale(.98)}
+.stat-num{font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.75rem;background:linear-gradient(180deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-desc{font-size:.85rem;color:var(--g);font-weight:500;line-height:1.5}
+.stat-bar{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:1.25rem;overflow:hidden}
+.stat-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--r),#ff6b6b);width:0;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
+.stat-dots{display:flex;justify-content:center;gap:.4rem;margin-top:1.5rem}
+.stat-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s ease}
+.stat-dot.active{background:var(--r);width:20px;border-radius:3px}
+
+/* MODAL */
+.mod{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:1rem}
+.mod.on{opacity:1;pointer-events:all}
+.mod-box{background:linear-gradient(135deg,#0c0c0c,#161616);border:1px solid rgba(255,0,60,.25);border-radius:28px;padding:2.5rem 2rem;max-width:520px;width:100%;position:relative;transform:scale(.92);transition:transform .3s ease;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 40px rgba(255,0,60,.08)}
+.mod.on .mod-box{transform:scale(1)}
+.mod-x{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--g);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.mod-x:hover{background:rgba(255,0,60,.15);color:var(--w);border-color:var(--r)}
+.mod-tit{font-size:1.3rem;font-weight:800;margin-bottom:.25rem}
+.mod-num{font-size:3rem;font-weight:900;margin:.5rem 0;background:linear-gradient(180deg,var(--rs),var(--r));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.mod-chart{width:100%;height:100px;margin:1rem 0;background:rgba(255,0,60,.04);border-radius:14px;border:1px solid rgba(255,0,60,.12);display:flex;align-items:flex-end;justify-content:space-around;padding:0 .75rem .5rem;gap:4px}
+.mod-bar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--r),rgba(255,0,60,.25));transition:height 1s ease;height:0;max-width:30px}
+.mod-txt{color:var(--g);font-size:.9rem;line-height:1.7}
+.mod-src{margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);font-size:.75rem;color:rgba(255,255,255,.35)}
+
+/* RETRO CARDS (Causas/Consecuencias/Justificacion) */
+.retro-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
+@media(min-width:768px){.retro-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+.retro-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.75rem;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.retro-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--r),transparent);opacity:.8;transition:width .3s ease}
+.retro-card:hover{transform:translateY(-5px);border-color:rgba(255,0,60,.3);box-shadow:0 15px 40px rgba(255,0,60,.1)}
+.retro-card:hover::before{width:5px}
+.retro-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--w);padding-left:.5rem}
+.retro-card p{color:var(--g);font-size:.9rem;line-height:1.7;padding-left:.5rem}
+
+/* Justificacion variant */
+.justif-card::before{background:linear-gradient(to bottom,var(--b),transparent)}
+.justif-card:hover{border-color:rgba(68,138,255,.3);box-shadow:0 15px 40px rgba(68,138,255,.1)}
+.justif-card:hover::before{width:5px}
+.justif-num{position:absolute;top:1rem;right:1.5rem;font-size:4rem;font-weight:900;color:rgba(68,138,255,.06);line-height:1;pointer-events:none;transition:all .4s ease}
+.justif-card:hover .justif-num{color:rgba(68,138,255,.12);transform:scale(1.1)}
+
+/* DICCIONARIO DAS - Nothing style */
+.dic-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2.5rem}
+@media(min-width:768px){.dic-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem}}
+.dic-card{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all .5s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:1rem}
+.dic-card::after{content:'';position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle,rgba(68,138,255,.08),transparent 70%);opacity:0;transition:opacity .5s ease;pointer-events:none}
+.dic-card:hover::after{opacity:1}
+.dic-card:hover{border-color:rgba(68,138,255,.25);box-shadow:0 20px 50px rgba(68,138,255,.08);transform:translateY(-4px)}
+.dic-num{font-size:clamp(3rem,8vw,5rem);font-weight:900;line-height:1;color:rgba(68,138,255,.15);letter-spacing:-.04em;transition:all .4s ease}
+.dic-card:hover .dic-num{color:rgba(68,138,255,.25)}
+.dic-tit{font-size:1.25rem;font-weight:700;color:var(--w);margin-top:-.5rem}
+.dic-desc{color:var(--g);font-size:.9rem;line-height:1.8}
+.dic-line{width:40px;height:2px;background:linear-gradient(90deg,var(--b),transparent);transition:width .4s ease}
+.dic-card:hover .dic-line{width:80px}
+
+/* ARBOL DE PROBLEMAS */
+.arbol-wrap{margin-top:3rem;padding:2.5rem 1.5rem;background:linear-gradient(135deg,rgba(255,0,60,.03),rgba(0,0,0,.2));border-radius:28px;border:1px solid rgba(255,0,60,.15);position:relative;overflow:hidden}
+.arbol-tit{text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:2.5rem;color:var(--rs)}
+.arbol{display:flex;flex-direction:column;align-items:center;gap:2rem;position:relative}
+.arbol-tronco{background:linear-gradient(135deg,rgba(255,0,60,.12),rgba(255,0,60,.04));border:1px solid rgba(255,0,60,.25);border-radius:18px;padding:1.5rem 2rem;font-weight:700;font-size:1rem;text-align:center;max-width:600px;width:100%;backdrop-filter:blur(10px);position:relative;z-index:2;box-shadow:0 0 30px rgba(255,0,60,.08)}
+.arbol-ramas,.arbol-raices{display:grid;grid-template-columns:1fr;gap:.75rem;width:100%;max-width:700px;position:relative;z-index:2}
+@media(min-width:640px){.arbol-ramas,.arbol-raices{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:768px){.arbol-ramas,.arbol-raices{grid-template-columns:repeat(4,1fr)}}
+.arbol-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1rem;text-align:center;font-size:.85rem;color:var(--g);transition:all .3s ease}
+.arbol-item:hover{background:rgba(255,0,60,.06);border-color:rgba(255,0,60,.2);color:var(--w);transform:translateY(-2px)}
+.arbol-raiz{background:rgba(255,0,60,.05);border-color:rgba(255,0,60,.15)}
+.arbol-raiz:hover{background:rgba(255,0,60,.1);border-color:rgba(255,0,60,.3)}
+/* SVG lines */
+.arbol-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.arbol-line{stroke:rgba(255,0,60,.2);stroke-width:1.5;fill:none;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 2s ease}
+.arbol-line.on{stroke-dashoffset:0}
+
+/* IMPORTANCIA BOX */
+.imp-box{margin-top:3rem;padding:2rem;background:linear-gradient(135deg,rgba(68,138,255,.05),rgba(0,0,0,.15));border-radius:24px;border:1px solid rgba(68,138,255,.15);position:relative;overflow:hidden}
+.imp-box::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(68,138,255,.06),transparent 70%);pointer-events:none}
+.imp-box h3{font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--b);position:relative}
+.imp-box p{color:var(--g);font-size:.95rem;line-height:1.8;position:relative}
+.imp-box strong{color:var(--w);font-weight:600}
+
+/* CARRUSEL PROCESO */
+.car-wrap{position:relative;margin-top:2.5rem;background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:2rem 1.5rem;overflow:hidden}
+.car-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
+.car-slide{min-width:100%;padding:1rem;display:flex;flex-direction:column;align-items:center;text-align:center}
+.car-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(83,109,254,.15),rgba(83,109,254,.03));border:2px solid var(--i);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:var(--i);margin-bottom:1.5rem;flex-shrink:0}
+.car-slide h3{font-size:1.3rem;font-weight:700;margin-bottom:.75rem;color:var(--w)}
+.car-slide p{color:var(--g);font-size:.9rem;line-height:1.8;max-width:500px}
+.car-link{margin-top:1.25rem;padding:.6rem 1.5rem;background:rgba(83,109,254,.08);border:1px solid rgba(83,109,254,.2);border-radius:100px;color:var(--i);font-size:.8rem;font-weight:600;text-decoration:none;transition:all .3s ease}
+.car-link:hover{background:rgba(83,109,254,.15);border-color:var(--i);color:var(--w)}
+.car-nav{display:flex;justify-content:center;gap:.75rem;margin-top:1.5rem}
+.car-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--g);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease;touch-action:manipulation}
+.car-btn:hover{background:rgba(83,109,254,.12);border-color:var(--i);color:var(--i);transform:scale(1.08)}
+.car-btn:active{transform:scale(.95)}
+.car-dots{display:flex;justify-content:center;gap:.4rem;margin-top:1rem}
+.car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer;transition:all .3s ease}
+.car-dot.on{background:var(--i);width:20px;border-radius:3px}
+
+/* BPMN */
+.bpmn{margin-top:3rem;padding:2rem;background:linear-gradient(135deg,rgba(83,109,254,.03),rgba(0,0,0,.1));border-radius:24px;border:2px dashed rgba(83,109,254,.2);text-align:center}
+.bpmn h3{color:var(--i);margin-bottom:.75rem;font-size:1.2rem}
+.bpmn p{color:var(--g);font-size:.85rem}
+.bpmn-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
+@media(min-width:640px){.bpmn-grid{grid-template-columns:repeat(2,1fr)}}
+.bpmn-card{background:rgba(0,0,0,.25);border-radius:16px;padding:1.5rem;border:1px solid rgba(83,109,254,.2)}
+.bpmn-card h4{color:var(--i);margin-bottom:.75rem;font-size:1rem}
+.bpmn-card p{font-size:.8rem;color:var(--g)}
+
+/* RETROALIMENTACION */
+.quote{background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border-left:3px solid var(--p);border-radius:0 20px 20px 0;padding:2rem;margin:2.5rem 0;font-size:1.1rem;font-weight:600;font-style:italic;color:var(--w);backdrop-filter:blur(10px);position:relative}
+.quote::before{content:'"';position:absolute;top:-8px;left:16px;font-size:3.5rem;color:rgba(255,255,255,.06);font-family:serif;line-height:1}
+.feed-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
+@media(min-width:768px){.feed-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+@media(min-width:1024px){.feed-grid{grid-template-columns:repeat(3,1fr)}}
+.feed-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.75rem;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
+.feed-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--p),transparent);transition:width .3s ease}
+.feed-card:hover{border-color:rgba(255,255,255,.25);box-shadow:0 15px 35px rgba(255,255,255,.06);transform:translateY(-5px)}
+.feed-card:hover::before{width:5px}
+.feed-card h4{color:var(--p);font-size:1rem;font-weight:700;margin-bottom:1rem;padding-left:.5rem}
+.feed-card p{color:var(--g);font-size:.88rem;line-height:1.7;padding-left:.5rem}
+.feed-card strong{color:var(--w);font-weight:600}
+.feed-tag{display:inline-block;padding:.25rem .9rem;background:rgba(255,255,255,.06);border-radius:100px;font-size:.72rem;font-weight:600;color:var(--w);margin-top:1rem;margin-left:.5rem;border:1px solid rgba(255,255,255,.12)}
+
+/* FOOTER */
+footer{background:var(--n0);border-top:1px solid rgba(255,255,255,.06);padding:3rem 1.25rem;text-align:center;color:var(--g);font-size:.85rem;position:relative;z-index:1}
+footer .logo{margin-bottom:.75rem;display:inline-block;font-size:1.8rem}
+
+/* ANIMATIONS */
+.fade{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+.fade.v{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}
+.d2{transition-delay:.2s}
+.d3{transition-delay:.3s}
+.d4{transition-delay:.4s}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--n0)}
+::-webkit-scrollbar-thumb{background:var(--n3);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--n4)}
+
+/* TOUCH OPTIMIZATIONS */
+@media(pointer:coarse){
+  .btn:hover{transform:none}
+  .stat-card:hover,.retro-card:hover,.dic-card:hover,.feed-card:hover,.justif-card:hover{transform:none}
+  .car-btn:hover{transform:none}
+}
+</style>
 </head>
 <body>
 
-<canvas id="particles-canvas"></canvas>
+<canvas id="pc"></canvas>
 
-<nav id="navbar">
+<nav id="nav">
+  <div class="nav-inner">
     <div class="logo">DAS.</div>
-    <ul class="nav-links">
-        <li><a href="#amenaza">La Amenaza</a></li>
-        <li><a href="#escudo">El Escudo</a></li>
-        <li><a href="#proceso">Proceso</a></li>
-        <li><a href="#retroalimentacion">Retroalimentación</a></li>
-    </ul>
+    <div class="nav-pills">
+      <a href="#amenaza" data-sec="amenaza">Amenaza</a>
+      <a href="#escudo" data-sec="escudo">Escudo</a>
+      <a href="#proceso" data-sec="proceso">Proceso</a>
+      <a href="#retro" data-sec="retro">Retro</a>
+    </div>
+  </div>
 </nav>
 
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-content">
-        <p class="hero-pretitle">Digital Access Systems</p>
-        <h1 class="hero-title">DAS</h1>
-        <p class="hero-subtitle">Sistema de Defensa Proactiva contra Phishing</p>
-        <a href="#amenaza" class="btn-metallic btn-glow-rojo hero-btn">Explorar Proyecto</a>
-    </div>
+  <div class="hero-pre">Digital Access Systems</div>
+  <div class="hero-tit">DAS</div>
+  <div class="hero-sub">Sistema de Defensa Proactiva contra Phishing</div>
+  <a href="#amenaza" class="btn btn-glow-r hero-btn">Explorar Proyecto <span class="arrow">↓</span></a>
 </section>
 
-<div class="section-divider">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,0 C360,100 720,100 1080,50 C1260,25 1380,12 1440,0 L1440,100 L0,100 Z" fill="#020202"></path>
-    </svg>
+<div class="div">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,0 C360,80 720,80 1080,40 C1260,20 1380,10 1440,0 L1440,80 L0,80 Z" fill="#020202"/></svg>
 </div>
 
+<!-- SECCION 1: LA AMENAZA -->
 <section id="amenaza">
-    <div class="section-label fade-in">El Problema</div>
-    <h2 class="section-title fade-in delay-1">La Amenaza<br>Digital</h2>
-    <p class="section-subtitle fade-in delay-2">
-        El phishing no es una amenaza futura: es el presente. Cada 21 segundos, alguien cae. 
-        Cada día, 3.4 mil millones de correos maliciosos buscan una brecha: la confianza humana.
-    </p>
+  <div class="sec-inner">
+    <div class="lbl fade" style="color:var(--r)">El Problema</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--rs));-webkit-background-clip:text;-webkit-text-fill-color:transparent">La Amenaza<br>Digital</h2>
+    <p class="sub fade d2">El phishing no es una amenaza futura: es el presente. Cada 21 segundos, alguien cae. Cada dia, 3.4 mil millones de correos maliciosos buscan una brecha: la confianza humana.</p>
 
-    <div class="stats-dashboard fade-in delay-3">
-        <div class="stat-item" onclick="openModal(0)">
-            <div class="stat-number" data-target="5">0</div>
-            <div class="stat-desc">Millones de ataques de phishing anuales (2025)</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-width="95"></div></div>
+    <!-- Stats Swipeable -->
+    <div class="stats-wrap fade d3">
+      <div class="stats-track" id="statsTrack">
+        <div class="stat-card" onclick="openModal(0)">
+          <div class="stat-num" data-t="5">0</div>
+          <div class="stat-desc">Millones de ataques de phishing anuales (2025)</div>
+          <div class="stat-bar"><div class="stat-bar-fill" data-w="92"></div></div>
         </div>
-        <div class="stat-item" onclick="openModal(1)">
-            <div class="stat-number" data-target="3.4">0</div>
-            <div class="stat-desc">Mil millones de correos phishing enviados diariamente</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-width="88"></div></div>
+        <div class="stat-card" onclick="openModal(1)">
+          <div class="stat-num" data-t="3.4">0</div>
+          <div class="stat-desc">Mil millones de correos phishing enviados diariamente</div>
+          <div class="stat-bar"><div class="stat-bar-fill" data-w="85"></div></div>
         </div>
-        <div class="stat-item" onclick="openModal(2)">
-            <div class="stat-number" data-target="86">0</div>
-            <div class="stat-desc">% de ataques generados por Inteligencia Artificial</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-width="86"></div></div>
+        <div class="stat-card" onclick="openModal(2)">
+          <div class="stat-num" data-t="86">0</div>
+          <div class="stat-desc">% de ataques generados por Inteligencia Artificial</div>
+          <div class="stat-bar"><div class="stat-bar-fill" data-w="86"></div></div>
         </div>
-        <div class="stat-item" onclick="openModal(3)">
-            <div class="stat-number" data-target="21">0</div>
-            <div class="stat-desc">Segundos promedio para que un usuario haga clic</div>
-            <div class="stat-bar"><div class="stat-bar-fill" data-width="70"></div></div>
+        <div class="stat-card" onclick="openModal(3)">
+          <div class="stat-num" data-t="21">0</div>
+          <div class="stat-desc">Segundos promedio para que un usuario haga clic</div>
+          <div class="stat-bar"><div class="stat-bar-fill" data-w="65"></div></div>
         </div>
+      </div>
+      <div class="stat-dots" id="statDots"></div>
     </div>
 
-    <div class="modal-overlay" id="statModal" onclick="closeModal(event)">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <div class="modal-title" id="modalTitle">Título</div>
-            <div class="modal-number" id="modalNumber">0</div>
-            <div class="modal-chart" id="modalChart"></div>
-            <div class="modal-text" id="modalText">Descripción</div>
-            <div class="modal-source" id="modalSource">Fuente</div>
-        </div>
+    <!-- Modal -->
+    <div class="mod" id="statModal" onclick="closeModal(event)">
+      <div class="mod-box" onclick="event.stopPropagation()">
+        <button class="mod-x" onclick="closeModal()">&times;</button>
+        <div class="mod-tit" id="mTit"></div>
+        <div class="mod-num" id="mNum"></div>
+        <div class="mod-chart" id="mChart"></div>
+        <div class="mod-txt" id="mTxt"></div>
+        <div class="mod-src" id="mSrc"></div>
+      </div>
     </div>
 
-    <div style="margin-top: 5rem;">
-        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; color: var(--rojo-suave);">Causas</h3>
-        <div class="cards-grid">
-            <div class="retro-card fade-in">
-                <h3>Desconocimiento Técnico</h3>
-                <p>Falta de alfabetización en ciberseguridad. Los usuarios caen en tácticas de ingeniería social por desconocer los vectores de ataque modernos y las señales de alerta en comunicaciones digitales.</p>
-            </div>
-            <div class="retro-card fade-in delay-1">
-                <h3>Malas Prácticas de Credenciales</h3>
-                <p>Reutilización sistemática de contraseñas débiles en múltiples plataformas y almacenamiento inseguro de datos sensibles en dispositivos sin cifrado.</p>
-            </div>
-            <div class="retro-card fade-in delay-2">
-                <h3>Ausencia de Herramientas Integradas</h3>
-                <p>No existen soluciones gratuitas y accesibles que combinen escaneo de URLs y protección de contraseñas en una sola interfaz intuitiva para el usuario común.</p>
-            </div>
+    <!-- Causas -->
+    <div style="margin-top:4rem">
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--rs)">Causas</h3>
+      <div class="retro-grid">
+        <div class="retro-card fade">
+          <h3>Desconocimiento Tecnico</h3>
+          <p>Falta de alfabetizacion en ciberseguridad. Los usuarios caen en tacticas de ingenieria social por desconocer los vectores de ataque modernos y las senales de alerta en comunicaciones digitales.</p>
         </div>
+        <div class="retro-card fade d1">
+          <h3>Malas Practicas de Credenciales</h3>
+          <p>Reutilizacion sistematica de contrasenas debiles en multiples plataformas y almacenamiento inseguro de datos sensibles en dispositivos sin cifrado.</p>
+        </div>
+        <div class="retro-card fade d2">
+          <h3>Ausencia de Herramientas Integradas</h3>
+          <p>No existen soluciones gratuitas y accesibles que combinen escaneo de URLs y proteccion de contrasenas en una sola interfaz intuitiva para el usuario comun.</p>
+        </div>
+      </div>
     </div>
 
-    <div style="margin-top: 4rem;">
-        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; color: var(--rojo-suave);">Consecuencias</h3>
-        <div class="cards-grid">
-            <div class="retro-card fade-in">
-                <h3>Pérdidas Financieras</h3>
-                <p>Extracción directa de fondos de cuentas bancarias y billeteras digitales mediante suplantación de identidad. El costo promedio de una brecha supera los 4.7 millones de dólares.</p>
-            </div>
-            <div class="retro-card fade-in delay-1">
-                <h3>Robo de Identidad</h3>
-                <p>Uso de información personal para cometer fraudes a terceros, generando daños legales y reputacionales irreversibles que pueden extenderse por años.</p>
-            </div>
-            <div class="retro-card fade-in delay-2">
-                <h3>Compromiso en Cadena</h3>
-                <p>Al vulnerar una contraseña reutilizada, los atacantes acceden a múltiples servicios simultáneamente, amplificando el daño exponencialmente.</p>
-            </div>
-            <div class="retro-card fade-in delay-3">
-                <h3>Desconfianza Digital</h3>
-                <p>Miedo y resistencia a utilizar servicios en línea por temor a ser estafado, frenando la adopción tecnológica y la transformación digital de personas y organizaciones.</p>
-            </div>
+    <!-- Consecuencias -->
+    <div style="margin-top:3rem">
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--rs)">Consecuencias</h3>
+      <div class="retro-grid">
+        <div class="retro-card fade">
+          <h3>Perdidas Financieras</h3>
+          <p>Extraccion directa de fondos de cuentas bancarias y billeteras digitales mediante suplantacion de identidad. El costo promedio de una brecha supera los 4.7 millones de dolares.</p>
         </div>
+        <div class="retro-card fade d1">
+          <h3>Robo de Identidad</h3>
+          <p>Uso de informacion personal para cometer fraudes a terceros, generando danos legales y reputacionales irreversibles que pueden extenderse por anos.</p>
+        </div>
+        <div class="retro-card fade d2">
+          <h3>Compromiso en Cadena</h3>
+          <p>Al vulnerar una contrasena reutilizada, los atacantes acceden a multiples servicios simultaneamente, amplificando el dano exponencialmente.</p>
+        </div>
+        <div class="retro-card fade d3">
+          <h3>Desconfianza Digital</h3>
+          <p>Miedo y resistencia a utilizar servicios en linea por temor a ser estafado, frenando la adopcion tecnologica y la transformacion digital.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="tree-container fade-in">
-        <div class="tree-title">Árbol de Problemas</div>
-        <div class="tree-diagram">
-            <div class="tree-branches">
-                <div class="tree-branch">Robo de identidad</div>
-                <div class="tree-branch">Fraude financiero</div>
-                <div class="tree-branch">Exposición de datos</div>
-                <div class="tree-branch">Desconfianza digital</div>
-            </div>
-            <div class="tree-trunk">
-                Alta vulnerabilidad frente a ataques de phishing y robo de credenciales en entornos web
-            </div>
-            <div class="tree-roots">
-                <div class="tree-root">Desconocimiento en ciberseguridad</div>
-                <div class="tree-root">Contraseñas débiles y repetidas</div>
-                <div class="tree-root">Falta de herramientas de validación</div>
-            </div>
+    <!-- Arbol de Problemas -->
+    <div class="arbol-wrap fade">
+      <div class="arbol-tit">Arbol de Problemas</div>
+      <div class="arbol" id="arbol">
+        <svg class="arbol-svg" id="arbolSvg" viewBox="0 0 700 400" preserveAspectRatio="none">
+          <path class="arbol-line" id="line1" d="M350,80 L350,160"/>
+          <path class="arbol-line" id="line2" d="M100,80 L350,160"/>
+          <path class="arbol-line" id="line3" d="M250,80 L350,160"/>
+          <path class="arbol-line" id="line4" d="M450,80 L350,160"/>
+          <path class="arbol-line" id="line5" d="M600,80 L350,160"/>
+          <path class="arbol-line" id="line6" d="M350,240 L350,320"/>
+          <path class="arbol-line" id="line7" d="M150,320 L350,240"/>
+          <path class="arbol-line" id="line8" d="M350,320 L350,240"/>
+          <path class="arbol-line" id="line9" d="M550,320 L350,240"/>
+        </svg>
+        <div class="arbol-ramas">
+          <div class="arbol-item">Robo de identidad</div>
+          <div class="arbol-item">Fraude financiero</div>
+          <div class="arbol-item">Exposicion de datos</div>
+          <div class="arbol-item">Desconfianza digital</div>
         </div>
+        <div class="arbol-tronco">Alta vulnerabilidad frente a ataques de phishing y robo de credenciales en entornos web</div>
+        <div class="arbol-raices">
+          <div class="arbol-item arbol-raiz">Desconocimiento en ciberseguridad</div>
+          <div class="arbol-item arbol-raiz">Contrasenas debiles y repetidas</div>
+          <div class="arbol-item arbol-raiz">Falta de herramientas de validacion</div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<div class="section-divider divider-rojo">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,100 C360,0 720,0 1080,50 C1260,75 1380,88 1440,100 L1440,0 L0,0 Z" fill="#020202"></path>
-    </svg>
+<div class="div">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
 </div>
 
+<!-- SECCION 2: DAS EL ESCUDO -->
 <section id="escudo">
-    <div class="section-label fade-in">La Solución</div>
-    <h2 class="section-title fade-in delay-1">DAS: El Escudo<br>Digital</h2>
-    <p class="section-subtitle fade-in delay-2">
-        Digital Access Systems centraliza la prevención. Escaneo en tiempo real, bóveda cifrada 
-        y asistencia automatizada: tres líneas de defensa en una sola plataforma.
-    </p>
+  <div class="sec-inner">
+    <div class="lbl fade" style="color:var(--b)">La Solucion</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DAS: El Escudo<br>Digital</h2>
+    <p class="sub fade d2">Digital Access Systems centraliza la prevencion. Escaneo en tiempo real, boveda cifrada y asistencia automatizada: tres lineas de defensa en una sola plataforma.</p>
 
-    <div style="margin-top: 3rem;">
-        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; color: var(--azul);">Diccionario DAS — Marco Teórico</h3>
-        <div class="cards-grid">
-            <div class="retro-card fade-in">
-                <h3>Ciberseguridad</h3>
-                <p>Prácticas y tecnologías para proteger redes, dispositivos y datos. Basada en la tríada CIA: Confidencialidad, Integridad y Disponibilidad.</p>
-            </div>
-            <div class="retro-card fade-in delay-1">
-                <h3>Phishing</h3>
-                <p>Técnica de ciberdelito mediante engaño y suplantación. El atacante se hace pasar por una entidad de confianza para robar información sensible.</p>
-            </div>
-            <div class="retro-card fade-in delay-2">
-                <h3>Ingeniería Social</h3>
-                <p>Manipulación psicológica que explota el factor humano: urgencia, miedo, curiosidad. Base sobre la cual se construyen los ataques de phishing.</p>
-            </div>
-            <div class="retro-card fade-in">
-                <h3>Hacking Ético</h3>
-                <p>Aplicación de técnicas defensivas con autorización. Simulación de ataques para identificar vulnerabilidades antes de que sean explotadas.</p>
-            </div>
-            <div class="retro-card fade-in delay-1">
-                <h3>IA en Ciberseguridad</h3>
-                <p>Automatización de la detección de patrones anómalos. En DAS se aplica mediante bots de asistencia capaces de interpretar consultas de seguridad.</p>
-            </div>
-            <div class="retro-card fade-in delay-2">
-                <h3>Apps de Detección</h3>
-                <p>Sistemas que inspeccionan URLs y dominios mediante listas negras e inspección heurística para determinar si un sitio es legítimo.</p>
-            </div>
+    <!-- Diccionario DAS -->
+    <div style="margin-top:1rem">
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--b)">Diccionario DAS — Marco Teorico</h3>
+      <div class="dic-grid">
+        <div class="dic-card fade">
+          <div class="dic-num">01</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">Ciberseguridad</div>
+          <div class="dic-desc">Practicas y tecnologias para proteger redes, dispositivos y datos. Basada en la triada CIA: Confidencialidad, Integridad y Disponibilidad.</div>
         </div>
-    </div>
-
-    <div style="margin-top: 4rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(68,138,255,0.06), rgba(0,0,0,0.2)); border-radius: 24px; border: 1px solid rgba(68,138,255,0.2);" class="fade-in">
-        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 1rem; color: var(--azul);">Importancia del Proyecto</h3>
-        <p style="color: var(--gris-metal); font-size: 1rem; line-height: 1.8;">
-            DAS no solo protege: <strong style="color: var(--blanco);">empodera</strong>. Cuando no se alcanza a intervenir un delito cibernético, 
-            el sistema actúa como una <strong style="color: var(--blanco);">guía de evacuación digital</strong>: pasos claros, asistencia inmediata 
-            y contención del daño. Centralizamos prevención activa (escáner) y pasiva (bóveda) en una interfaz intuitiva, 
-            democratizando la ciberseguridad para usuarios sin conocimientos técnicos.
-        </p>
-    </div>
-
-    <div style="margin-top: 4rem;">
-        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 2rem; color: var(--azul);">Justificación</h3>
-        <div class="justification-grid">
-            <div class="justification-card fade-in">
-                <h4>Tecnológica</h4>
-                <p>Arquitectura web centralizada con motor de inspección de dominios vía APIs y bóveda con algoritmos de cifrado robustos.</p>
-            </div>
-            <div class="justification-card fade-in delay-1">
-                <h4>Social</h4>
-                <p>Democratiza el acceso a la ciberseguridad preventiva. Protege a los usuarios más vulnerables frente a ingeniería social.</p>
-            </div>
-            <div class="justification-card fade-in delay-2">
-                <h4>Económica</h4>
-                <p>Barrera preventiva contra fraude financiero. Tecnologías de código abierto y APIs de acceso libre optimizan recursos.</p>
-            </div>
-            <div class="justification-card fade-in">
-                <h4>Académica</h4>
-                <p>Aplica competencias ADSO: patrones de diseño, POO, bases de datos, UI/UX y gestión ágil con Scrum.</p>
-            </div>
-            <div class="justification-card fade-in delay-1">
-                <h4>Ambiental</h4>
-                <p>Solución nativa digital con impacto mínimo. Alineado con políticas "Cero Papel" y despliegue en nube optimizada.</p>
-            </div>
+        <div class="dic-card fade d1">
+          <div class="dic-num">02</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">Phishing</div>
+          <div class="dic-desc">Tecnica de ciberdelito mediante engano y suplantacion. El atacante se hace pasar por una entidad de confianza para robar informacion sensible.</div>
         </div>
+        <div class="dic-card fade d2">
+          <div class="dic-num">03</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">Ingenieria Social</div>
+          <div class="dic-desc">Manipulacion psicologica que explota el factor humano: urgencia, miedo, curiosidad. Base sobre la cual se construyen los ataques de phishing.</div>
+        </div>
+        <div class="dic-card fade">
+          <div class="dic-num">04</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">Hacking Etico</div>
+          <div class="dic-desc">Aplicacion de tecnicas defensivas con autorizacion. Simulacion de ataques para identificar vulnerabilidades antes de que sean explotadas.</div>
+        </div>
+        <div class="dic-card fade d1">
+          <div class="dic-num">05</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">IA en Ciberseguridad</div>
+          <div class="dic-desc">Automatizacion de la deteccion de patrones anomalos. En DAS se aplica mediante bots de asistencia capaces de interpretar consultas de seguridad.</div>
+        </div>
+        <div class="dic-card fade d2">
+          <div class="dic-num">06</div>
+          <div class="dic-line"></div>
+          <div class="dic-tit">Apps de Deteccion</div>
+          <div class="dic-desc">Sistemas que inspeccionan URLs y dominios mediante listas negras e inspeccion heuristica para determinar si un sitio es legitimo.</div>
+        </div>
+      </div>
     </div>
+
+    <!-- Importancia -->
+    <div class="imp-box fade">
+      <h3>Importancia del Proyecto</h3>
+      <p>DAS no solo protege: <strong>empodera</strong>. Cuando no se alcanza a intervenir un delito cibernetico, el sistema actua como una <strong>guia de evacuacion digital</strong>: pasos claros, asistencia inmediata y contencion del dano. Centralizamos prevencion activa (escaner) y pasiva (boveda) en una interfaz intuitiva, democratizando la ciberseguridad para usuarios sin conocimientos tecnicos.</p>
+    </div>
+
+    <!-- Justificacion -->
+    <div style="margin-top:4rem">
+      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--b)">Justificacion</h3>
+      <div class="retro-grid">
+        <div class="retro-card justif-card fade">
+          <div class="justif-num">01</div>
+          <h3>Tecnologica</h3>
+          <p>Arquitectura web centralizada con motor de inspeccion de dominios via APIs y boveda con algoritmos de cifrado robustos. Integracion de multiples capas de seguridad en un solo entorno.</p>
+        </div>
+        <div class="retro-card justif-card fade d1">
+          <div class="justif-num">02</div>
+          <h3>Social</h3>
+          <p>Democratiza el acceso a la ciberseguridad preventiva. Protege a los usuarios mas vulnerables frente a ingenieria social sin requerir conocimientos tecnicos avanzados.</p>
+        </div>
+        <div class="retro-card justif-card fade d2">
+          <div class="justif-num">03</div>
+          <h3>Economica</h3>
+          <p>Barrera preventiva contra fraude financiero. Tecnologias de codigo abierto y APIs de acceso libre optimizan recursos del presupuesto de desarrollo sin comprometer calidad.</p>
+        </div>
+        <div class="retro-card justif-card fade">
+          <div class="justif-num">04</div>
+          <h3>Academica</h3>
+          <p>Aplica competencias ADSO: patrones de diseno, POO, bases de datos, UI/UX y gestion agil con Scrum. Cumple integralmente con los resultados de aprendizaje del proyecto formativo.</p>
+        </div>
+        <div class="retro-card justif-card fade d1">
+          <div class="justif-num">05</div>
+          <h3>Ambiental</h3>
+          <p>Solucion nativa digital con impacto minimo. Alineado con politicas "Cero Papel" y despliegue en infraestructuras en la nube que optimizan el consumo energetico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="section-divider divider-azul">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,100 C360,0 720,0 1080,50 C1260,75 1380,88 1440,100 L1440,0 L0,0 Z" fill="#020202"></path>
-    </svg>
+<div class="div">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
 </div>
 
+<!-- SECCION 3: PROCESO -->
 <section id="proceso">
-    <div class="section-label fade-in">Construcción</div>
-    <h2 class="section-title fade-in delay-1">Proceso &<br>Evidencia</h2>
-    <p class="section-subtitle fade-in delay-2">
-        Un proyecto sólido se construye sobre evidencia. Cada dato, cada entrevista y cada observación 
-        valida la necesidad de un escudo digital accesible.
-    </p>
+  <div class="sec-inner">
+    <div class="lbl fade" style="color:var(--i)">Construccion</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--i));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Proceso &<br>Evidencia</h2>
+    <p class="sub fade d2">Un proyecto solido se construye sobre evidencia. Cada dato, cada entrevista y cada observacion valida la necesidad de un escudo digital accesible.</p>
 
-    <div class="carousel-container fade-in delay-3">
-        <div class="carousel-slides" id="carouselSlides">
-            <div class="carousel-slide">
-                <div class="carousel-slide-number">01</div>
-                <h3>Encuestas Digitales</h3>
-                <p>Cuestionario estructurado distribuido a la población objetivo. Reveló que la mayoría no verifica dominios antes de ingresar datos y desconoce el uso de bóvedas cifradas.</p>
-                <a href="#" class="slide-link">Ver encuesta →</a>
-            </div>
-            <div class="carousel-slide">
-                <div class="carousel-slide-number">02</div>
-                <h3>Entrevistas Semiestructuradas</h3>
-                <p>Diálogos cualitativos con usuarios que han enfrentado intentos de fraude. Permisieron entender el comportamiento real ante URLs desconocidas y el sentido de urgencia.</p>
-                <a href="#" class="slide-link">Ver entrevistas →</a>
-            </div>
-            <div class="carousel-slide">
-                <div class="carousel-slide-number">03</div>
-                <h3>Observación Directa</h3>
-                <p>Análisis del comportamiento de autenticación en plataformas web. Confirmó que los usuarios acceden a enlaces dudosos por impulso, sin validación técnica previa.</p>
-                <a href="#" class="slide-link">Ver observaciones →</a>
-            </div>
-            <div class="carousel-slide">
-                <div class="carousel-slide-number">04</div>
-                <h3>Análisis de Resultados</h3>
-                <p>Triangulación de datos: encuestas, entrevistas y observaciones confirman la brecha de seguridad. El usuario demanda una solución sin conocimientos técnicos avanzados.</p>
-                <a href="#" class="slide-link">Ver análisis →</a>
-            </div>
+    <!-- Carrusel -->
+    <div class="car-wrap fade d3">
+      <div class="car-track" id="carTrack">
+        <div class="car-slide">
+          <div class="car-num">01</div>
+          <h3>Encuestas Digitales</h3>
+          <p>Cuestionario estructurado distribuido a la poblacion objetivo. Revelo que la mayoria no verifica dominios antes de ingresar datos y desconoce el uso de bovedas cifradas.</p>
+          <a href="#" class="car-link">Ver encuesta &rarr;</a>
         </div>
-        <div class="carousel-nav">
-            <button class="carousel-btn" onclick="prevSlide()">‹</button>
-            <button class="carousel-btn" onclick="nextSlide()">›</button>
+        <div class="car-slide">
+          <div class="car-num">02</div>
+          <h3>Entrevistas Semiestructuradas</h3>
+          <p>Dialogos cualitativos con usuarios que han enfrentado intentos de fraude. Permisieron entender el comportamiento real ante URLs desconocidas y el sentido de urgencia.</p>
+          <a href="#" class="car-link">Ver entrevistas &rarr;</a>
         </div>
-        <div class="carousel-dots" id="carouselDots"></div>
+        <div class="car-slide">
+          <div class="car-num">03</div>
+          <h3>Observacion Directa</h3>
+          <p>Analisis del comportamiento de autenticacion en plataformas web. Confirmo que los usuarios acceden a enlaces dudosos por impulso, sin validacion tecnica previa.</p>
+          <a href="#" class="car-link">Ver observaciones &rarr;</a>
+        </div>
+        <div class="car-slide">
+          <div class="car-num">04</div>
+          <h3>Analisis de Resultados</h3>
+          <p>Triangulacion de datos: encuestas, entrevistas y observaciones confirman la brecha de seguridad. El usuario demanda una solucion sin conocimientos tecnicos avanzados.</p>
+          <a href="#" class="car-link">Ver analisis &rarr;</a>
+        </div>
+      </div>
+      <div class="car-nav">
+        <button class="car-btn" onclick="prevCar()">&lsaquo;</button>
+        <button class="car-btn" onclick="nextCar()">&rsaquo;</button>
+      </div>
+      <div class="car-dots" id="carDots"></div>
     </div>
 
-    <div class="bpmn-placeholder fade-in">
-        <h3>Modelado de Procesos BPMN</h3>
-        <p>Diagramas de flujo para los procesos de Escaneo de Seguridad y Gestión de Bóveda de Contraseñas.<br>
-        <em style="font-size: 0.85rem; opacity: 0.6;">(Espacio reservado para diagramas exportados desde Bizagi / Lucidchart)</em></p>
-        <div style="margin-top: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-            <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 2rem; border: 1px solid rgba(83,109,254,0.25);">
-                <h4 style="color: var(--indigo); margin-bottom: 1rem; font-size: 1.1rem;">Flujo de Escaneo</h4>
-                <p style="font-size: 0.85rem; color: var(--gris-metal);">Inicio → Consulta API → ¿Malicioso? → Alerta/Bloqueo → Guardar historial</p>
-            </div>
-            <div style="background: rgba(0,0,0,0.3); border-radius: 16px; padding: 2rem; border: 1px solid rgba(83,109,254,0.25);">
-                <h4 style="color: var(--indigo); margin-bottom: 1rem; font-size: 1.1rem;">Flujo de Bóveda</h4>
-                <p style="font-size: 0.85rem; color: var(--gris-metal);">Acceso → Validación maestra → ¿Válida? → Cifrar/Descifrar credenciales</p>
-            </div>
+    <!-- BPMN -->
+    <div class="bpmn fade">
+      <h3>Modelado de Procesos BPMN</h3>
+      <p>Diagramas de flujo para los procesos de Escaneo de Seguridad y Gestion de Boveda de Contrasenas.<br><em style="opacity:.5;font-size:.8rem">(Espacio reservado para diagramas exportados desde Bizagi / Lucidchart)</em></p>
+      <div class="bpmn-grid">
+        <div class="bpmn-card">
+          <h4>Flujo de Escaneo</h4>
+          <p>Inicio &rarr; Consulta API &rarr; &iquest;Malicioso? &rarr; Alerta/Bloqueo &rarr; Guardar historial</p>
         </div>
+        <div class="bpmn-card">
+          <h4>Flujo de Boveda</h4>
+          <p>Acceso &rarr; Validacion maestra &rarr; &iquest;Valida? &rarr; Cifrar/Descifrar credenciales</p>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
-<div class="section-divider divider-indigo">
-    <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,100 C360,0 720,0 1080,50 C1260,75 1380,88 1440,100 L1440,0 L0,0 Z" fill="#020202"></path>
-    </svg>
+<div class="div">
+  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
 </div>
 
-<section id="retroalimentacion">
-    <div class="section-label fade-in">Evolución</div>
-    <h2 class="section-title fade-in delay-1">Retroalimentación</h2>
-    <p class="section-subtitle fade-in delay-2">
-        Los instructores plantearon observaciones. No como críticas destructivas, sino como catalizadores. 
-        Cada punto fue absorbido, procesado y transformado en acción concreta.
-    </p>
+<!-- SECCION 4: RETROALIMENTACION -->
+<section id="retro">
+  <div class="sec-inner">
+    <div class="lbl fade" style="color:var(--p)">Evolucion</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Retroalimentacion</h2>
+    <p class="sub fade d2">Los instructores plantearon observaciones. No como criticas destructivas, sino como catalizadores. Cada punto fue absorbido, procesado y transformado en accion concreta.</p>
 
-    <div class="quote-box fade-in delay-3">
-        En la retroalimentación los instructores dijeron que el marco teórico no estaba claro, 
-        pero como pueden ver, ya está aplicado, estructurado y evidenciado.
+    <div class="quote fade d3">En la retroalimentacion los instructores dijeron que el marco teorico no estaba claro, pero como pueden ver, ya esta aplicado, estructurado y evidenciado.</div>
+
+    <div class="feed-grid">
+      <div class="feed-card fade">
+        <h4>Recoleccion de Informacion</h4>
+        <p><strong>Observacion:</strong> No existian evidencias suficientes del levantamiento de informacion.<br><br><strong>Accion:</strong> Se incorporaron las evidencias de encuestas, entrevistas y observaciones. Resultados, analisis y conclusiones documentadas en anexos.</p>
+        <span class="feed-tag">Resuelto</span>
+      </div>
+      <div class="feed-card fade d1">
+        <h4>Planteamiento del Problema</h4>
+        <p><strong>Observacion:</strong> La problematica no era lo suficientemente clara ni profunda.<br><br><strong>Accion:</strong> Incorporadas cifras de fuentes confiables (APWG, Verizon DBIR). Poblacion objetivo delimitada. Precision en la explicacion del problema.</p>
+        <span class="feed-tag">Resuelto</span>
+      </div>
+      <div class="feed-card fade d2">
+        <h4>Alcance del Proyecto</h4>
+        <p><strong>Observacion:</strong> El alcance no estaba completamente definido, generando interpretaciones amplias.<br><br><strong>Accion:</strong> Definicion clara de funciones (In Scope) y limites (Out of Scope). Alineamiento con objetivos y problematica.</p>
+        <span class="feed-tag">Resuelto</span>
+      </div>
+      <div class="feed-card fade">
+        <h4>Aplicacion del Marco Scrum</h4>
+        <p><strong>Observacion:</strong> No se evidencio la aplicacion completa de la metodologia Scrum.<br><br><strong>Accion:</strong> Documentados roles, Product Backlog, Sprint Backlog, cronograma de sprints y evidencias de seguimiento en Jira.</p>
+        <span class="feed-tag">Resuelto</span>
+      </div>
+      <div class="feed-card fade d1">
+        <h4>Modelado de Procesos BPMN</h4>
+        <p><strong>Observacion:</strong> No se presentaron diagramas BPMN de los procesos del sistema.<br><br><strong>Accion:</strong> Elaborados diagramas BPMN para escaneo de seguridad y gestion de boveda. Explicacion de flujos y relacion con el sistema.</p>
+        <span class="feed-tag">Resuelto</span>
+      </div>
     </div>
 
-    <div class="feedback-grid">
-        <div class="feedback-card fade-in">
-            <h4>Recolección de Información</h4>
-            <p><strong style="color: var(--plata);">Observación:</strong> No existían evidencias suficientes del levantamiento de información.<br><br>
-            <strong style="color: var(--plata);">Acción:</strong> Se incorporaron las evidencias de encuestas, entrevistas y observaciones. 
-            Resultados, análisis y conclusiones documentadas en anexos.</p>
-            <span class="tag">Resuelto</span>
-        </div>
-        <div class="feedback-card fade-in delay-1">
-            <h4>Planteamiento del Problema</h4>
-            <p><strong style="color: var(--plata);">Observación:</strong> La problemática no era lo suficientemente clara ni profunda.<br><br>
-            <strong style="color: var(--plata);">Acción:</strong> Incorporadas cifras de fuentes confiables (APWG, Verizon DBIR). 
-            Población objetivo delimitada. Precisión en la explicación del problema.</p>
-            <span class="tag">Resuelto</span>
-        </div>
-        <div class="feedback-card fade-in delay-2">
-            <h4>Alcance del Proyecto</h4>
-            <p><strong style="color: var(--plata);">Observación:</strong> El alcance no estaba completamente definido, generando interpretaciones amplias.<br><br>
-            <strong style="color: var(--plata);">Acción:</strong> Definición clara de funciones (In Scope) y límites (Out of Scope). 
-            Alineamiento con objetivos y problemática.</p>
-            <span class="tag">Resuelto</span>
-        </div>
-        <div class="feedback-card fade-in">
-            <h4>Aplicación del Marco Scrum</h4>
-            <p><strong style="color: var(--plata);">Observación:</strong> No se evidenció la aplicación completa de la metodología Scrum.<br><br>
-            <strong style="color: var(--plata);">Acción:</strong> Documentados roles, Product Backlog, Sprint Backlog, cronograma de sprints 
-            y evidencias de seguimiento en Jira.</p>
-            <span class="tag">Resuelto</span>
-        </div>
-        <div class="feedback-card fade-in delay-1">
-            <h4>Modelado de Procesos BPMN</h4>
-            <p><strong style="color: var(--plata);">Observación:</strong> No se presentaron diagramas BPMN de los procesos del sistema.<br><br>
-            <strong style="color: var(--plata);">Acción:</strong> Elaborados diagramas BPMN para escaneo de seguridad y gestión de bóveda. 
-            Explicación de flujos y relación con el sistema.</p>
-            <span class="tag">Resuelto</span>
-        </div>
+    <div style="margin-top:4rem;text-align:center" class="fade">
+      <p style="font-size:1rem;color:var(--g);margin-bottom:1.5rem">La retroalimentacion fue el detonante. No el veredicto.</p>
+      <a href="#" class="btn btn-glow-p" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Volver al inicio <span class="arrow">&uarr;</span></a>
     </div>
-
-    <div style="margin-top: 5rem; text-align: center;" class="fade-in">
-        <p style="font-size: 1.1rem; color: var(--gris-metal); margin-bottom: 2rem;">
-            La retroalimentación fue el detonante. No el veredicto.
-        </p>
-        <a href="#" class="btn-metallic btn-glow-plata" onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">
-            Volver al inicio ↑
-        </a>
-    </div>
+  </div>
 </section>
 
 <footer>
-    <div class="logo">DAS.</div>
-    <p>Digital Access Systems — Proyecto Formativo ADSO | SENA</p>
-    <p style="margin-top: 0.5rem; font-size: 0.8rem; opacity: 0.5;">Bogotá, D.C. | 2025</p>
+  <div class="logo">DAS.</div>
+  <p>Digital Access Systems — Proyecto Formativo ADSO | SENA</p>
+  <p style="margin-top:.5rem;font-size:.75rem;opacity:.4">Bogota, D.C. | 2025</p>
 </footer>
 
 <script>
-// ========== PARTÍCULAS DE FONDO ==========
-const canvas = document.getElementById('particles-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
+// PARTICULAS
+const cvs=document.getElementById('pc'),ctx=cvs.getContext('2d');
+let pts=[];
+function rs(){cvs.width=window.innerWidth;cvs.height=window.innerHeight}
+rs();window.addEventListener('resize',rs);
+class Pt{constructor(){this.x=Math.random()*cvs.width;this.y=Math.random()*cvs.height;this.s=Math.random()*1.2+.3;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.o=Math.random()*.35+.08}
+up(){this.x+=this.vx;this.y+=this.vy;if(this.x>cvs.width)this.x=0;if(this.x<0)this.x=cvs.width;if(this.y>cvs.height)this.y=0;if(this.y<0)this.y=cvs.height}
+dr(){ctx.fillStyle=`rgba(180,200,255,${this.o})`;ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fill()}}
+function ip(){pts=[];for(let i=0;i<70;i++)pts.push(new Pt())}
+function ap(){ctx.clearRect(0,0,cvs.width,cvs.height);pts.forEach(p=>{p.up();p.dr()});
+for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.strokeStyle=`rgba(180,200,255,${.07*(1-d/110)})`;ctx.lineWidth=.35;ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}}
+requestAnimationFrame(ap)}
+ip();ap();
 
-function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-resizeCanvas(); window.addEventListener('resize', resizeCanvas);
-
-class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.3;
-        this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.4 + 0.1;
-    }
-    update() {
-        this.x += this.speedX; this.y += this.speedY;
-        if (this.x > canvas.width) this.x = 0; if (this.x < 0) this.x = canvas.width;
-        if (this.y > canvas.height) this.y = 0; if (this.y < 0) this.y = canvas.height;
-    }
-    draw() {
-        ctx.fillStyle = `rgba(180, 200, 255, ${this.opacity})`;
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
-    }
-}
-function initParticles() { particles = []; for (let i = 0; i < 80; i++) particles.push(new Particle()); }
-function animateParticles() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x; const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            if (distance < 120) {
-                ctx.strokeStyle = `rgba(180, 200, 255, ${0.08 * (1 - distance / 120)})`;
-                ctx.lineWidth = 0.4; ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y); ctx.stroke();
-            }
-        }
-    }
-    requestAnimationFrame(animateParticles);
-}
-initParticles(); animateParticles();
-
-// ========== NAVBAR SCROLL ==========
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 50); });
-
-// ========== INTERSECTION OBSERVER ==========
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-// ========== CONTADORES ANIMADOS ==========
-const statNumbers = document.querySelectorAll('.stat-number');
-const statBars = document.querySelectorAll('.stat-bar-fill');
-let counted = false;
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting && !counted) {
-            counted = true;
-            statNumbers.forEach((stat, idx) => {
-                const target = parseFloat(stat.getAttribute('data-target'));
-                const duration = 2000; const startTime = performance.now();
-                function updateCounter(currentTime) {
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const easeOut = 1 - Math.pow(1 - progress, 3);
-                    const current = target * easeOut;
-                    if (target === 3.4) stat.textContent = current.toFixed(1) + 'B';
-                    else if (target === 5) stat.textContent = Math.floor(current) + 'M+';
-                    else if (target === 86) stat.textContent = Math.floor(current) + '%';
-                    else if (target === 21) stat.textContent = Math.floor(current) + 's';
-                    if (progress < 1) requestAnimationFrame(updateCounter);
-                }
-                requestAnimationFrame(updateCounter);
-            });
-            statBars.forEach(bar => { setTimeout(() => { bar.style.width = bar.getAttribute('data-width') + '%'; }, 300); });
-        }
-    });
-}, { threshold: 0.3 });
-const statsSection = document.querySelector('.stats-dashboard');
-if (statsSection) statsObserver.observe(statsSection);
-
-// ========== MODAL ESTADÍSTICAS ==========
-const modalData = [
-    {
-        title: 'Ataques de Phishing Anuales', number: '5M+',
-        text: 'En 2025 se registraron más de 5 millones de ataques de phishing a nivel global, según el reporte de APWG. Aunque en 2024 hubo una ligera estabilización (4.8M), la cifra volvió a superar los 5 millones, demostrando que la amenaza sigue en crecimiento sostenido.',
-        source: 'Fuente: APWG Phishing Activity Trends Report 2025',
-        bars: [30, 45, 60, 55, 80, 95, 85]
-    },
-    {
-        title: 'Correos Phishing Diarios', number: '3.4B',
-        text: 'Aproximadamente 3.4 mil millones de correos de phishing son enviados diariamente. La IA permite crear correos sin errores de ortografía, con personalización avanzada y técnicas como quishing (phishing por QR), lo que dificulta la detección por parte de usuarios comunes.',
-        source: 'Fuente: The Network Installers / AAG IT',
-        bars: [40, 55, 70, 65, 85, 90, 88]
-    },
-    {
-        title: 'Ataques Generados por IA', number: '86%',
-        text: 'Entre el 82% y 90% de los ataques de phishing en 2025 son generados con apoyo de Inteligencia Artificial. Los modelos de lenguaje permiten crear mensajes hiperpersonalizados, sin errores gramaticales y con técnicas de ingeniería social avanzadas que engañan incluso a usuarios cautelosos.',
-        source: 'Fuente: Keepnet / VIPRE / ESED',
-        bars: [20, 35, 50, 60, 75, 82, 86]
-    },
-    {
-        title: 'Tiempo Promedio para Clic', number: '21s',
-        text: 'El tiempo promedio para que un usuario haga clic en un enlace malicioso tras recibir un correo de phishing es de apenas 21 segundos. Esta velocidad de reacción deja poco margen para la reflexión, haciendo crítica la necesidad de herramientas de detección automática.',
-        source: 'Fuente: Verizon DBIR 2025',
-        bars: [60, 45, 30, 25, 22, 21, 21]
-    }
-];
-
-function openModal(index) {
-    const data = modalData[index];
-    document.getElementById('modalTitle').textContent = data.title;
-    document.getElementById('modalNumber').textContent = data.number;
-    document.getElementById('modalText').textContent = data.text;
-    document.getElementById('modalSource').textContent = data.source;
-    const chart = document.getElementById('modalChart');
-    chart.innerHTML = '';
-    data.bars.forEach((h, i) => {
-        const bar = document.createElement('div');
-        bar.className = 'modal-chart-bar';
-        bar.style.height = '0';
-        bar.style.width = '10%';
-        chart.appendChild(bar);
-        setTimeout(() => { bar.style.height = h + '%'; }, i * 100 + 300);
-    });
-    document.getElementById('statModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-function closeModal(event) {
-    if (!event || event.target === document.getElementById('statModal') || event.target.closest('.modal-close')) {
-        document.getElementById('statModal').classList.remove('active');
-        document.body.style.overflow = '';
-    }
-}
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-// ========== CARRUSEL PROCESO ==========
-let currentSlide = 0;
-const slides = document.getElementById('carouselSlides');
-const totalSlides = 4;
-
-function updateCarousel() {
-    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
-    document.querySelectorAll('.carousel-dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-    });
-}
-function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; updateCarousel(); }
-function prevSlide() { currentSlide = (currentSlide - 1 + totalSlides) % totalSlides; updateCarousel(); }
-
-const dotsContainer = document.getElementById('carouselDots');
-for (let i = 0; i < totalSlides; i++) {
-    const dot = document.createElement('div');
-    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => { currentSlide = i; updateCarousel(); };
-    dotsContainer.appendChild(dot);
-}
-
-let autoSlide = setInterval(nextSlide, 6000);
-document.querySelector('.carousel-container').addEventListener('mouseenter', () => clearInterval(autoSlide));
-document.querySelector('.carousel-container').addEventListener('mouseleave', () => autoSlide = setInterval(nextSlide, 6000));
-
-// ========== SMOOTH SCROLL PARA NAV LINKS ==========
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const target = document.querySelector(link.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+// NAV SCROLL + ACTIVE
+document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+  document.querySelectorAll('.nav-pills a').forEach(a=>{a.classList.remove('active');
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t&&window.scrollY>=t.offsetTop-200)a.classList.add('active');
+  });
 });
+
+// INTERSECTION OBSERVER
+const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');if(e.target.id==='arbol')drawArbolLines()}})},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// ARBOL LINES ANIM
+function drawArbolLines(){setTimeout(()=>{document.querySelectorAll('.arbol-line').forEach((l,i)=>{setTimeout(()=>l.classList.add('on'),i*150)})},300)}
+
+// STATS COUNTER + SWIPE
+const sn=document.querySelectorAll('.stat-num'),sb=document.querySelectorAll('.stat-bar-fill');
+let cnt=false,si=0;
+const so=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!cnt){cnt=true;sn.forEach(s=>{const t=parseFloat(s.dataset.t),d=2000,st=performance.now();function uc(ct){const el=ct-st,pr=Math.min(el/d,1),eo=1-Math.pow(1-pr,3),cu=t*eo;if(t===3.4)s.textContent=cu.toFixed(1)+'B';else if(t===5)s.textContent=Math.floor(cu)+'M+';else if(t===86)s.textContent=Math.floor(cu)+'%';else if(t===21)s.textContent=Math.floor(cu)+'s';if(pr<1)requestAnimationFrame(uc)}requestAnimationFrame(uc)});sb.forEach(b=>setTimeout(()=>b.style.width=b.dataset.w+'%',400))}})},{threshold:.3});
+so.observe(document.querySelector('.stats-wrap'));
+
+// STATS SWIPE
+const st=document.getElementById('statsTrack'),sd=document.getElementById('statDots');
+for(let i=0;i<4;i++){const d=document.createElement('div');d.className='stat-dot'+(i===0?' active':'');sd.appendChild(d)}
+function updStatDots(){document.querySelectorAll('.stat-dot').forEach((d,i)=>d.classList.toggle('active',i===si))}
+let sx=0,ss=0;
+st.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;ss=si},{passive:true});
+st.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){if(dx<0&&si<3)si++;else if(dx>0&&si>0)si--;st.style.transform=`translateX(-${si*100/4}%)`;updStatDots()}},{passive:true});
+
+// MODAL DATA
+const md=[
+  {t:'Ataques de Phishing Anuales',n:'5M+',x:'En 2025 se registraron mas de 5 millones de ataques de phishing a nivel global, segun el reporte de APWG. Aunque en 2024 hubo una ligera estabilizacion (4.8M), la cifra volvio a superar los 5 millones, demostrando que la amenaza sigue en crecimiento sostenido.',s:'Fuente: APWG Phishing Activity Trends Report 2025',b:[25,40,55,50,75,92,88]},
+  {t:'Correos Phishing Diarios',n:'3.4B',x:'Aproximadamente 3.4 mil millones de correos de phishing son enviados diariamente. La IA permite crear correos sin errores de ortografia, con personalizacion avanzada y tecnicas como quishing (phishing por QR), lo que dificulta la deteccion por parte de usuarios comunes.',s:'Fuente: The Network Installers / AAG IT',b:[35,50,65,60,80,88,85]},
+  {t:'Ataques Generados por IA',n:'86%',x:'Entre el 82% y 90% de los ataques de phishing en 2025 son generados con apoyo de Inteligencia Artificial. Los modelos de lenguaje permiten crear mensajes hiperpersonalizados, sin errores gramaticales y con tecnicas de ingenieria social avanzadas.',s:'Fuente: Keepnet / VIPRE / ESED',b:[18,30,45,55,70,82,86]},
+  {t:'Tiempo Promedio para Clic',n:'21s',x:'El tiempo promedio para que un usuario haga clic en un enlace malicioso tras recibir un correo de phishing es de apenas 21 segundos. Esta velocidad de reaccion deja poco margen para la reflexion, haciendo critica la necesidad de herramientas de deteccion automatica.',s:'Fuente: Verizon DBIR 2025',b:[55,42,30,26,23,21,21]}
+];
+function openModal(i){const d=md[i];document.getElementById('mTit').textContent=d.t;document.getElementById('mNum').textContent=d.n;document.getElementById('mTxt').textContent=d.x;document.getElementById('mSrc').textContent=d.s;const ch=document.getElementById('mChart');ch.innerHTML='';d.b.forEach((h,j)=>{const b=document.createElement('div');b.className='mod-bar';b.style.height='0';ch.appendChild(b);setTimeout(()=>b.style.height=h+'%',j*80+200)});document.getElementById('statModal').classList.add('on');document.body.style.overflow='hidden'}
+function closeModal(e){if(!e||e.target===document.getElementById('statModal')||e.target.closest('.mod-x')){document.getElementById('statModal').classList.remove('on');document.body.style.overflow=''}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// CARRUSEL PROCESO
+let ci=0;const ct=document.getElementById('carTrack'),cd=document.getElementById('carDots'),tc=4;
+function uc(){ct.style.transform=`translateX(-${ci*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('on',i===ci))}
+function nextCar(){ci=(ci+1)%tc;uc()}function prevCar(){ci=(ci-1+tc)%tc;uc()}
+for(let i=0;i<tc;i++){const d=document.createElement('div');d.className='car-dot'+(i===0?' on':'');d.onclick=()=>{ci=i;uc()};cd.appendChild(d)}
+let as=setInterval(nextCar,5000);
+ct.parentElement.addEventListener('mouseenter',()=>clearInterval(as));
+ct.parentElement.addEventListener('mouseleave',()=>as=setInterval(nextCar,5000));
+// Touch swipe carrusel
+let cx=0;
+ct.addEventListener('touchstart',e=>{cx=e.touches[0].clientX},{passive:true});
+ct.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-cx;if(Math.abs(dx)>60){if(dx<0)nextCar();else prevCar()}},{passive:true});
+
+// SMOOTH NAV
+document.querySelectorAll('.nav-pills a').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
 </script>
 </body>
 </html>
