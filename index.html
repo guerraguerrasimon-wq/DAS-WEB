@@ -6,7 +6,7 @@
 <title>DAS — Digital Access Systems</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
 <style>
 :root {
   --n0:#020202;--n1:#0a0a0a;--n2:#111;--n3:#1a1a1a;--n4:#222;
@@ -14,206 +14,241 @@
   --b:#448aff;--bd:#0d47a1;--bt:rgba(68,138,255,0.08);
   --i:#536dfe;--it:rgba(83,109,254,0.08);
   --p:#e0e0e0;--w:#fff;--g:#b0b0b0;--gd:#666;
+  --font:'Inter',sans-serif;
+  --jp:'Noto Serif JP',serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth;font-size:16px}
-body{font-family:'Inter',sans-serif;background:var(--n0);color:var(--w);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
-#pc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.3}
+body{font-family:var(--font);background:var(--n0);color:var(--w);overflow-x:hidden;line-height:1.6;-webkit-font-smoothing:antialiased}
+#pc{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.25}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 1rem;background:rgba(2,2,2,.8);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:all .3s ease}
-nav.scrolled{background:rgba(2,2,2,.95);box-shadow:0 8px 32px rgba(0,0,0,.4)}
+nav{position:fixed;top:0;left:0;width:100%;z-index:1000;padding:.75rem 1.5rem;background:rgba(2,2,2,.85);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.05);transition:all .3s ease}
+nav.scrolled{background:rgba(2,2,2,.97);box-shadow:0 8px 40px rgba(0,0,0,.5)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1400px;margin:0 auto}
-.logo{font-weight:900;font-size:1.4rem;letter-spacing:-.06em;background:linear-gradient(135deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0}
-.nav-pills{display:flex;gap:.5rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:0 .25rem}
+.logo{font-weight:900;font-size:1.5rem;letter-spacing:-.06em;background:linear-gradient(135deg,var(--w),rgba(255,255,255,.5));-webkit-background-clip:text;-webkit-text-fill-color:transparent;flex-shrink:0;font-family:var(--font)}
+.nav-pills{display:flex;gap:.4rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .nav-pills::-webkit-scrollbar{display:none}
-.nav-pills a{flex-shrink:0;padding:.5rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;color:var(--g);text-decoration:none;white-space:nowrap;transition:all .3s ease;border:1px solid transparent}
-.nav-pills a:hover,.nav-pills a.active{color:var(--w);background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+.nav-pills a{flex-shrink:0;padding:.45rem .9rem;border-radius:100px;font-size:.75rem;font-weight:600;color:rgba(255,255,255,.45);text-decoration:none;white-space:nowrap;transition:all .3s ease;border:1px solid transparent;letter-spacing:.04em;text-transform:uppercase}
+.nav-pills a:hover,.nav-pills a.active{color:var(--w);background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
 
 /* BTN */
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:1rem 2.2rem;font-family:'Inter',sans-serif;font-weight:600;font-size:.9rem;color:var(--w);background:linear-gradient(135deg,rgba(255,255,255,.1),rgba(255,255,255,.03));backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.2);border-radius:100px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:.02em;box-shadow:0 4px 24px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.08)}
-.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transition:left .7s ease}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;font-family:var(--font);font-weight:600;font-size:.85rem;color:var(--w);background:rgba(255,255,255,.06);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.15);border-radius:100px;cursor:pointer;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1);text-decoration:none;letter-spacing:.05em;text-transform:uppercase}
+.btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transition:left .7s ease}
 .btn:hover::before{left:100%}
-.btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,255,255,.1),0 0 30px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.15);border-color:rgba(255,255,255,.45);background:linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.06))}
-.btn-glow-r:hover{box-shadow:0 0 40px rgba(255,0,60,.3),0 10px 40px rgba(255,0,60,.12);border-color:var(--r)}
-.btn-glow-b:hover{box-shadow:0 0 40px rgba(68,138,255,.3),0 10px 40px rgba(68,138,255,.12);border-color:var(--b)}
-.btn-glow-p:hover{box-shadow:0 0 40px rgba(224,224,224,.2),0 10px 40px rgba(224,224,224,.08);border-color:var(--p)}
-.btn .arrow{display:inline-block;animation:bounce 2s ease infinite}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+.btn:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1)}
+.btn-r{border-color:rgba(255,0,60,.25)}
+.btn-r:hover{border-color:var(--r);box-shadow:0 0 30px rgba(255,0,60,.15)}
+.btn-b:hover{border-color:var(--b);box-shadow:0 0 30px rgba(68,138,255,.15)}
+.btn .arrow{animation:bounce 2s ease infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
 
 /* SECTIONS */
-section{position:relative;z-index:1;padding:6rem 1.25rem}
+section{position:relative;z-index:1;padding:7rem 1.5rem}
 .sec-inner{max-width:1200px;margin:0 auto}
-.lbl{font-size:.75rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.25rem;opacity:.6}
-.tit{font-size:clamp(2.2rem,7vw,4.5rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:1.25rem}
-.sub{font-size:1.05rem;font-weight:400;color:var(--g);max-width:560px;line-height:1.7;margin-bottom:2.5rem}
+.lbl{font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;margin-bottom:1.5rem;opacity:.5;font-family:var(--font)}
+.tit{font-size:clamp(2.4rem,7vw,5rem);font-weight:800;letter-spacing:-.04em;line-height:1.02;margin-bottom:1.25rem}
+.sub{font-size:1rem;font-weight:400;color:var(--g);max-width:520px;line-height:1.75;margin-bottom:3rem}
 
 /* DIVIDER */
-.div{position:relative;width:100%;height:80px;z-index:2;overflow:hidden;line-height:0}
+.div{position:relative;width:100%;height:70px;z-index:2;overflow:hidden;line-height:0}
 .div svg{position:absolute;width:100%;height:100%}
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.25rem 4rem;background:radial-gradient(ellipse at 50% 30%,rgba(20,20,20,1) 0%,rgba(2,2,2,1) 70%)}
-.hero-pre{font-size:.8rem;font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:var(--g);margin-bottom:1.5rem;opacity:0;animation:fu .8s ease .2s forwards}
-.hero-tit{font-size:clamp(4rem,15vw,10rem);font-weight:900;letter-spacing:-.06em;line-height:.9;margin-bottom:1rem;background:linear-gradient(180deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 50px rgba(255,255,255,.06));opacity:0;animation:fu .8s ease .4s forwards}
-.hero-sub{font-size:clamp(.9rem,2.5vw,1.3rem);color:var(--g);font-weight:300;margin-bottom:3rem;letter-spacing:.03em;opacity:0;animation:fu .8s ease .6s forwards}
-.hero-btn{opacity:0;animation:fu .8s ease .8s forwards}
-@keyframes fu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+/* HERO — limpio estilo KM */
+.hero{min-height:100vh;display:flex;align-items:center;padding:0 1.5rem;background:radial-gradient(ellipse at 30% 50%,rgba(15,15,15,1) 0%,rgba(2,2,2,1) 70%);overflow:hidden;position:relative}
+.hero::after{content:'';position:absolute;right:0;top:0;width:55%;height:100%;background:radial-gradient(ellipse at 80% 50%,rgba(255,255,255,0.015) 0%,transparent 60%);pointer-events:none}
+.hero-inner{max-width:1400px;margin:0 auto;width:100%;display:flex;align-items:center;gap:4rem}
+.hero-left{flex:1;z-index:2}
+.hero-pre{font-size:.72rem;font-weight:600;letter-spacing:.35em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:2rem;display:flex;align-items:center;gap:12px}
+.hero-pre::before{content:'';width:32px;height:1px;background:rgba(255,255,255,.2)}
+.hero-tit{font-size:clamp(5rem,14vw,11rem);font-weight:900;letter-spacing:-.06em;line-height:.88;margin-bottom:1.5rem;background:linear-gradient(180deg,#fff 0%,rgba(255,255,255,.55) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;opacity:0;animation:fu .9s ease .3s forwards}
+.hero-sub{font-size:clamp(.9rem,2vw,1.15rem);color:rgba(255,255,255,.4);font-weight:300;margin-bottom:3rem;letter-spacing:.03em;max-width:480px;line-height:1.7;opacity:0;animation:fu .9s ease .5s forwards}
+.hero-btn{opacity:0;animation:fu .9s ease .7s forwards}
+.hero-right{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:1.5rem;z-index:2;opacity:0;animation:fu .9s ease .9s forwards}
+.hero-stat-mini{text-align:right}
+.hero-stat-mini .num{font-size:2.2rem;font-weight:900;letter-spacing:-.04em;background:linear-gradient(180deg,#fff,rgba(255,255,255,.4));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.hero-stat-mini .desc{font-size:.72rem;color:rgba(255,255,255,.25);letter-spacing:.06em;text-transform:uppercase;margin-top:.2rem}
+.hero-divider{width:1px;height:40px;background:rgba(255,255,255,.08);align-self:flex-end}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.hero{padding-top:6rem}.hero-inner{flex-direction:column;gap:3rem}.hero-right{align-items:flex-start;flex-direction:row;flex-wrap:wrap;gap:2rem}.hero-stat-mini{text-align:left}.hero-divider{display:none}}
 
-/* STATS DASHBOARD */
-.stats-wrap{position:relative;margin:2.5rem 0;overflow:hidden}
-.stats-track{display:flex;gap:1rem;transition:transform .5s cubic-bezier(.4,0,.2,1);cursor:grab}
-.stats-track:active{cursor:grabbing}
-.stat-card{flex:0 0 85%;max-width:320px;background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:2rem;position:relative;overflow:hidden;transition:all .4s ease}
-.stat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:3px;background:linear-gradient(90deg,transparent,var(--r),transparent);opacity:.7}
-.stat-card:active{transform:scale(.98)}
-.stat-num{font-size:2.8rem;font-weight:900;line-height:1;margin-bottom:.75rem;background:linear-gradient(180deg,var(--w),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat-desc{font-size:.85rem;color:var(--g);font-weight:500;line-height:1.5}
-.stat-bar{width:100%;height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-top:1.25rem;overflow:hidden}
-.stat-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--r),#ff6b6b);width:0;transition:width 1.5s cubic-bezier(.4,0,.2,1)}
-.stat-dots{display:flex;justify-content:center;gap:.4rem;margin-top:1.5rem}
-.stat-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.15);transition:all .3s ease}
-.stat-dot.active{background:var(--r);width:20px;border-radius:3px}
+/* STATS CARDS — más serias */
+.stats-wrap{margin:2.5rem 0;position:relative}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.06);border-radius:20px;overflow:hidden}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.stats-grid{grid-template-columns:1fr}}
+.stat-card{background:var(--n0);padding:2.5rem 2rem;cursor:pointer;position:relative;overflow:hidden;transition:background .3s ease}
+.stat-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,var(--r),transparent);opacity:.6}
+.stat-card:hover{background:rgba(255,255,255,.02)}
+.stat-num{font-size:3rem;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:.75rem;color:#fff;font-family:var(--font)}
+.stat-desc{font-size:.8rem;color:rgba(255,255,255,.4);font-weight:500;line-height:1.6;letter-spacing:.01em}
+.stat-bar{width:100%;height:1px;background:rgba(255,255,255,.05);margin-top:2rem}
+.stat-bar-fill{height:100%;background:var(--r);width:0;transition:width 1.8s cubic-bezier(.4,0,.2,1);opacity:.7}
+.stat-hint{position:absolute;bottom:1.25rem;right:1.5rem;font-size:.65rem;color:rgba(255,255,255,.15);letter-spacing:.1em;text-transform:uppercase}
 
 /* MODAL */
-.mod{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.88);backdrop-filter:blur(12px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:1rem}
+.mod{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);backdrop-filter:blur(16px);z-index:9999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:1rem}
 .mod.on{opacity:1;pointer-events:all}
-.mod-box{background:linear-gradient(135deg,#0c0c0c,#161616);border:1px solid rgba(255,0,60,.25);border-radius:28px;padding:2.5rem 2rem;max-width:520px;width:100%;position:relative;transform:scale(.92);transition:transform .3s ease;box-shadow:0 30px 60px rgba(0,0,0,.5),0 0 40px rgba(255,0,60,.08)}
-.mod.on .mod-box{transform:scale(1)}
-.mod-x{position:absolute;top:1.25rem;right:1.25rem;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--g);font-size:1.3rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
-.mod-x:hover{background:rgba(255,0,60,.15);color:var(--w);border-color:var(--r)}
-.mod-tit{font-size:1.3rem;font-weight:800;margin-bottom:.25rem}
-.mod-num{font-size:3rem;font-weight:900;margin:.5rem 0;background:linear-gradient(180deg,var(--rs),var(--r));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.mod-chart{width:100%;height:100px;margin:1rem 0;background:rgba(255,0,60,.04);border-radius:14px;border:1px solid rgba(255,0,60,.12);display:flex;align-items:flex-end;justify-content:space-around;padding:0 .75rem .5rem;gap:4px}
-.mod-bar{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(to top,var(--r),rgba(255,0,60,.25));transition:height 1s ease;height:0;max-width:30px}
-.mod-txt{color:var(--g);font-size:.9rem;line-height:1.7}
-.mod-src{margin-top:1.25rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.06);font-size:.75rem;color:rgba(255,255,255,.35)}
+.mod-box{background:#0a0a0a;border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:3rem 2.5rem;max-width:500px;width:100%;position:relative;transform:translateY(20px);transition:transform .3s ease;box-shadow:0 40px 80px rgba(0,0,0,.6)}
+.mod.on .mod-box{transform:translateY(0)}
+.mod-x{position:absolute;top:1.5rem;right:1.5rem;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.mod-x:hover{background:rgba(255,0,60,.08);color:var(--w);border-color:rgba(255,0,60,.3)}
+.mod-label{font-size:.68rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1rem}
+.mod-tit{font-size:1.1rem;font-weight:700;margin-bottom:.5rem;color:#fff;line-height:1.3}
+.mod-num{font-size:3.5rem;font-weight:900;margin:.75rem 0;color:#fff;letter-spacing:-.04em;line-height:1}
+.mod-chart{width:100%;height:90px;margin:1.5rem 0;display:flex;align-items:flex-end;gap:5px}
+.mod-bar{flex:1;border-radius:2px 2px 0 0;background:rgba(255,0,60,.15);transition:height 1s ease;height:0;position:relative}
+.mod-bar::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,var(--r),rgba(255,0,60,.2));border-radius:2px 2px 0 0;opacity:.8}
+.mod-txt{color:rgba(255,255,255,.5);font-size:.88rem;line-height:1.75}
+.mod-src{margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.05);font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.05em}
 
-/* RETRO CARDS (Causas/Consecuencias/Justificacion) */
-.retro-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
-@media(min-width:768px){.retro-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
-.retro-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.75rem;position:relative;overflow:hidden;transition:all .4s cubic-bezier(.4,0,.2,1)}
-.retro-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--r),transparent);opacity:.8;transition:width .3s ease}
-.retro-card:hover{transform:translateY(-5px);border-color:rgba(255,0,60,.3);box-shadow:0 15px 40px rgba(255,0,60,.1)}
-.retro-card:hover::before{width:5px}
-.retro-card h3{font-size:1.1rem;font-weight:700;margin-bottom:.75rem;color:var(--w);padding-left:.5rem}
-.retro-card p{color:var(--g);font-size:.9rem;line-height:1.7;padding-left:.5rem}
+/* RETRO CARDS */
+.retro-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-top:2rem}
+@media(min-width:768px){.retro-grid{grid-template-columns:repeat(2,1fr)}}
+.retro-card{background:var(--n0);padding:2rem;position:relative;overflow:hidden;transition:background .3s ease}
+.retro-card:hover{background:rgba(255,255,255,.015)}
+.retro-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--r);opacity:.5}
+.retro-card h3{font-size:.95rem;font-weight:700;margin-bottom:.75rem;color:#fff;padding-left:1rem;letter-spacing:-.01em}
+.retro-card p{color:rgba(255,255,255,.4);font-size:.85rem;line-height:1.75;padding-left:1rem}
 
-/* Justificacion variant */
-.justif-card::before{background:linear-gradient(to bottom,var(--b),transparent)}
-.justif-card:hover{border-color:rgba(68,138,255,.3);box-shadow:0 15px 40px rgba(68,138,255,.1)}
-.justif-card:hover::before{width:5px}
-.justif-num{position:absolute;top:1rem;right:1.5rem;font-size:4rem;font-weight:900;color:rgba(68,138,255,.06);line-height:1;pointer-events:none;transition:all .4s ease}
-.justif-card:hover .justif-num{color:rgba(68,138,255,.12);transform:scale(1.1)}
+/* ÁRBOL DE PROBLEMAS — rediseño KM */
+.arbol-section{margin-top:5rem}
+.arbol-label{font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,0,60,.5);margin-bottom:1.5rem}
+.arbol-title{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:3.5rem;color:#fff;line-height:1.1}
+.arbol-wrap{position:relative;padding:3rem 2rem;background:linear-gradient(135deg,rgba(255,0,60,.02),rgba(0,0,0,0));border:1px solid rgba(255,255,255,.05);border-radius:24px}
 
-/* DICCIONARIO DAS - Nothing style */
-.dic-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:2.5rem}
-@media(min-width:768px){.dic-grid{grid-template-columns:repeat(2,1fr);gap:1.5rem}}
-.dic-card{background:linear-gradient(135deg,rgba(255,255,255,.03),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.08);border-radius:24px;padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all .5s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:1rem}
-.dic-card::after{content:'';position:absolute;top:0;right:0;width:150px;height:150px;background:radial-gradient(circle,rgba(68,138,255,.08),transparent 70%);opacity:0;transition:opacity .5s ease;pointer-events:none}
-.dic-card:hover::after{opacity:1}
-.dic-card:hover{border-color:rgba(68,138,255,.25);box-shadow:0 20px 50px rgba(68,138,255,.08);transform:translateY(-4px)}
-.dic-num{font-size:clamp(3rem,8vw,5rem);font-weight:900;line-height:1;color:rgba(68,138,255,.15);letter-spacing:-.04em;transition:all .4s ease}
-.dic-card:hover .dic-num{color:rgba(68,138,255,.25)}
-.dic-tit{font-size:1.25rem;font-weight:700;color:var(--w);margin-top:-.5rem}
-.dic-desc{color:var(--g);font-size:.9rem;line-height:1.8}
-.dic-line{width:40px;height:2px;background:linear-gradient(90deg,var(--b),transparent);transition:width .4s ease}
-.dic-card:hover .dic-line{width:80px}
+/* Efectos */
+.arbol-col-label{font-size:.65rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.18);margin-bottom:1.25rem;text-align:center}
 
-/* ARBOL DE PROBLEMAS */
-.arbol-wrap{margin-top:3rem;padding:2.5rem 1.5rem;background:linear-gradient(135deg,rgba(255,0,60,.03),rgba(0,0,0,.2));border-radius:28px;border:1px solid rgba(255,0,60,.15);position:relative;overflow:hidden}
-.arbol-tit{text-align:center;font-size:1.3rem;font-weight:700;margin-bottom:2.5rem;color:var(--rs)}
-.arbol{display:flex;flex-direction:column;align-items:center;gap:2rem;position:relative}
-.arbol-tronco{background:linear-gradient(135deg,rgba(255,0,60,.12),rgba(255,0,60,.04));border:1px solid rgba(255,0,60,.25);border-radius:18px;padding:1.5rem 2rem;font-weight:700;font-size:1rem;text-align:center;max-width:600px;width:100%;backdrop-filter:blur(10px);position:relative;z-index:2;box-shadow:0 0 30px rgba(255,0,60,.08)}
-.arbol-ramas,.arbol-raices{display:grid;grid-template-columns:1fr;gap:.75rem;width:100%;max-width:700px;position:relative;z-index:2}
-@media(min-width:640px){.arbol-ramas,.arbol-raices{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:768px){.arbol-ramas,.arbol-raices{grid-template-columns:repeat(4,1fr)}}
-.arbol-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:1rem;text-align:center;font-size:.85rem;color:var(--g);transition:all .3s ease}
-.arbol-item:hover{background:rgba(255,0,60,.06);border-color:rgba(255,0,60,.2);color:var(--w);transform:translateY(-2px)}
-.arbol-raiz{background:rgba(255,0,60,.05);border-color:rgba(255,0,60,.15)}
-.arbol-raiz:hover{background:rgba(255,0,60,.1);border-color:rgba(255,0,60,.3)}
-/* SVG lines */
-.arbol-svg{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
-.arbol-line{stroke:rgba(255,0,60,.2);stroke-width:1.5;fill:none;stroke-dasharray:300;stroke-dashoffset:300;transition:stroke-dashoffset 2s ease}
-.arbol-line.on{stroke-dashoffset:0}
+/* Capas del árbol */
+.arbol-layer{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;position:relative;z-index:2}
+.arbol-connector{display:flex;justify-content:center;margin:1rem 0;position:relative;z-index:1}
+.arbol-connector-line{width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,0,60,.3),rgba(255,0,60,.1))}
 
-/* IMPORTANCIA BOX */
-.imp-box{margin-top:3rem;padding:2rem;background:linear-gradient(135deg,rgba(68,138,255,.05),rgba(0,0,0,.15));border-radius:24px;border:1px solid rgba(68,138,255,.15);position:relative;overflow:hidden}
-.imp-box::before{content:'';position:absolute;top:-50%;right:-20%;width:300px;height:300px;background:radial-gradient(circle,rgba(68,138,255,.06),transparent 70%);pointer-events:none}
-.imp-box h3{font-size:1.2rem;font-weight:700;margin-bottom:1rem;color:var(--b);position:relative}
-.imp-box p{color:var(--g);font-size:.95rem;line-height:1.8;position:relative}
-.imp-box strong{color:var(--w);font-weight:600}
+/* Nodos */
+.arbol-node{padding:1rem 1.5rem;border-radius:12px;font-size:.82rem;font-weight:500;text-align:center;line-height:1.45;transition:all .3s ease;letter-spacing:.01em}
+.arbol-node-effect{background:rgba(255,0,60,.04);border:1px solid rgba(255,0,60,.12);color:rgba(255,255,255,.6);max-width:200px}
+.arbol-node-effect:hover{background:rgba(255,0,60,.08);border-color:rgba(255,0,60,.25);color:#fff}
+.arbol-node-center{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);color:#fff;font-weight:700;font-size:.92rem;max-width:560px;padding:1.5rem 2rem;border-radius:16px;line-height:1.5;letter-spacing:-.01em}
+.arbol-node-cause{background:rgba(255,0,60,.03);border:1px solid rgba(255,0,60,.1);color:rgba(255,255,255,.5);max-width:200px}
+.arbol-node-cause:hover{background:rgba(255,0,60,.07);border-color:rgba(255,0,60,.2);color:rgba(255,255,255,.8)}
 
-/* CARRUSEL PROCESO */
-.car-wrap{position:relative;margin-top:2.5rem;background:linear-gradient(135deg,rgba(255,255,255,.02),rgba(255,255,255,.005));border:1px solid rgba(255,255,255,.08);border-radius:28px;padding:2rem 1.5rem;overflow:hidden}
+/* Líneas SVG árbol */
+.arbol-svg-wrap{position:absolute;inset:0;pointer-events:none;z-index:0}
+.arbol-svg-wrap svg{width:100%;height:100%}
+.a-line{stroke:rgba(255,0,60,.12);stroke-width:1;fill:none;stroke-dasharray:400;stroke-dashoffset:400;transition:stroke-dashoffset 1.5s ease}
+.a-line.on{stroke-dashoffset:0}
+
+@media(max-width:700px){.arbol-node{max-width:100%!important;width:100%}.arbol-layer{flex-direction:column;align-items:center}}
+
+/* IMPORTANCIA — rediseño editorial KM */
+.importancia-section{margin-top:5rem;position:relative}
+.importancia-inner{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.06);border-radius:24px;overflow:hidden}
+@media(max-width:768px){.importancia-inner{grid-template-columns:1fr}}
+.imp-left{padding:3.5rem;background:rgba(255,255,255,.015);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.imp-right{padding:3.5rem;display:flex;flex-direction:column;gap:2rem}
+.imp-eyebrow{font-size:.68rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(68,138,255,.5)}
+.imp-headline{font-size:clamp(1.6rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;color:#fff}
+.imp-body{font-size:.92rem;color:rgba(255,255,255,.45);line-height:1.85}
+.imp-body strong{color:rgba(255,255,255,.85);font-weight:600}
+.imp-quote{padding:1.5rem;border-left:2px solid rgba(68,138,255,.3);background:rgba(68,138,255,.03);border-radius:0 12px 12px 0}
+.imp-quote p{font-size:.88rem;color:rgba(255,255,255,.5);line-height:1.7;font-style:italic}
+.imp-pillars{display:flex;flex-direction:column;gap:1rem}
+.imp-pillar{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;transition:all .3s ease}
+.imp-pillar:hover{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.08)}
+.imp-pillar-icon{width:36px;height:36px;border-radius:8px;background:rgba(68,138,255,.08);border:1px solid rgba(68,138,255,.15);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.imp-pillar-text h4{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:.3rem;letter-spacing:-.01em}
+.imp-pillar-text p{font-size:.78rem;color:rgba(255,255,255,.38);line-height:1.55}
+
+/* JUSTIFICACION */
+.justif-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-top:2rem}
+@media(min-width:768px){.justif-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.justif-grid{grid-template-columns:repeat(3,1fr)}}
+.justif-card{background:var(--n0);padding:2rem 2rem 2rem;position:relative;overflow:hidden;transition:background .3s ease}
+.justif-card:hover{background:rgba(68,138,255,.02)}
+.justif-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,rgba(68,138,255,.5),transparent)}
+.justif-num{font-size:.68rem;font-weight:700;letter-spacing:.2em;color:rgba(68,138,255,.35);margin-bottom:1rem;font-family:var(--jp)}
+.justif-card h3{font-size:.95rem;font-weight:700;color:#fff;margin-bottom:.75rem;letter-spacing:-.01em}
+.justif-card p{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75}
+
+/* DICCIONARIO */
+.dic-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-top:2rem}
+@media(min-width:768px){.dic-grid{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.dic-grid{grid-template-columns:repeat(3,1fr)}}
+.dic-card{background:var(--n0);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s ease;display:flex;flex-direction:column;gap:.75rem}
+.dic-card:hover{background:rgba(68,138,255,.015)}
+.dic-num{font-size:.7rem;font-weight:700;letter-spacing:.2em;color:rgba(68,138,255,.3);font-family:var(--jp)}
+.dic-line{width:24px;height:1px;background:rgba(68,138,255,.25);transition:width .4s ease}
+.dic-card:hover .dic-line{width:48px}
+.dic-tit{font-size:.95rem;font-weight:700;color:#fff;letter-spacing:-.01em}
+.dic-desc{font-size:.82rem;color:rgba(255,255,255,.4);line-height:1.75}
+
+/* IMP BOX */
+.imp-box{margin-top:3rem;padding:2.5rem;background:rgba(68,138,255,.03);border:1px solid rgba(68,138,255,.1);border-radius:20px}
+.imp-box h3{font-size:1rem;font-weight:700;color:var(--b);margin-bottom:1rem}
+.imp-box p{font-size:.9rem;color:rgba(255,255,255,.45);line-height:1.8}
+.imp-box strong{color:#fff;font-weight:600}
+
+/* CARRUSEL */
+.car-wrap{position:relative;margin-top:2.5rem;background:rgba(255,255,255,.015);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:3rem 2.5rem;overflow:hidden}
 .car-track{display:flex;transition:transform .5s cubic-bezier(.4,0,.2,1)}
-.car-slide{min-width:100%;padding:1rem;display:flex;flex-direction:column;align-items:center;text-align:center}
-.car-num{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,rgba(83,109,254,.15),rgba(83,109,254,.03));border:2px solid var(--i);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;color:var(--i);margin-bottom:1.5rem;flex-shrink:0}
-.car-slide h3{font-size:1.3rem;font-weight:700;margin-bottom:.75rem;color:var(--w)}
-.car-slide p{color:var(--g);font-size:.9rem;line-height:1.8;max-width:500px}
-.car-link{margin-top:1.25rem;padding:.6rem 1.5rem;background:rgba(83,109,254,.08);border:1px solid rgba(83,109,254,.2);border-radius:100px;color:var(--i);font-size:.8rem;font-weight:600;text-decoration:none;transition:all .3s ease}
-.car-link:hover{background:rgba(83,109,254,.15);border-color:var(--i);color:var(--w)}
-.car-nav{display:flex;justify-content:center;gap:.75rem;margin-top:1.5rem}
-.car-btn{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);color:var(--g);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease;touch-action:manipulation}
-.car-btn:hover{background:rgba(83,109,254,.12);border-color:var(--i);color:var(--i);transform:scale(1.08)}
-.car-btn:active{transform:scale(.95)}
+.car-slide{min-width:100%;display:flex;flex-direction:column;align-items:center;text-align:center}
+.car-num{font-size:.68rem;font-weight:700;letter-spacing:.2em;color:rgba(83,109,254,.4);margin-bottom:1.5rem;font-family:var(--jp)}
+.car-slide h3{font-size:1.2rem;font-weight:700;margin-bottom:.75rem;color:#fff;letter-spacing:-.02em}
+.car-slide p{color:rgba(255,255,255,.4);font-size:.88rem;line-height:1.8;max-width:500px}
+.car-nav{display:flex;justify-content:center;gap:.75rem;margin-top:2rem}
+.car-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:rgba(255,255,255,.4);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .3s ease}
+.car-btn:hover{background:rgba(83,109,254,.08);border-color:rgba(83,109,254,.2);color:var(--i)}
 .car-dots{display:flex;justify-content:center;gap:.4rem;margin-top:1rem}
-.car-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer;transition:all .3s ease}
-.car-dot.on{background:var(--i);width:20px;border-radius:3px}
+.car-dot{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.12);cursor:pointer;transition:all .3s ease}
+.car-dot.on{background:rgba(255,255,255,.5);width:16px;border-radius:2px}
 
 /* BPMN */
-.bpmn{margin-top:3rem;padding:2rem;background:linear-gradient(135deg,rgba(83,109,254,.03),rgba(0,0,0,.1));border-radius:24px;border:2px dashed rgba(83,109,254,.2);text-align:center}
-.bpmn h3{color:var(--i);margin-bottom:.75rem;font-size:1.2rem}
-.bpmn p{color:var(--g);font-size:.85rem}
-.bpmn-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:1.5rem}
+.bpmn{margin-top:3rem;padding:2.5rem;background:rgba(83,109,254,.02);border:1px solid rgba(83,109,254,.1);border-radius:20px}
+.bpmn h3{color:rgba(83,109,254,.7);margin-bottom:.75rem;font-size:1rem;font-weight:700;letter-spacing:-.01em}
+.bpmn p{color:rgba(255,255,255,.3);font-size:.82rem}
+.bpmn-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(83,109,254,.1);border-radius:12px;overflow:hidden;margin-top:1.5rem}
 @media(min-width:640px){.bpmn-grid{grid-template-columns:repeat(2,1fr)}}
-.bpmn-card{background:rgba(0,0,0,.25);border-radius:16px;padding:1.5rem;border:1px solid rgba(83,109,254,.2)}
-.bpmn-card h4{color:var(--i);margin-bottom:.75rem;font-size:1rem}
-.bpmn-card p{font-size:.8rem;color:var(--g)}
+.bpmn-card{background:#080808;padding:1.75rem}
+.bpmn-card h4{color:rgba(83,109,254,.6);margin-bottom:.75rem;font-size:.85rem;font-weight:700;letter-spacing:.02em}
+.bpmn-card p{font-size:.78rem;color:rgba(255,255,255,.3);line-height:1.65}
 
-/* RETROALIMENTACION */
-.quote{background:linear-gradient(135deg,rgba(255,255,255,.05),rgba(255,255,255,.02));border-left:3px solid var(--p);border-radius:0 20px 20px 0;padding:2rem;margin:2.5rem 0;font-size:1.1rem;font-weight:600;font-style:italic;color:var(--w);backdrop-filter:blur(10px);position:relative}
-.quote::before{content:'"';position:absolute;top:-8px;left:16px;font-size:3.5rem;color:rgba(255,255,255,.06);font-family:serif;line-height:1}
-.feed-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem}
-@media(min-width:768px){.feed-grid{grid-template-columns:repeat(2,1fr);gap:1.25rem}}
+/* RETROALIMENTACION — rediseño editorial */
+.retro-note{padding:2rem 2.5rem;border-left:2px solid rgba(255,255,255,.12);margin-bottom:3.5rem;background:rgba(255,255,255,.015);border-radius:0 16px 16px 0}
+.retro-note p{font-size:.95rem;color:rgba(255,255,255,.5);line-height:1.75;font-style:italic;font-weight:300}
+
+.feed-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.05);border-radius:20px;overflow:hidden;margin-top:2rem}
+@media(min-width:768px){.feed-grid{grid-template-columns:repeat(2,1fr)}}
 @media(min-width:1024px){.feed-grid{grid-template-columns:repeat(3,1fr)}}
-.feed-card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:1.75rem;transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden}
-.feed-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--p),transparent);transition:width .3s ease}
-.feed-card:hover{border-color:rgba(255,255,255,.25);box-shadow:0 15px 35px rgba(255,255,255,.06);transform:translateY(-5px)}
-.feed-card:hover::before{width:5px}
-.feed-card h4{color:var(--p);font-size:1rem;font-weight:700;margin-bottom:1rem;padding-left:.5rem}
-.feed-card p{color:var(--g);font-size:.88rem;line-height:1.7;padding-left:.5rem}
-.feed-card strong{color:var(--w);font-weight:600}
-.feed-tag{display:inline-block;padding:.25rem .9rem;background:rgba(255,255,255,.06);border-radius:100px;font-size:.72rem;font-weight:600;color:var(--w);margin-top:1rem;margin-left:.5rem;border:1px solid rgba(255,255,255,.12)}
+.feed-card{background:var(--n0);padding:2rem;position:relative;overflow:hidden;transition:background .3s ease;display:flex;flex-direction:column;gap:1rem}
+.feed-card:hover{background:rgba(255,255,255,.015)}
+.feed-card::before{content:'';position:absolute;top:0;left:0;width:100%;height:1px;background:linear-gradient(90deg,rgba(224,224,224,.15),transparent)}
+.feed-card-num{font-size:.65rem;font-weight:700;letter-spacing:.2em;color:rgba(255,255,255,.15);font-family:var(--jp)}
+.feed-card h4{font-size:.92rem;font-weight:700;color:#fff;letter-spacing:-.01em;line-height:1.3}
+.feed-card p{color:rgba(255,255,255,.4);font-size:.82rem;line-height:1.75;flex:1}
+.feed-tag{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .8rem;background:rgba(255,255,255,.04);border-radius:100px;font-size:.68rem;font-weight:600;color:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.07);letter-spacing:.05em;text-transform:uppercase;width:fit-content}
+.feed-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.3)}
+
+/* QUOTE */
+.quote{padding:2rem 2.5rem;border-left:2px solid rgba(224,224,224,.15);background:rgba(255,255,255,.015);border-radius:0 16px 16px 0;margin:2.5rem 0}
+.quote p{font-size:.95rem;font-weight:400;font-style:italic;color:rgba(255,255,255,.45);line-height:1.75}
 
 /* FOOTER */
-footer{background:var(--n0);border-top:1px solid rgba(255,255,255,.06);padding:3rem 1.25rem;text-align:center;color:var(--g);font-size:.85rem;position:relative;z-index:1}
-footer .logo{margin-bottom:.75rem;display:inline-block;font-size:1.8rem}
+footer{background:var(--n0);border-top:1px solid rgba(255,255,255,.05);padding:3rem 1.5rem;text-align:center;color:rgba(255,255,255,.2);font-size:.82rem;position:relative;z-index:1}
+footer .logo{margin-bottom:.75rem;display:inline-block;font-size:2rem;-webkit-text-fill-color:transparent}
 
-/* ANIMATIONS */
-.fade{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease}
+/* ANIM */
+.fade{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
 .fade.v{opacity:1;transform:translateY(0)}
-.d1{transition-delay:.1s}
-.d2{transition-delay:.2s}
-.d3{transition-delay:.3s}
-.d4{transition-delay:.4s}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--n0)}
-::-webkit-scrollbar-thumb{background:var(--n3);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:var(--n4)}
-
-/* TOUCH OPTIMIZATIONS */
-@media(pointer:coarse){
-  .btn:hover{transform:none}
-  .stat-card:hover,.retro-card:hover,.dic-card:hover,.feed-card:hover,.justif-card:hover{transform:none}
-  .car-btn:hover{transform:none}
-}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.08);border-radius:2px}
+@media(pointer:coarse){.btn:hover,.stat-card:hover,.retro-card:hover,.feed-card:hover{transform:none}}
 </style>
 </head>
 <body>
-
 <canvas id="pc"></canvas>
 
 <nav id="nav">
@@ -230,54 +265,76 @@ footer .logo{margin-bottom:.75rem;display:inline-block;font-size:1.8rem}
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-pre">Digital Access Systems</div>
-  <div class="hero-tit">DAS</div>
-  <div class="hero-sub">Sistema de Defensa Proactiva contra Phishing</div>
-  <a href="#amenaza" class="btn btn-glow-r hero-btn">Explorar Proyecto <span class="arrow">↓</span></a>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-pre">Digital Access Systems</div>
+      <div class="hero-tit">DAS</div>
+      <div class="hero-sub">Sistema de Defensa Proactiva contra Phishing</div>
+      <a href="#amenaza" class="btn btn-r hero-btn">Explorar Proyecto <span class="arrow">↓</span></a>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-mini">
+        <div class="num">5M+</div>
+        <div class="desc">Ataques anuales</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat-mini">
+        <div class="num">86%</div>
+        <div class="desc">Generados por IA</div>
+      </div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat-mini">
+        <div class="num">21s</div>
+        <div class="desc">Para hacer clic</div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<div class="div">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,0 C360,80 720,80 1080,40 C1260,20 1380,10 1440,0 L1440,80 L0,80 Z" fill="#020202"/></svg>
-</div>
+<div class="div"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,0 C360,70 720,70 1080,35 C1260,17 1380,8 1440,0 L1440,70 L0,70 Z" fill="#020202"/></svg></div>
 
 <!-- SECCION 1: LA AMENAZA -->
 <section id="amenaza">
   <div class="sec-inner">
-    <div class="lbl fade" style="color:var(--r)">El Problema</div>
-    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--rs));-webkit-background-clip:text;-webkit-text-fill-color:transparent">La Amenaza<br>Digital</h2>
-    <p class="sub fade d2">El phishing no es una amenaza futura: es el presente. Cada 21 segundos, alguien cae. Cada dia, 3.4 mil millones de correos maliciosos buscan una brecha: la confianza humana.</p>
+    <div class="lbl fade" style="color:rgba(255,0,60,.5)">El Problema</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,#fff,rgba(255,0,60,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent">La Amenaza<br>Digital</h2>
+    <p class="sub fade d2">El phishing no es una amenaza futura: es el presente. Cada 21 segundos, alguien cae. Cada día, 3.4 mil millones de correos maliciosos buscan una brecha: la confianza humana.</p>
 
-    <!-- Stats Swipeable -->
+    <!-- Stats grid limpio -->
     <div class="stats-wrap fade d3">
-      <div class="stats-track" id="statsTrack">
+      <div class="stats-grid">
         <div class="stat-card" onclick="openModal(0)">
-          <div class="stat-num" data-t="5">0</div>
+          <div class="stat-num" data-t="5" data-fmt="M+">0</div>
           <div class="stat-desc">Millones de ataques de phishing anuales (2025)</div>
           <div class="stat-bar"><div class="stat-bar-fill" data-w="92"></div></div>
+          <div class="stat-hint">Ver detalle →</div>
         </div>
         <div class="stat-card" onclick="openModal(1)">
-          <div class="stat-num" data-t="3.4">0</div>
+          <div class="stat-num" data-t="3.4" data-fmt="B">0</div>
           <div class="stat-desc">Mil millones de correos phishing enviados diariamente</div>
           <div class="stat-bar"><div class="stat-bar-fill" data-w="85"></div></div>
+          <div class="stat-hint">Ver detalle →</div>
         </div>
         <div class="stat-card" onclick="openModal(2)">
-          <div class="stat-num" data-t="86">0</div>
-          <div class="stat-desc">% de ataques generados por Inteligencia Artificial</div>
+          <div class="stat-num" data-t="86" data-fmt="%">0</div>
+          <div class="stat-desc">% de ataques generados con Inteligencia Artificial</div>
           <div class="stat-bar"><div class="stat-bar-fill" data-w="86"></div></div>
+          <div class="stat-hint">Ver detalle →</div>
         </div>
         <div class="stat-card" onclick="openModal(3)">
-          <div class="stat-num" data-t="21">0</div>
+          <div class="stat-num" data-t="21" data-fmt="s">0</div>
           <div class="stat-desc">Segundos promedio para que un usuario haga clic</div>
           <div class="stat-bar"><div class="stat-bar-fill" data-w="65"></div></div>
+          <div class="stat-hint">Ver detalle →</div>
         </div>
       </div>
-      <div class="stat-dots" id="statDots"></div>
     </div>
 
     <!-- Modal -->
     <div class="mod" id="statModal" onclick="closeModal(event)">
       <div class="mod-box" onclick="event.stopPropagation()">
         <button class="mod-x" onclick="closeModal()">&times;</button>
+        <div class="mod-label">Estadística DAS</div>
         <div class="mod-tit" id="mTit"></div>
         <div class="mod-num" id="mNum"></div>
         <div class="mod-chart" id="mChart"></div>
@@ -287,281 +344,219 @@ footer .logo{margin-bottom:.75rem;display:inline-block;font-size:1.8rem}
     </div>
 
     <!-- Causas -->
-    <div style="margin-top:4rem">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--rs)">Causas</h3>
+    <div style="margin-top:5rem">
+      <h3 class="fade" style="font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,0,60,.45);margin-bottom:1.5rem">Causas</h3>
       <div class="retro-grid">
-        <div class="retro-card fade">
-          <h3>Desconocimiento Tecnico</h3>
-          <p>Falta de alfabetizacion en ciberseguridad. Los usuarios caen en tacticas de ingenieria social por desconocer los vectores de ataque modernos y las senales de alerta en comunicaciones digitales.</p>
-        </div>
-        <div class="retro-card fade d1">
-          <h3>Malas Practicas de Credenciales</h3>
-          <p>Reutilizacion sistematica de contrasenas debiles en multiples plataformas y almacenamiento inseguro de datos sensibles en dispositivos sin cifrado.</p>
-        </div>
-        <div class="retro-card fade d2">
-          <h3>Ausencia de Herramientas Integradas</h3>
-          <p>No existen soluciones gratuitas y accesibles que combinen escaneo de URLs y proteccion de contrasenas en una sola interfaz intuitiva para el usuario comun.</p>
-        </div>
+        <div class="retro-card fade"><h3>Desconocimiento Técnico</h3><p>Falta de alfabetización en ciberseguridad. Los usuarios caen en tácticas de ingeniería social por desconocer los vectores de ataque modernos y las señales de alerta en comunicaciones digitales.</p></div>
+        <div class="retro-card fade d1"><h3>Malas Prácticas de Credenciales</h3><p>Reutilización sistemática de contraseñas débiles en múltiples plataformas y almacenamiento inseguro de datos sensibles en dispositivos sin cifrado.</p></div>
+        <div class="retro-card fade d2"><h3>Ausencia de Herramientas Integradas</h3><p>No existen soluciones gratuitas y accesibles que combinen escaneo de URLs y protección de contraseñas en una sola interfaz intuitiva para el usuario común.</p></div>
       </div>
     </div>
 
     <!-- Consecuencias -->
     <div style="margin-top:3rem">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--rs)">Consecuencias</h3>
+      <h3 class="fade" style="font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,0,60,.45);margin-bottom:1.5rem">Consecuencias</h3>
       <div class="retro-grid">
-        <div class="retro-card fade">
-          <h3>Perdidas Financieras</h3>
-          <p>Extraccion directa de fondos de cuentas bancarias y billeteras digitales mediante suplantacion de identidad. El costo promedio de una brecha supera los 4.7 millones de dolares.</p>
-        </div>
-        <div class="retro-card fade d1">
-          <h3>Robo de Identidad</h3>
-          <p>Uso de informacion personal para cometer fraudes a terceros, generando danos legales y reputacionales irreversibles que pueden extenderse por anos.</p>
-        </div>
-        <div class="retro-card fade d2">
-          <h3>Compromiso en Cadena</h3>
-          <p>Al vulnerar una contrasena reutilizada, los atacantes acceden a multiples servicios simultaneamente, amplificando el dano exponencialmente.</p>
-        </div>
-        <div class="retro-card fade d3">
-          <h3>Desconfianza Digital</h3>
-          <p>Miedo y resistencia a utilizar servicios en linea por temor a ser estafado, frenando la adopcion tecnologica y la transformacion digital.</p>
-        </div>
+        <div class="retro-card fade"><h3>Pérdidas Financieras</h3><p>Extracción directa de fondos de cuentas bancarias y billeteras digitales. El costo promedio de una brecha supera los 4.7 millones de dólares.</p></div>
+        <div class="retro-card fade d1"><h3>Robo de Identidad</h3><p>Uso de información personal para cometer fraudes a terceros, generando daños legales y reputacionales irreversibles que pueden extenderse por años.</p></div>
+        <div class="retro-card fade d2"><h3>Compromiso en Cadena</h3><p>Al vulnerar una contraseña reutilizada, los atacantes acceden a múltiples servicios simultáneamente, amplificando el daño exponencialmente.</p></div>
+        <div class="retro-card fade d3"><h3>Desconfianza Digital</h3><p>Miedo y resistencia a utilizar servicios en línea, frenando la adopción tecnológica y la transformación digital de usuarios y organizaciones.</p></div>
       </div>
     </div>
 
-    <!-- Arbol de Problemas -->
-    <div class="arbol-wrap fade">
-      <div class="arbol-tit">Arbol de Problemas</div>
-      <div class="arbol" id="arbol">
-        <svg class="arbol-svg" id="arbolSvg" viewBox="0 0 700 400" preserveAspectRatio="none">
-          <path class="arbol-line" id="line1" d="M350,80 L350,160"/>
-          <path class="arbol-line" id="line2" d="M100,80 L350,160"/>
-          <path class="arbol-line" id="line3" d="M250,80 L350,160"/>
-          <path class="arbol-line" id="line4" d="M450,80 L350,160"/>
-          <path class="arbol-line" id="line5" d="M600,80 L350,160"/>
-          <path class="arbol-line" id="line6" d="M350,240 L350,320"/>
-          <path class="arbol-line" id="line7" d="M150,320 L350,240"/>
-          <path class="arbol-line" id="line8" d="M350,320 L350,240"/>
-          <path class="arbol-line" id="line9" d="M550,320 L350,240"/>
-        </svg>
-        <div class="arbol-ramas">
-          <div class="arbol-item">Robo de identidad</div>
-          <div class="arbol-item">Fraude financiero</div>
-          <div class="arbol-item">Exposicion de datos</div>
-          <div class="arbol-item">Desconfianza digital</div>
+    <!-- ÁRBOL DE PROBLEMAS — rediseño editorial -->
+    <div class="arbol-section fade">
+      <div class="arbol-label">Árbol de Problemas</div>
+      <div class="arbol-title">Estructura del problema</div>
+      <div class="arbol-wrap" id="arbolWrap">
+
+        <!-- Efectos (arriba) -->
+        <div class="arbol-col-label">Efectos</div>
+        <div class="arbol-layer" id="arbolTop">
+          <div class="arbol-node arbol-node-effect">Robo de identidad</div>
+          <div class="arbol-node arbol-node-effect">Fraude financiero</div>
+          <div class="arbol-node arbol-node-effect">Exposición de datos</div>
+          <div class="arbol-node arbol-node-effect">Desconfianza digital</div>
         </div>
-        <div class="arbol-tronco">Alta vulnerabilidad frente a ataques de phishing y robo de credenciales en entornos web</div>
-        <div class="arbol-raices">
-          <div class="arbol-item arbol-raiz">Desconocimiento en ciberseguridad</div>
-          <div class="arbol-item arbol-raiz">Contrasenas debiles y repetidas</div>
-          <div class="arbol-item arbol-raiz">Falta de herramientas de validacion</div>
+
+        <!-- Conector -->
+        <div class="arbol-connector"><div class="arbol-connector-line" id="connTop"></div></div>
+
+        <!-- Tronco -->
+        <div class="arbol-layer">
+          <div class="arbol-node arbol-node-center">Alta vulnerabilidad frente a ataques de phishing y robo de credenciales en entornos web</div>
+        </div>
+
+        <!-- Conector -->
+        <div class="arbol-connector"><div class="arbol-connector-line" id="connBot"></div></div>
+
+        <!-- Causas (abajo) -->
+        <div class="arbol-col-label" style="margin-top:0;margin-bottom:1rem">Causas</div>
+        <div class="arbol-layer" id="arbolBot">
+          <div class="arbol-node arbol-node-cause">Desconocimiento en ciberseguridad</div>
+          <div class="arbol-node arbol-node-cause">Contraseñas débiles y repetidas</div>
+          <div class="arbol-node arbol-node-cause">Falta de herramientas de validación</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="div">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
-</div>
+<div class="div"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,70 C360,0 720,0 1080,35 C1260,52 1380,62 1440,70 L1440,0 L0,0 Z" fill="#020202"/></svg></div>
 
 <!-- SECCION 2: DAS EL ESCUDO -->
 <section id="escudo">
   <div class="sec-inner">
-    <div class="lbl fade" style="color:var(--b)">La Solucion</div>
-    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--b));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DAS: El Escudo<br>Digital</h2>
-    <p class="sub fade d2">Digital Access Systems centraliza la prevencion. Escaneo en tiempo real, boveda cifrada y asistencia automatizada: tres lineas de defensa en una sola plataforma.</p>
+    <div class="lbl fade" style="color:rgba(68,138,255,.5)">La Solución</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,#fff,rgba(68,138,255,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent">DAS: El Escudo<br>Digital</h2>
+    <p class="sub fade d2">Digital Access Systems centraliza la prevención. Escaneo en tiempo real, bóveda cifrada y asistencia automatizada: tres líneas de defensa en una sola plataforma.</p>
 
-    <!-- Diccionario DAS -->
+    <!-- Marco teórico -->
     <div style="margin-top:1rem">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--b)">Diccionario DAS — Marco Teorico</h3>
+      <h3 class="fade" style="font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(68,138,255,.4);margin-bottom:1.5rem">Marco Teórico</h3>
       <div class="dic-grid">
-        <div class="dic-card fade">
-          <div class="dic-num">01</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">Ciberseguridad</div>
-          <div class="dic-desc">Practicas y tecnologias para proteger redes, dispositivos y datos. Basada en la triada CIA: Confidencialidad, Integridad y Disponibilidad.</div>
+        <div class="dic-card fade"><div class="dic-num">01</div><div class="dic-line"></div><div class="dic-tit">Ciberseguridad</div><div class="dic-desc">Prácticas y tecnologías para proteger redes, dispositivos y datos. Basada en la tríada CIA: Confidencialidad, Integridad y Disponibilidad.</div></div>
+        <div class="dic-card fade d1"><div class="dic-num">02</div><div class="dic-line"></div><div class="dic-tit">Phishing</div><div class="dic-desc">Técnica de ciberdelito mediante engaño y suplantación. El atacante se hace pasar por una entidad de confianza para robar información sensible.</div></div>
+        <div class="dic-card fade d2"><div class="dic-num">03</div><div class="dic-line"></div><div class="dic-tit">Ingeniería Social</div><div class="dic-desc">Manipulación psicológica que explota el factor humano: urgencia, miedo, curiosidad. Base sobre la cual se construyen los ataques de phishing.</div></div>
+        <div class="dic-card fade"><div class="dic-num">04</div><div class="dic-line"></div><div class="dic-tit">Hacking Ético</div><div class="dic-desc">Aplicación de técnicas defensivas con autorización. Simulación de ataques para identificar vulnerabilidades antes de que sean explotadas.</div></div>
+        <div class="dic-card fade d1"><div class="dic-num">05</div><div class="dic-line"></div><div class="dic-tit">IA en Ciberseguridad</div><div class="dic-desc">Automatización de la detección de patrones anómalos. En DAS se aplica mediante bots de asistencia capaces de interpretar consultas de seguridad.</div></div>
+        <div class="dic-card fade d2"><div class="dic-num">06</div><div class="dic-line"></div><div class="dic-tit">Apps de Detección</div><div class="dic-desc">Sistemas que inspeccionan URLs y dominios mediante listas negras e inspección heurística para determinar si un sitio es legítimo.</div></div>
+      </div>
+    </div>
+
+    <!-- IMPORTANCIA — rediseño editorial KM -->
+    <div class="importancia-section fade">
+      <div class="importancia-inner">
+        <div class="imp-left">
+          <div>
+            <div class="imp-eyebrow" style="margin-bottom:1rem">Importancia del Proyecto</div>
+            <div class="imp-headline">DAS no solo<br>protege.<br>Empodera.</div>
+          </div>
+          <div class="imp-quote">
+            <p>Cuando no se alcanza a intervenir un delito cibernético, el sistema actúa como una <strong style="color:rgba(255,255,255,.7)">guía de evacuación digital</strong>: pasos claros, asistencia inmediata y contención del daño.</p>
+          </div>
+          <div>
+            <div style="font-size:.78rem;color:rgba(255,255,255,.2);line-height:1.6">Democratizamos la ciberseguridad para usuarios sin conocimientos técnicos, centralizando prevención activa (escáner) y pasiva (bóveda) en una sola interfaz.</div>
+          </div>
         </div>
-        <div class="dic-card fade d1">
-          <div class="dic-num">02</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">Phishing</div>
-          <div class="dic-desc">Tecnica de ciberdelito mediante engano y suplantacion. El atacante se hace pasar por una entidad de confianza para robar informacion sensible.</div>
-        </div>
-        <div class="dic-card fade d2">
-          <div class="dic-num">03</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">Ingenieria Social</div>
-          <div class="dic-desc">Manipulacion psicologica que explota el factor humano: urgencia, miedo, curiosidad. Base sobre la cual se construyen los ataques de phishing.</div>
-        </div>
-        <div class="dic-card fade">
-          <div class="dic-num">04</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">Hacking Etico</div>
-          <div class="dic-desc">Aplicacion de tecnicas defensivas con autorizacion. Simulacion de ataques para identificar vulnerabilidades antes de que sean explotadas.</div>
-        </div>
-        <div class="dic-card fade d1">
-          <div class="dic-num">05</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">IA en Ciberseguridad</div>
-          <div class="dic-desc">Automatizacion de la deteccion de patrones anomalos. En DAS se aplica mediante bots de asistencia capaces de interpretar consultas de seguridad.</div>
-        </div>
-        <div class="dic-card fade d2">
-          <div class="dic-num">06</div>
-          <div class="dic-line"></div>
-          <div class="dic-tit">Apps de Deteccion</div>
-          <div class="dic-desc">Sistemas que inspeccionan URLs y dominios mediante listas negras e inspeccion heuristica para determinar si un sitio es legitimo.</div>
+        <div class="imp-right">
+          <div class="imp-pillars">
+            <div class="imp-pillar">
+              <div class="imp-pillar-icon">🛡</div>
+              <div class="imp-pillar-text"><h4>Prevención Activa</h4><p>Escaneo de URLs en tiempo real mediante APIs de validación de dominios y listas negras actualizadas.</p></div>
+            </div>
+            <div class="imp-pillar">
+              <div class="imp-pillar-icon">🔐</div>
+              <div class="imp-pillar-text"><h4>Prevención Pasiva</h4><p>Bóveda cifrada para almacenamiento seguro de credenciales con algoritmos de cifrado robustos.</p></div>
+            </div>
+            <div class="imp-pillar">
+              <div class="imp-pillar-icon">🤖</div>
+              <div class="imp-pillar-text"><h4>Asistencia Inteligente</h4><p>Bot automatizado capaz de orientar al usuario ante intentos de fraude y guiar la respuesta al incidente.</p></div>
+            </div>
+            <div class="imp-pillar">
+              <div class="imp-pillar-icon">♿</div>
+              <div class="imp-pillar-text"><h4>Acceso Universal</h4><p>Interfaz diseñada para usuarios sin conocimientos técnicos. Ciberseguridad democratizada.</p></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Importancia -->
-    <div class="imp-box fade">
-      <h3>Importancia del Proyecto</h3>
-      <p>DAS no solo protege: <strong>empodera</strong>. Cuando no se alcanza a intervenir un delito cibernetico, el sistema actua como una <strong>guia de evacuacion digital</strong>: pasos claros, asistencia inmediata y contencion del dano. Centralizamos prevencion activa (escaner) y pasiva (boveda) en una interfaz intuitiva, democratizando la ciberseguridad para usuarios sin conocimientos tecnicos.</p>
-    </div>
-
     <!-- Justificacion -->
-    <div style="margin-top:4rem">
-      <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:1.5rem;color:var(--b)">Justificacion</h3>
-      <div class="retro-grid">
-        <div class="retro-card justif-card fade">
-          <div class="justif-num">01</div>
-          <h3>Tecnologica</h3>
-          <p>Arquitectura web centralizada con motor de inspeccion de dominios via APIs y boveda con algoritmos de cifrado robustos. Integracion de multiples capas de seguridad en un solo entorno.</p>
-        </div>
-        <div class="retro-card justif-card fade d1">
-          <div class="justif-num">02</div>
-          <h3>Social</h3>
-          <p>Democratiza el acceso a la ciberseguridad preventiva. Protege a los usuarios mas vulnerables frente a ingenieria social sin requerir conocimientos tecnicos avanzados.</p>
-        </div>
-        <div class="retro-card justif-card fade d2">
-          <div class="justif-num">03</div>
-          <h3>Economica</h3>
-          <p>Barrera preventiva contra fraude financiero. Tecnologias de codigo abierto y APIs de acceso libre optimizan recursos del presupuesto de desarrollo sin comprometer calidad.</p>
-        </div>
-        <div class="retro-card justif-card fade">
-          <div class="justif-num">04</div>
-          <h3>Academica</h3>
-          <p>Aplica competencias ADSO: patrones de diseno, POO, bases de datos, UI/UX y gestion agil con Scrum. Cumple integralmente con los resultados de aprendizaje del proyecto formativo.</p>
-        </div>
-        <div class="retro-card justif-card fade d1">
-          <div class="justif-num">05</div>
-          <h3>Ambiental</h3>
-          <p>Solucion nativa digital con impacto minimo. Alineado con politicas "Cero Papel" y despliegue en infraestructuras en la nube que optimizan el consumo energetico.</p>
-        </div>
+    <div style="margin-top:5rem">
+      <h3 class="fade" style="font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:rgba(68,138,255,.4);margin-bottom:1.5rem">Justificación</h3>
+      <div class="justif-grid">
+        <div class="justif-card fade"><div class="justif-num">01</div><h3>Tecnológica</h3><p>Arquitectura web centralizada con motor de inspección de dominios vía APIs y bóveda con algoritmos de cifrado robustos. Múltiples capas de seguridad en un solo entorno.</p></div>
+        <div class="justif-card fade d1"><div class="justif-num">02</div><h3>Social</h3><p>Democratiza el acceso a la ciberseguridad preventiva. Protege a los usuarios más vulnerables frente a ingeniería social sin requerir conocimientos técnicos avanzados.</p></div>
+        <div class="justif-card fade d2"><div class="justif-num">03</div><h3>Económica</h3><p>Barrera preventiva contra fraude financiero. Tecnologías de código abierto y APIs de acceso libre optimizan recursos sin comprometer calidad.</p></div>
+        <div class="justif-card fade"><div class="justif-num">04</div><h3>Académica</h3><p>Aplica competencias ADSO: patrones de diseño, POO, bases de datos, UI/UX y gestión ágil con Scrum. Cumple con los resultados de aprendizaje del proyecto formativo.</p></div>
+        <div class="justif-card fade d1"><div class="justif-num">05</div><h3>Ambiental</h3><p>Solución nativa digital con impacto mínimo. Alineado con políticas "Cero Papel" y despliegue en infraestructuras en la nube que optimizan el consumo energético.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="div">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
-</div>
+<div class="div"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,70 C360,0 720,0 1080,35 C1260,52 1380,62 1440,70 L1440,0 L0,0 Z" fill="#020202"/></svg></div>
 
 <!-- SECCION 3: PROCESO -->
 <section id="proceso">
   <div class="sec-inner">
-    <div class="lbl fade" style="color:var(--i)">Construccion</div>
-    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--i));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Proceso &<br>Evidencia</h2>
-    <p class="sub fade d2">Un proyecto solido se construye sobre evidencia. Cada dato, cada entrevista y cada observacion valida la necesidad de un escudo digital accesible.</p>
-
-    <!-- Carrusel -->
+    <div class="lbl fade" style="color:rgba(83,109,254,.5)">Construcción</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,#fff,rgba(83,109,254,.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Proceso &<br>Evidencia</h2>
+    <p class="sub fade d2">Un proyecto sólido se construye sobre evidencia. Cada dato, cada entrevista y cada observación valida la necesidad de un escudo digital accesible.</p>
     <div class="car-wrap fade d3">
       <div class="car-track" id="carTrack">
-        <div class="car-slide">
-          <div class="car-num">01</div>
-          <h3>Encuestas Digitales</h3>
-          <p>Cuestionario estructurado distribuido a la poblacion objetivo. Revelo que la mayoria no verifica dominios antes de ingresar datos y desconoce el uso de bovedas cifradas.</p>
-          <a href="#" class="car-link">Ver encuesta &rarr;</a>
-        </div>
-        <div class="car-slide">
-          <div class="car-num">02</div>
-          <h3>Entrevistas Semiestructuradas</h3>
-          <p>Dialogos cualitativos con usuarios que han enfrentado intentos de fraude. Permisieron entender el comportamiento real ante URLs desconocidas y el sentido de urgencia.</p>
-          <a href="#" class="car-link">Ver entrevistas &rarr;</a>
-        </div>
-        <div class="car-slide">
-          <div class="car-num">03</div>
-          <h3>Observacion Directa</h3>
-          <p>Analisis del comportamiento de autenticacion en plataformas web. Confirmo que los usuarios acceden a enlaces dudosos por impulso, sin validacion tecnica previa.</p>
-          <a href="#" class="car-link">Ver observaciones &rarr;</a>
-        </div>
-        <div class="car-slide">
-          <div class="car-num">04</div>
-          <h3>Analisis de Resultados</h3>
-          <p>Triangulacion de datos: encuestas, entrevistas y observaciones confirman la brecha de seguridad. El usuario demanda una solucion sin conocimientos tecnicos avanzados.</p>
-          <a href="#" class="car-link">Ver analisis &rarr;</a>
-        </div>
+        <div class="car-slide"><div class="car-num">01 / 04</div><h3>Encuestas Digitales</h3><p>Cuestionario estructurado distribuido a la población objetivo. Reveló que la mayoría no verifica dominios antes de ingresar datos y desconoce el uso de bóvedas cifradas.</p></div>
+        <div class="car-slide"><div class="car-num">02 / 04</div><h3>Entrevistas Semiestructuradas</h3><p>Diálogos cualitativos con usuarios que han enfrentado intentos de fraude. Permitieron entender el comportamiento real ante URLs desconocidas y el sentido de urgencia.</p></div>
+        <div class="car-slide"><div class="car-num">03 / 04</div><h3>Observación Directa</h3><p>Análisis del comportamiento de autenticación en plataformas web. Confirmó que los usuarios acceden a enlaces dudosos por impulso, sin validación técnica previa.</p></div>
+        <div class="car-slide"><div class="car-num">04 / 04</div><h3>Análisis de Resultados</h3><p>Triangulación de datos: encuestas, entrevistas y observaciones confirman la brecha de seguridad. El usuario demanda una solución sin conocimientos técnicos avanzados.</p></div>
       </div>
       <div class="car-nav">
-        <button class="car-btn" onclick="prevCar()">&lsaquo;</button>
-        <button class="car-btn" onclick="nextCar()">&rsaquo;</button>
+        <button class="car-btn" onclick="prevCar()">‹</button>
+        <button class="car-btn" onclick="nextCar()">›</button>
       </div>
       <div class="car-dots" id="carDots"></div>
     </div>
-
-    <!-- BPMN -->
     <div class="bpmn fade">
       <h3>Modelado de Procesos BPMN</h3>
-      <p>Diagramas de flujo para los procesos de Escaneo de Seguridad y Gestion de Boveda de Contrasenas.<br><em style="opacity:.5;font-size:.8rem">(Espacio reservado para diagramas exportados desde Bizagi / Lucidchart)</em></p>
+      <p>Diagramas de flujo para los procesos de Escaneo de Seguridad y Gestión de Bóveda de Contraseñas.</p>
       <div class="bpmn-grid">
-        <div class="bpmn-card">
-          <h4>Flujo de Escaneo</h4>
-          <p>Inicio &rarr; Consulta API &rarr; &iquest;Malicioso? &rarr; Alerta/Bloqueo &rarr; Guardar historial</p>
-        </div>
-        <div class="bpmn-card">
-          <h4>Flujo de Boveda</h4>
-          <p>Acceso &rarr; Validacion maestra &rarr; &iquest;Valida? &rarr; Cifrar/Descifrar credenciales</p>
-        </div>
+        <div class="bpmn-card"><h4>Flujo de Escaneo</h4><p>Inicio → Consulta API → ¿Malicioso? → Alerta/Bloqueo → Guardar historial</p></div>
+        <div class="bpmn-card"><h4>Flujo de Bóveda</h4><p>Acceso → Validación maestra → ¿Válida? → Cifrar/Descifrar credenciales</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<div class="div">
-  <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,80 C360,0 720,0 1080,40 C1260,60 1380,70 1440,80 L1440,0 L0,0 Z" fill="#020202"/></svg>
-</div>
+<div class="div"><svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0,70 C360,0 720,0 1080,35 C1260,52 1380,62 1440,70 L1440,0 L0,0 Z" fill="#020202"/></svg></div>
 
 <!-- SECCION 4: RETROALIMENTACION -->
 <section id="retro">
   <div class="sec-inner">
-    <div class="lbl fade" style="color:var(--p)">Evolucion</div>
-    <h2 class="tit fade d1" style="background:linear-gradient(135deg,var(--w),var(--p));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Retroalimentacion</h2>
-    <p class="sub fade d2">Los instructores plantearon observaciones. No como criticas destructivas, sino como catalizadores. Cada punto fue absorbido, procesado y transformado en accion concreta.</p>
+    <div class="lbl fade" style="color:rgba(224,224,224,.4)">Evolución</div>
+    <h2 class="tit fade d1" style="background:linear-gradient(135deg,#fff,rgba(224,224,224,.4));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Retroalimentación</h2>
+    <p class="sub fade d2">Los instructores plantearon observaciones. No como críticas destructivas, sino como catalizadores. Cada punto fue absorbido, procesado y transformado en acción concreta.</p>
 
-    <div class="quote fade d3">En la retroalimentacion los instructores dijeron que el marco teorico no estaba claro, pero como pueden ver, ya esta aplicado, estructurado y evidenciado.</div>
+    <div class="retro-note fade d3">
+      <p>Las siguientes acciones reflejan las mejoras realizadas tras la retroalimentación recibida.</p>
+    </div>
 
     <div class="feed-grid">
       <div class="feed-card fade">
-        <h4>Recoleccion de Informacion</h4>
-        <p><strong>Observacion:</strong> No existian evidencias suficientes del levantamiento de informacion.<br><br><strong>Accion:</strong> Se incorporaron las evidencias de encuestas, entrevistas y observaciones. Resultados, analisis y conclusiones documentadas en anexos.</p>
-        <span class="feed-tag">Resuelto</span>
+        <div class="feed-card-num">01</div>
+        <h4>Recolección de Información</h4>
+        <p>Se consolidaron y documentaron las evidencias del levantamiento de información, incorporando las encuestas, entrevistas y observaciones realizadas, junto con sus respectivos resultados, análisis y conclusiones. Esto permite evidenciar de manera más clara el proceso de investigación desarrollado para la identificación de necesidades y la formulación del proyecto.</p>
+        <div class="feed-tag">Resuelto</div>
       </div>
       <div class="feed-card fade d1">
+        <div class="feed-card-num">02</div>
         <h4>Planteamiento del Problema</h4>
-        <p><strong>Observacion:</strong> La problematica no era lo suficientemente clara ni profunda.<br><br><strong>Accion:</strong> Incorporadas cifras de fuentes confiables (APWG, Verizon DBIR). Poblacion objetivo delimitada. Precision en la explicacion del problema.</p>
-        <span class="feed-tag">Resuelto</span>
+        <p>Se fortaleció el planteamiento del problema mediante la incorporación de estadísticas, fuentes confiables y una mejor delimitación de la población objetivo. Asimismo, se precisó la descripción de la problemática y su relación con la solución propuesta, facilitando su comprensión y alcance.</p>
+        <div class="feed-tag">Resuelto</div>
       </div>
       <div class="feed-card fade d2">
+        <div class="feed-card-num">03</div>
         <h4>Alcance del Proyecto</h4>
-        <p><strong>Observacion:</strong> El alcance no estaba completamente definido, generando interpretaciones amplias.<br><br><strong>Accion:</strong> Definicion clara de funciones (In Scope) y limites (Out of Scope). Alineamiento con objetivos y problematica.</p>
-        <span class="feed-tag">Resuelto</span>
+        <p>Se redefinió el alcance del proyecto, estableciendo de manera explícita las funcionalidades que forman parte de la solución y aquellas que se encuentran fuera de su cobertura. Esto permite una mejor alineación entre los objetivos, la problemática y los resultados esperados.</p>
+        <div class="feed-tag">Resuelto</div>
       </div>
       <div class="feed-card fade">
-        <h4>Aplicacion del Marco Scrum</h4>
-        <p><strong>Observacion:</strong> No se evidencio la aplicacion completa de la metodologia Scrum.<br><br><strong>Accion:</strong> Documentados roles, Product Backlog, Sprint Backlog, cronograma de sprints y evidencias de seguimiento en Jira.</p>
-        <span class="feed-tag">Resuelto</span>
+        <div class="feed-card-num">04</div>
+        <h4>Aplicación del Marco Scrum</h4>
+        <p>Se complementó la documentación de la metodología Scrum mediante la incorporación de roles, responsabilidades, Product Backlog, Sprint Backlog, cronograma de sprints y evidencias de seguimiento en Jira, permitiendo visualizar de forma más clara la gestión y organización del proyecto.</p>
+        <div class="feed-tag">Resuelto</div>
       </div>
       <div class="feed-card fade d1">
+        <div class="feed-card-num">05</div>
         <h4>Modelado de Procesos BPMN</h4>
-        <p><strong>Observacion:</strong> No se presentaron diagramas BPMN de los procesos del sistema.<br><br><strong>Accion:</strong> Elaborados diagramas BPMN para escaneo de seguridad y gestion de boveda. Explicacion de flujos y relacion con el sistema.</p>
-        <span class="feed-tag">Resuelto</span>
+        <p>Se elaboraron y documentaron los diagramas BPMN correspondientes a los procesos principales del sistema, acompañados de la descripción de los flujos y su relación con la solución propuesta, fortaleciendo la comprensión del funcionamiento general del proyecto.</p>
+        <div class="feed-tag">Resuelto</div>
       </div>
     </div>
 
-    <div style="margin-top:4rem;text-align:center" class="fade">
-      <p style="font-size:1rem;color:var(--g);margin-bottom:1.5rem">La retroalimentacion fue el detonante. No el veredicto.</p>
-      <a href="#" class="btn btn-glow-p" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Volver al inicio <span class="arrow">&uarr;</span></a>
+    <div style="margin-top:5rem;text-align:center" class="fade">
+      <p style="font-size:.85rem;color:rgba(255,255,255,.2);margin-bottom:1.5rem;letter-spacing:.05em;text-transform:uppercase">La retroalimentación fue el detonante. No el veredicto.</p>
+      <a href="#" class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">Volver al inicio ↑</a>
     </div>
   </div>
 </section>
@@ -569,28 +564,27 @@ footer .logo{margin-bottom:.75rem;display:inline-block;font-size:1.8rem}
 <footer>
   <div class="logo">DAS.</div>
   <p>Digital Access Systems — Proyecto Formativo ADSO | SENA</p>
-  <p style="margin-top:.5rem;font-size:.75rem;opacity:.4">Bogota, D.C. | 2025</p>
+  <p style="margin-top:.5rem;font-size:.72rem;opacity:.4">Bogotá, D.C. | 2025</p>
 </footer>
 
 <script>
-// PARTICULAS
+// PARTÍCULAS
 const cvs=document.getElementById('pc'),ctx=cvs.getContext('2d');
 let pts=[];
 function rs(){cvs.width=window.innerWidth;cvs.height=window.innerHeight}
 rs();window.addEventListener('resize',rs);
-class Pt{constructor(){this.x=Math.random()*cvs.width;this.y=Math.random()*cvs.height;this.s=Math.random()*1.2+.3;this.vx=(Math.random()-.5)*.25;this.vy=(Math.random()-.5)*.25;this.o=Math.random()*.35+.08}
+class Pt{constructor(){this.x=Math.random()*cvs.width;this.y=Math.random()*cvs.height;this.s=Math.random()*.8+.2;this.vx=(Math.random()-.5)*.2;this.vy=(Math.random()-.5)*.2;this.o=Math.random()*.2+.04}
 up(){this.x+=this.vx;this.y+=this.vy;if(this.x>cvs.width)this.x=0;if(this.x<0)this.x=cvs.width;if(this.y>cvs.height)this.y=0;if(this.y<0)this.y=cvs.height}
-dr(){ctx.fillStyle=`rgba(180,200,255,${this.o})`;ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fill()}}
-function ip(){pts=[];for(let i=0;i<70;i++)pts.push(new Pt())}
+dr(){ctx.fillStyle=`rgba(200,210,255,${this.o})`;ctx.beginPath();ctx.arc(this.x,this.y,this.s,0,Math.PI*2);ctx.fill()}}
+function ip(){pts=[];for(let i=0;i<60;i++)pts.push(new Pt())}
 function ap(){ctx.clearRect(0,0,cvs.width,cvs.height);pts.forEach(p=>{p.up();p.dr()});
-for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<110){ctx.strokeStyle=`rgba(180,200,255,${.07*(1-d/110)})`;ctx.lineWidth=.35;ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}}
+for(let i=0;i<pts.length;i++)for(let j=i+1;j<pts.length;j++){const dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<100){ctx.strokeStyle=`rgba(180,200,255,${.05*(1-d/100)})`;ctx.lineWidth=.3;ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.stroke()}}
 requestAnimationFrame(ap)}
 ip();ap();
 
-// NAV SCROLL + ACTIVE
-document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+// NAV
 window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>60);
   document.querySelectorAll('.nav-pills a').forEach(a=>{a.classList.remove('active');
     const t=document.querySelector(a.getAttribute('href'));
     if(t&&window.scrollY>=t.offsetTop-200)a.classList.add('active');
@@ -598,38 +592,46 @@ window.addEventListener('scroll',()=>{
 });
 
 // INTERSECTION OBSERVER
-const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');if(e.target.id==='arbol')drawArbolLines()}})},{threshold:.1,rootMargin:'0px 0px -60px 0px'});
+const obs=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');if(e.target.id==='arbolWrap'||e.target.closest('#arbolWrap'))animArbol()}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
 
-// ARBOL LINES ANIM
-function drawArbolLines(){setTimeout(()=>{document.querySelectorAll('.arbol-line').forEach((l,i)=>{setTimeout(()=>l.classList.add('on'),i*150)})},300)}
+// ÁRBOL animación conectores
+let arbolDone=false;
+function animArbol(){
+  if(arbolDone)return;arbolDone=true;
+  setTimeout(()=>{
+    document.getElementById('connTop').style.height='60px';
+    document.getElementById('connBot').style.height='60px';
+  },300);
+}
 
-// STATS COUNTER + SWIPE
-const sn=document.querySelectorAll('.stat-num'),sb=document.querySelectorAll('.stat-bar-fill');
-let cnt=false,si=0;
-const so=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!cnt){cnt=true;sn.forEach(s=>{const t=parseFloat(s.dataset.t),d=2000,st=performance.now();function uc(ct){const el=ct-st,pr=Math.min(el/d,1),eo=1-Math.pow(1-pr,3),cu=t*eo;if(t===3.4)s.textContent=cu.toFixed(1)+'B';else if(t===5)s.textContent=Math.floor(cu)+'M+';else if(t===86)s.textContent=Math.floor(cu)+'%';else if(t===21)s.textContent=Math.floor(cu)+'s';if(pr<1)requestAnimationFrame(uc)}requestAnimationFrame(uc)});sb.forEach(b=>setTimeout(()=>b.style.width=b.dataset.w+'%',400))}})},{threshold:.3});
+// STATS COUNTER
+let cnt=false;
+const so=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting&&!cnt){cnt=true;
+  document.querySelectorAll('.stat-num').forEach(s=>{
+    const t=parseFloat(s.dataset.t),fmt=s.dataset.fmt,d=1800,st=performance.now();
+    function uc(ct){const el=ct-st,pr=Math.min(el/d,1),eo=1-Math.pow(1-pr,3),cu=t*eo;
+      if(fmt==='M+')s.textContent=cu.toFixed(1)+'M+';
+      else if(fmt==='B')s.textContent=cu.toFixed(1)+'B';
+      else if(fmt==='%')s.textContent=Math.floor(cu)+'%';
+      else if(fmt==='s')s.textContent=Math.floor(cu)+'s';
+      if(pr<1)requestAnimationFrame(uc)}requestAnimationFrame(uc)});
+  setTimeout(()=>document.querySelectorAll('.stat-bar-fill').forEach(b=>b.style.width=b.dataset.w+'%'),300);
+}})},{threshold:.3});
 so.observe(document.querySelector('.stats-wrap'));
 
-// STATS SWIPE
-const st=document.getElementById('statsTrack'),sd=document.getElementById('statDots');
-for(let i=0;i<4;i++){const d=document.createElement('div');d.className='stat-dot'+(i===0?' active':'');sd.appendChild(d)}
-function updStatDots(){document.querySelectorAll('.stat-dot').forEach((d,i)=>d.classList.toggle('active',i===si))}
-let sx=0,ss=0;
-st.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;ss=si},{passive:true});
-st.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50){if(dx<0&&si<3)si++;else if(dx>0&&si>0)si--;st.style.transform=`translateX(-${si*100/4}%)`;updStatDots()}},{passive:true});
-
-// MODAL DATA
+// MODAL
 const md=[
-  {t:'Ataques de Phishing Anuales',n:'5M+',x:'En 2025 se registraron mas de 5 millones de ataques de phishing a nivel global, segun el reporte de APWG. Aunque en 2024 hubo una ligera estabilizacion (4.8M), la cifra volvio a superar los 5 millones, demostrando que la amenaza sigue en crecimiento sostenido.',s:'Fuente: APWG Phishing Activity Trends Report 2025',b:[25,40,55,50,75,92,88]},
-  {t:'Correos Phishing Diarios',n:'3.4B',x:'Aproximadamente 3.4 mil millones de correos de phishing son enviados diariamente. La IA permite crear correos sin errores de ortografia, con personalizacion avanzada y tecnicas como quishing (phishing por QR), lo que dificulta la deteccion por parte de usuarios comunes.',s:'Fuente: The Network Installers / AAG IT',b:[35,50,65,60,80,88,85]},
-  {t:'Ataques Generados por IA',n:'86%',x:'Entre el 82% y 90% de los ataques de phishing en 2025 son generados con apoyo de Inteligencia Artificial. Los modelos de lenguaje permiten crear mensajes hiperpersonalizados, sin errores gramaticales y con tecnicas de ingenieria social avanzadas.',s:'Fuente: Keepnet / VIPRE / ESED',b:[18,30,45,55,70,82,86]},
-  {t:'Tiempo Promedio para Clic',n:'21s',x:'El tiempo promedio para que un usuario haga clic en un enlace malicioso tras recibir un correo de phishing es de apenas 21 segundos. Esta velocidad de reaccion deja poco margen para la reflexion, haciendo critica la necesidad de herramientas de deteccion automatica.',s:'Fuente: Verizon DBIR 2025',b:[55,42,30,26,23,21,21]}
+  {t:'Ataques de Phishing Anuales',n:'5M+',x:'En 2025 se registraron más de 5 millones de ataques de phishing a nivel global, según el reporte de APWG. Aunque en 2024 hubo una ligera estabilización, la cifra volvió a superar los 5 millones, demostrando que la amenaza sigue en crecimiento sostenido.',s:'Fuente: APWG Phishing Activity Trends Report 2025',b:[25,40,55,50,75,92,88]},
+  {t:'Correos Phishing Diarios',n:'3.4B',x:'Aproximadamente 3.4 mil millones de correos de phishing son enviados diariamente. La IA permite crear correos sin errores de ortografía, con personalización avanzada y técnicas como quishing (phishing por QR), lo que dificulta la detección.',s:'Fuente: The Network Installers / AAG IT',b:[35,50,65,60,80,88,85]},
+  {t:'Ataques Generados por IA',n:'86%',x:'Entre el 82% y 90% de los ataques de phishing en 2025 son generados con apoyo de Inteligencia Artificial. Los modelos de lenguaje permiten crear mensajes hiperpersonalizados, sin errores gramaticales y con técnicas de ingeniería social avanzadas.',s:'Fuente: Keepnet / VIPRE / ESED',b:[18,30,45,55,70,82,86]},
+  {t:'Tiempo Promedio para Clic',n:'21s',x:'El tiempo promedio para que un usuario haga clic en un enlace malicioso tras recibir un correo de phishing es de apenas 21 segundos. Esta velocidad deja poco margen para la reflexión, haciendo crítica la necesidad de herramientas de detección automática.',s:'Fuente: Verizon DBIR 2025',b:[55,42,30,26,23,21,21]}
 ];
 function openModal(i){const d=md[i];document.getElementById('mTit').textContent=d.t;document.getElementById('mNum').textContent=d.n;document.getElementById('mTxt').textContent=d.x;document.getElementById('mSrc').textContent=d.s;const ch=document.getElementById('mChart');ch.innerHTML='';d.b.forEach((h,j)=>{const b=document.createElement('div');b.className='mod-bar';b.style.height='0';ch.appendChild(b);setTimeout(()=>b.style.height=h+'%',j*80+200)});document.getElementById('statModal').classList.add('on');document.body.style.overflow='hidden'}
 function closeModal(e){if(!e||e.target===document.getElementById('statModal')||e.target.closest('.mod-x')){document.getElementById('statModal').classList.remove('on');document.body.style.overflow=''}}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 
-// CARRUSEL PROCESO
+// CARRUSEL
 let ci=0;const ct=document.getElementById('carTrack'),cd=document.getElementById('carDots'),tc=4;
 function uc(){ct.style.transform=`translateX(-${ci*100}%)`;document.querySelectorAll('.car-dot').forEach((d,i)=>d.classList.toggle('on',i===ci))}
 function nextCar(){ci=(ci+1)%tc;uc()}function prevCar(){ci=(ci-1+tc)%tc;uc()}
@@ -637,9 +639,7 @@ for(let i=0;i<tc;i++){const d=document.createElement('div');d.className='car-dot
 let as=setInterval(nextCar,5000);
 ct.parentElement.addEventListener('mouseenter',()=>clearInterval(as));
 ct.parentElement.addEventListener('mouseleave',()=>as=setInterval(nextCar,5000));
-// Touch swipe carrusel
-let cx=0;
-ct.addEventListener('touchstart',e=>{cx=e.touches[0].clientX},{passive:true});
+let cx=0;ct.addEventListener('touchstart',e=>{cx=e.touches[0].clientX},{passive:true});
 ct.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-cx;if(Math.abs(dx)>60){if(dx<0)nextCar();else prevCar()}},{passive:true});
 
 // SMOOTH NAV
