@@ -60,11 +60,12 @@ document.querySelectorAll(".img-slot").forEach(slot => {
     edit.hidden = false;
   }
 
-  const saved = localStorage.getItem(id);
+  const saved = localStorage.getItem(id) || (slot.dataset.slot === "hero-1" ? localStorage.getItem("das-img-hero") : null);
   if (saved) show(saved);
 
   slot.addEventListener("click", event => {
     if (event.target.closest(".play-button")) return;
+    if (slot.dataset.mode === "button" && !event.target.closest(".slot-edit, .slot-empty")) return;
     input.click();
   });
 
@@ -229,3 +230,49 @@ mainNav.querySelectorAll("a").forEach(link => link.addEventListener("click", () 
   mainNav.classList.remove("open");
   menuButton.setAttribute("aria-expanded", "false");
 }));
+
+/* ---------- Carrusel del hero ---------- */
+const heroSection = document.querySelector(".hero");
+const slides = [...document.querySelectorAll(".hero-slide")];
+const dotsBox = document.querySelector(".hero-dots");
+let current = 0;
+let timer = null;
+
+const dots = slides.map((_, i) => {
+  const dot = document.createElement("button");
+  dot.type = "button";
+  dot.setAttribute("role", "tab");
+  dot.setAttribute("aria-label", `Ir a la diapositiva ${i + 1}`);
+  dot.addEventListener("click", () => { goTo(i); restartAutoplay(); });
+  dotsBox.appendChild(dot);
+  return dot;
+});
+
+function goTo(index) {
+  current = (index + slides.length) % slides.length;
+  slides.forEach((slide, i) => {
+    const active = i === current;
+    slide.classList.toggle("is-active", active);
+    slide.inert = !active;
+    slide.setAttribute("aria-hidden", String(!active));
+  });
+  dots.forEach((dot, i) => dot.setAttribute("aria-selected", String(i === current)));
+}
+
+function startAutoplay() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  stopAutoplay();
+  timer = setInterval(() => goTo(current + 1), 8000);
+}
+function stopAutoplay() { clearInterval(timer); timer = null; }
+function restartAutoplay() { startAutoplay(); }
+
+document.querySelector(".hero-prev").addEventListener("click", () => { goTo(current - 1); restartAutoplay(); });
+document.querySelector(".hero-next").addEventListener("click", () => { goTo(current + 1); restartAutoplay(); });
+heroSection.addEventListener("mouseenter", stopAutoplay);
+heroSection.addEventListener("mouseleave", startAutoplay);
+heroSection.addEventListener("focusin", stopAutoplay);
+heroSection.addEventListener("focusout", startAutoplay);
+
+goTo(0);
+startAutoplay();
