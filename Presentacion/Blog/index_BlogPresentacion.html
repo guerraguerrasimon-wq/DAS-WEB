@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Blog — DAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Base/style_BasePresentacion.css">
+  <link rel="stylesheet" href="style_BlogPresentacion.css">
+  <script src="../Base/script_BasePresentacion.js" defer></script>
+  <script src="script_BlogPresentacion.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="index_inicio_presentacion.html" aria-label="DAS, inicio"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <div class="nav-links"><a href="../Inicio/index_InicioPresentacion.html">Inicio</a><a href="../Inicio/index_InicioPresentacion.html#Cursos">Cursos</a><a href="../Blog/index_BlogPresentacion.html" aria-current="page">Blog</a><a href="../Precios/index_PreciosPresentacion.html">Precios</a></div>
+      <button class="icon-button search-button" aria-label="Buscar">⌕</button>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+      <div class="account-actions">
+        <button class="button button-outline" data-auth="login">Iniciar sesión <span>→</span></button>
+        <button class="button button-red" data-auth="register">Registrarse <span>→</span></button>
+      </div>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="app">Ir a la aplicación</button>
+        <button type="button" class="menu-item" data-action="photo">Cambiar foto</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+      <input type="file" class="avatar-input" accept="image/*" hidden>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="page-head section-rule">
+      <div class="eyebrow-row"><span class="kicker">BLOG / SEGURIDAD DIGITAL</span><span>APRENDE ANTES DE HACER CLIC.</span></div>
+      <h1 class="page-title">BLOG</h1>
+      <p class="page-lead">Artículos cortos y claros sobre las amenazas que sí te pueden pasar, y cómo evitarlas.</p>
+      <div class="blog-filters" role="group" aria-label="Filtrar artículos">
+        <button class="chip" data-filter="todos" aria-pressed="true">Todos</button>
+        <button class="chip" data-filter="phishing" aria-pressed="false">Phishing</button>
+        <button class="chip" data-filter="ransomware" aria-pressed="false">Ransomware</button>
+        <button class="chip" data-filter="identidad" aria-pressed="false">Identidad digital</button>
+      </div>
+    </section>
+    <!-- Artículos de ejemplo: reemplaza títulos y textos por los reales -->
+    <section class="blog-grid section-rule" aria-live="polite">
+      <article class="post-card" data-tag="phishing">
+        <div class="post-image img-slot" data-slot="blog-1" data-label="imagen del artículo 1">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>PHISHING</b><span>3 min DE LECTURA</span></div>
+          <h2 class="post-title">5 señales de que un correo no es de tu banco</h2>
+          <p class="post-excerpt">Remitente raro, urgencia y enlaces que no coinciden: lo básico para dudar a tiempo.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+      <article class="post-card" data-tag="ransomware">
+        <div class="post-image img-slot" data-slot="blog-2" data-label="imagen del artículo 2">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>RANSOMWARE</b><span>4 min DE LECTURA</span></div>
+          <h2 class="post-title">Qué hacer si abriste un archivo sospechoso</h2>
+          <p class="post-excerpt">Desconecta, no pagues y avisa. Los primeros minutos cambian el resultado.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+      <article class="post-card" data-tag="identidad">
+        <div class="post-image img-slot" data-slot="blog-3" data-label="imagen del artículo 3">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>IDENTIDAD DIGITAL</b><span>3 min DE LECTURA</span></div>
+          <h2 class="post-title">Contraseñas: por qué la tuya no debería repetirse</h2>
+          <p class="post-excerpt">Una sola filtración puede abrirle la puerta a todas tus cuentas.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+      <article class="post-card" data-tag="phishing">
+        <div class="post-image img-slot" data-slot="blog-4" data-label="imagen del artículo 4">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>PHISHING</b><span>3 min DE LECTURA</span></div>
+          <h2 class="post-title">Cómo revisar un enlace antes de hacer clic</h2>
+          <p class="post-excerpt">Mira el dominio real, no el texto. Así lo comprueba DAS por ti.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+      <article class="post-card" data-tag="ransomware">
+        <div class="post-image img-slot" data-slot="blog-5" data-label="imagen del artículo 5">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>RANSOMWARE</b><span>4 min DE LECTURA</span></div>
+          <h2 class="post-title">Copias de seguridad: tu mejor defensa</h2>
+          <p class="post-excerpt">Si tienes respaldo, el secuestro de archivos pierde casi todo su poder.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+      <article class="post-card" data-tag="identidad">
+        <div class="post-image img-slot" data-slot="blog-6" data-label="imagen del artículo 6">
+          <img class="slot-img" alt="" hidden>
+          <div class="slot-empty"><span>Subir imagen</span></div>
+          <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+          <input type="file" accept="image/*" hidden>
+        </div>
+        <div class="post-body">
+          <div class="post-meta"><b>IDENTIDAD DIGITAL</b><span>5 min DE LECTURA</span></div>
+          <h2 class="post-title">Verificación en dos pasos, paso a paso</h2>
+          <p class="post-excerpt">Actívala en tus cuentas principales en menos de diez minutos.</p>
+          <a class="post-link" href="#">Leer artículo ↗</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="../Inicio/index_InicioPresentacion.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <dialog class="auth-dialog" aria-labelledby="auth-title"><button class="dialog-close" aria-label="Cerrar">×</button><div class="auth-brand">DAS <span>DEFENSA ACTIVA</span></div><span class="kicker" id="auth-kicker">TU SEGURIDAD EMPIEZA AQUÍ</span><h2 id="auth-title">Inicia sesión</h2><p class="auth-description">Continúa con tu cuenta DAS.</p><form id="auth-form"><label>Correo electrónico<input type="email" name="email" placeholder="tu@correo.com" autocomplete="email" required></label><label class="password-label">Contraseña<input type="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" autocomplete="current-password" required></label><label class="name-field" hidden>Tu nombre<input type="text" name="name" placeholder="Nombre y apellido" autocomplete="name"></label><button class="button button-red submit-button" type="submit">Entrar <span>↗</span></button><p class="form-message" aria-live="polite"></p></form><p class="auth-switch"><span>¿No tienes cuenta?</span> <button type="button" class="text-button" data-auth="register">Regístrate</button></p><p class="auth-switch register-switch" hidden>¿Ya tienes cuenta? <button type="button" class="text-button" data-auth="login">Inicia sesión</button></p></dialog>
+</body>
+</html>

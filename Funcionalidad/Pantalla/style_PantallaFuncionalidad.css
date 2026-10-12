@@ -1,0 +1,20 @@
+.progress-card{display:grid;grid-template-columns:1fr 1.2fr;gap:32px;align-items:center}
+.progress-caption{font-size:15px;color:var(--muted);margin:0;max-width:380px;line-height:1.5}
+.percent{display:block;font:900 clamp(64px,9vw,120px)/.85 "Barlow Condensed",Impact,sans-serif;color:var(--red);margin-bottom:14px}
+.progress-big .progress{height:12px}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.how-card h3{font:700 20px/1.25 "DM Sans",sans-serif;margin:12px 0 8px}
+.how-card p{font-size:15px;line-height:1.55;color:var(--muted);margin:0}
+.how-num{font:800 40px/1 "Barlow Condensed",sans-serif;color:var(--red)}
+.roadmap{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.road-item{display:grid;grid-template-columns:1fr minmax(220px,.7fr);gap:24px;align-items:center;padding:18px 0;border-bottom:1px solid var(--line)}
+.road-item strong{display:block;font-size:17px}
+.road-item small{display:block;font-size:14px;color:var(--muted);margin-top:3px}
+.road-bar{display:flex;align-items:center;gap:14px}
+.road-bar .progress{flex:1}
+.road-bar b{min-width:42px;text-align:right;font-size:14px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.news-grid.two{grid-template-columns:repeat(2,1fr)}
+.news-card h3{font:700 20px/1.25 "DM Sans",sans-serif;margin:10px 0 8px}
+.news-card p{font-size:15px;line-height:1.55;color:var(--muted);margin:0}
+@media(max-width:900px){.progress-card{grid-template-columns:1fr}.how-grid,.news-grid,.news-grid.two{grid-template-columns:1fr}.road-item{grid-template-columns:1fr;gap:10px}}

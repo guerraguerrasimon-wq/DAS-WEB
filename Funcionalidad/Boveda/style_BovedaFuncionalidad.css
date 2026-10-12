@@ -1,0 +1,54 @@
+.vault-card{max-width:560px}
+.vault-text{font-size:15.5px;line-height:1.55;color:var(--muted);margin:0 0 16px}
+.vault-hint{font-size:13px;color:var(--muted);margin:14px 0 0;line-height:1.5}
+#vault-area label{display:block;font-size:13px;font-weight:700;margin:16px 0 0}
+#vault-area input[type="password"],#vault-area input[type="text"]{width:100%;padding:13px 14px;margin-top:7px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:16px "DM Sans",sans-serif;outline-color:var(--red)}
+.meter{height:8px;background:var(--line);margin-top:10px;overflow:hidden}
+.meter>span{display:block;height:100%;width:0;transition:width .25s,background .25s}
+.meter[data-level="Baja"]>span{width:33%;background:var(--red)}
+.meter[data-level="Media"]>span{width:66%;background:var(--warn)}
+.meter[data-level="Alta"]>span{width:100%;background:var(--ok)}
+.meter-label{font-size:13px;font-weight:700;color:var(--muted);margin:6px 0 0}
+.meter[data-level="Baja"]+.meter-label{color:var(--red)}
+.meter[data-level="Media"]+.meter-label{color:var(--warn)}
+.meter[data-level="Alta"]+.meter-label{color:var(--ok)}
+#vault-area .button[type="submit"],#pick-save{margin-top:6px}
+
+.vault-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+.vault-head .panel-title{margin-bottom:8px}
+.vault-actions{display:flex;gap:10px;flex-wrap:wrap}
+.suggest-label{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:22px 0 12px}
+.app-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-bottom:22px}
+.app-tile{display:flex;flex-direction:column;align-items:flex-start;gap:8px;text-align:left;padding:20px;border:1px solid var(--line);background:var(--card);color:var(--text);font:inherit;cursor:pointer;transition:border-color .2s,transform .2s}
+.app-tile:hover{border-color:var(--red);transform:translateY(-2px)}
+.app-tile[aria-pressed="true"]{border-color:var(--red);box-shadow:inset 0 0 0 1px var(--red)}
+.app-tile strong{font-size:18px}
+.app-tile small{font-size:13px;color:var(--muted)}
+.app-logo{width:48px;height:48px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font:900 24px "Barlow Condensed",sans-serif}
+.app-logo.big{width:72px;height:72px;font-size:36px;flex:none}
+.pill{font-size:12px;font-weight:700;padding:4px 9px;border:1px solid var(--line);color:var(--muted)}
+.pill[data-level="Alta"]{color:var(--red);border-color:var(--red)}
+.pill[data-level="Media"]{color:var(--warn);border-color:var(--warn)}
+.pill[data-level="Baja"]{color:var(--ok);border-color:var(--ok)}
+.custom-add{display:flex;gap:10px;max-width:520px;margin:6px 0 4px}
+.custom-add input{flex:1;min-width:0;padding:13px 14px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:16px "DM Sans",sans-serif;outline-color:var(--red)}
+
+.back{border:0;background:none;color:var(--text);font:600 15px "DM Sans",sans-serif;cursor:pointer;padding:0;margin-bottom:18px}
+.back:hover{color:var(--red)}
+.app-profile{display:flex;align-items:center;gap:22px;margin-bottom:20px}
+.app-name{font:900 clamp(40px,5vw,64px)/.9 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:6px 0 8px}
+.app-columns{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:start}
+.level-big{font:900 64px/.9 "Barlow Condensed",sans-serif;text-transform:uppercase;margin:0 0 20px}
+.level-big[data-level="Alta"]{color:var(--red)}
+.level-big[data-level="Media"]{color:var(--warn)}
+.level-big[data-level="Baja"]{color:var(--ok)}
+.stat{margin-bottom:16px}
+.stat-row{display:flex;justify-content:space-between;font-size:14px;margin-bottom:6px}
+.saved-box{border:1px solid var(--line);background:var(--surface);padding:16px;margin-bottom:6px}
+.saved-box p{margin:0 0 12px;font-size:15px;overflow-wrap:anywhere}
+.saved-box small{color:var(--muted)}
+.pw-row{display:flex;gap:10px;align-items:stretch}
+.pw-row input{flex:1;min-width:0}
+.pw-row .button{margin-top:7px;min-width:96px;justify-content:center}
+@media(max-width:900px){.app-columns{grid-template-columns:1fr}.app-profile{flex-direction:column;align-items:flex-start}}
+@media(max-width:480px){.custom-add{flex-direction:column}}

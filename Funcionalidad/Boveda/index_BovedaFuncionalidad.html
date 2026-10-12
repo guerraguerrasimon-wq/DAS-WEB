@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Bóveda — DAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Base/style_BaseFuncionalidad.css">
+  <link rel="stylesheet" href="style_BovedaFuncionalidad.css">
+  <script src="../Base/script_BaseFuncionalidad.js" defer></script>
+  <script src="script_BovedaFuncionalidad.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="../Links/index_LinksFuncionalidad.html" aria-label="DAS, inicio de la aplicación"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación de la aplicación">
+      <div class="nav-links"><a href="../Links/index_LinksFuncionalidad.html">Escaneo de links</a><a href="index_PantallaFuncionalidad.html">Escaneo de pantalla</a><a href="index_CursosFuncionalidad.html">Cursos</a><a href="index_BovedaFuncionalidad.html" aria-current="page">Bóveda</a></div>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Abrir menú de perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="site">Ir al sitio</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="view-head section-rule">
+      <div class="eyebrow-row"><span class="kicker">04 / BÓVEDA</span><span>TUS CONTRASEÑAS, CIFRADAS.</span></div>
+      <h1 class="view-title">Bóveda</h1>
+      <p class="view-lead">Guarda las contraseñas de tus aplicaciones cifradas con una contraseña maestra y mira qué tan segura es cada una.</p>
+    </section>
+
+    <section class="section-rule pad">
+      <div id="vault-area" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="index_LinksFuncionalidad.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <div class="boot" id="boot" role="status" aria-live="polite" hidden>
+    <div class="boot-card"><div class="boot-brand">DAS</div><div class="boot-bar"><span></span></div><p>Preparando interfaz</p></div>
+  </div>
+</body>
+</html>

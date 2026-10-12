@@ -1,0 +1,19 @@
+.course-search{margin-top:26px;max-width:560px}
+.course-search input{width:100%;padding:15px 18px;border:1px solid var(--line);background:var(--surface);color:var(--text);font:16px "DM Sans",sans-serif;outline-color:var(--red)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.cat-card{display:flex;flex-direction:column}
+.cat-card[hidden]{display:none}
+.cat-card h2{font:800 clamp(28px,3vw,36px)/.95 "Barlow Condensed",Impact,sans-serif;text-transform:uppercase;margin:10px 0 10px}
+.cat-card>p{font-size:15px;line-height:1.55;color:var(--muted);margin:0 0 16px}
+.course-list{list-style:none;margin:0 0 18px;padding:0;border-top:1px solid var(--line)}
+.course-list li{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+.cat-foot{margin-top:auto;display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.cat-foot .soon{color:var(--red);font-weight:700}
+.no-results{text-align:center;color:var(--muted);font-size:16px;margin:24px 0 0}
+.no-results[hidden]{display:none}
+.news-title{margin-top:20px;margin-bottom:24px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.news-card h3{font:700 20px/1.25 "DM Sans",sans-serif;margin:10px 0 8px}
+.news-card p{font-size:15px;line-height:1.55;color:var(--muted);margin:0}
+@media(max-width:900px){.news-grid{grid-template-columns:1fr}}
+@media(max-width:420px){.cat-grid{grid-template-columns:1fr}}

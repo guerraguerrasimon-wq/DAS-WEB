@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>DAS — Defensa activa de tu seguridad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Base/style_BasePresentacion.css">
+  <link rel="stylesheet" href="style_InicioPresentacion.css">
+  <script src="../Base/script_BasePresentacion.js" defer></script>
+  <script src="script_InicioPresentacion.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="index_InicioPresentacion.html" aria-label="DAS, inicio"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <div class="nav-links"><a href="index_InicioPresentacion.html" aria-current="page">Inicio</a><a href="index_InicioPresentacion.html#Cursos">Cursos</a><a href="../Blog/index_BlogPresentacion.html">Blog</a><a href="../Precios/index_PreciosPresentacion.html">Precios</a></div>
+      <button class="icon-button search-button" aria-label="Buscar">⌕</button>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+      <div class="account-actions">
+        <button class="button button-outline" data-auth="login">Iniciar sesión <span>→</span></button>
+        <button class="button button-red" data-auth="register">Registrarse <span>→</span></button>
+      </div>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="app">Ir a la aplicación</button>
+        <button type="button" class="menu-item" data-action="photo">Cambiar foto</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+      <input type="file" class="avatar-input" accept="image/*" hidden>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="hero section-rule" id="inicio" aria-roledescription="carrusel" aria-label="Seguridad digital">
+      <div class="hero-stage">
+        <article class="hero-slide is-active" aria-label="Diapositiva 1 de 4">
+          <div class="hero-bg img-slot" data-slot="hero-1" data-mode="button" data-label="imagen de fondo 1">
+            <img class="slot-img" alt="" hidden>
+            <div class="slot-empty"><b>+</b><span>Subir imagen de fondo</span><small>Haz clic para elegir una</small></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+          </div>
+          <div class="slide-content">
+            <div class="eyebrow-row"><span>PROYECTO DAS / CIBERSEGURIDAD</span><span>EL CONTROL EMPIEZA CONTIGO.</span></div>
+            <h1>SEGURIDAD DIGITAL</h1>
+            <div class="hero-grid">
+              <div class="hero-copy hero-copy-left"><span class="kicker">01 / NO BAJES LA GUARDIA</span><p>Tu vida también ocurre en internet. Cada enlace, descarga y acceso puede abrir una puerta que no querías abrir. Aprende a reconocer el riesgo antes de dar el siguiente clic.</p><button class="button button-red" data-auth="register">Ver más <span>↗</span></button></div>
+              <div class="hero-copy hero-copy-right"><span class="arrow-mark">↗</span><p>No necesitas ser especialista para protegerte. Proyecto DAS transforma señales complejas en decisiones claras: analiza, detecta y te alerta para que navegues con criterio.</p><small>MENOS INCERTIDUMBRE.<br>MÁS CONTROL.</small></div>
+            </div>
+            <span class="hero-caption">HUMANO / DIGITAL / VULNERABLE</span>
+          </div>
+        </article>
+        <article class="hero-slide" aria-label="Diapositiva 2 de 4">
+          <div class="hero-bg img-slot" data-slot="hero-2" data-mode="button" data-label="imagen de fondo 2">
+            <img class="slot-img" alt="" hidden>
+            <div class="slot-empty"><b>+</b><span>Subir imagen de fondo</span><small>Haz clic para elegir una</small></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+          </div>
+          <div class="slide-content">
+            <div class="eyebrow-row"><span>PROYECTO DAS / PHISHING</span><span>DESCONFÍA DE LA URGENCIA.</span></div>
+            <h1>PHISHING</h1>
+            <div class="hero-grid">
+              <div class="hero-copy hero-copy-left"><span class="kicker">02 / NO HAGAS CLIC A CIEGAS</span><p>Un correo de tu banco, un mensaje de un conocido, un premio que no pediste. El phishing se disfraza de lo que ya conoces. Revisa el remitente y el enlace antes de responder.</p><button class="button button-red" data-auth="register">Aprende a detectarlo <span>↗</span></button></div>
+              <div class="hero-copy hero-copy-right"><span class="arrow-mark">↗</span><p>DAS inspecciona la URL y las señales sospechosas de cada enlace para avisarte cuando algo no cuadra, antes de que ingreses tus datos.</p><small>MENOS ENGAÑOS.<br>MÁS CRITERIO.</small></div>
+            </div>
+            <span class="hero-caption">ENLACE / FALSO / PELIGROSO</span>
+          </div>
+        </article>
+        <article class="hero-slide" aria-label="Diapositiva 3 de 4">
+          <div class="hero-bg img-slot" data-slot="hero-3" data-mode="button" data-label="imagen de fondo 3">
+            <img class="slot-img" alt="" hidden>
+            <div class="slot-empty"><b>+</b><span>Subir imagen de fondo</span><small>Haz clic para elegir una</small></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+          </div>
+          <div class="slide-content">
+            <div class="eyebrow-row"><span>PROYECTO DAS / RANSOMWARE</span><span>NO DESCARGUES A CIEGAS.</span></div>
+            <h1>RANSOMWARE</h1>
+            <div class="hero-grid">
+              <div class="hero-copy hero-copy-left"><span class="kicker">03 / UN ARCHIVO, TODO BLOQUEADO</span><p>Una descarga que parece normal puede cifrar tus archivos y pedirte dinero por devolverlos. Pagar no garantiza nada. Prevenir sí.</p><button class="button button-red" data-auth="register">Cómo evitarlo <span>↗</span></button></div>
+              <div class="hero-copy hero-copy-right"><span class="arrow-mark">↗</span><p>El análisis heurístico de DAS detecta comportamientos sospechosos aunque la amenaza sea nueva y todavía no esté registrada.</p><small>MENOS RIESGO.<br>MÁS RESPALDO.</small></div>
+            </div>
+            <span class="hero-caption">ARCHIVO / CIFRADO / BLOQUEADO</span>
+          </div>
+        </article>
+        <article class="hero-slide" aria-label="Diapositiva 4 de 4">
+          <div class="hero-bg img-slot" data-slot="hero-4" data-mode="button" data-label="imagen de fondo 4">
+            <img class="slot-img" alt="" hidden>
+            <div class="slot-empty"><b>+</b><span>Subir imagen de fondo</span><small>Haz clic para elegir una</small></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+          </div>
+          <div class="slide-content">
+            <div class="eyebrow-row"><span>PROYECTO DAS / IDENTIDAD DIGITAL</span><span>TU IDENTIDAD NO ES PÚBLICA.</span></div>
+            <h1>IDENTIDAD DIGITAL</h1>
+            <div class="hero-grid">
+              <div class="hero-copy hero-copy-left"><span class="kicker">04 / TUS DATOS SON TUYOS</span><p>Tus datos pueden usarse para suplantarte, entrar a tus cuentas o cometer fraudes. Cuida lo que compartes y activa la verificación en dos pasos.</p><button class="button button-red" data-auth="register">Protege tu identidad <span>↗</span></button></div>
+              <div class="hero-copy hero-copy-right"><span class="arrow-mark">↗</span><p>Las alertas automatizadas de DAS te avisan cuando detectan una señal de riesgo, para que puedas actuar a tiempo.</p><small>MÁS ALERTAS.<br>MENOS SORPRESAS.</small></div>
+            </div>
+            <span class="hero-caption">IDENTIDAD / DIGITAL / EXPUESTA</span>
+          </div>
+        </article>
+      </div>
+      <button class="hero-arrow hero-prev" aria-label="Diapositiva anterior">‹</button>
+      <button class="hero-arrow hero-next" aria-label="Diapositiva siguiente">›</button>
+      <div class="hero-dots" role="tablist" aria-label="Elegir diapositiva"></div>
+      <div class="hero-foot"><span>NO ES PARANOIA. ES PREVENCIÓN.</span><a href="#amenazas">EXPLORA LAS AMENAZAS ↓</a></div>
+    </section>
+
+    <section class="block section-rule" id="riesgo">
+      <div class="eyebrow-row"><span class="kicker">02 / EL RIESGO ES REAL</span><span>INFORMACIÓN + DEFENSA</span></div>
+      <div class="intro-grid"><h2>No todo lo que ves en<br>internet es seguro</h2><div class="intro-note"><strong>[!]</strong><p>Las amenazas no siempre llegan con una advertencia. Se esconden en un correo que parece legítimo, una oferta demasiado buena o una descarga cotidiana. Basta un clic para exponer tus archivos, tus cuentas y tu identidad.</p></div></div>
+    </section>
+
+    <section class="block section-rule" id="cursos">
+      <div class="eyebrow-row"><span class="kicker">03 / APRENDE A DEFENDERTE</span><span>GUÍAS CORTAS EN VIDEO</span></div>
+      <h2 class="section-title">Cursos</h2>
+      <p class="section-desc">Guías breves en video para reconocer cada amenaza y saber cómo actuar. Empieza por la que más te preocupe.</p>
+      <div class="video-grid">
+        <article class="video-card">
+          <div class="video-image img-slot" data-slot="video-phishing" data-label="miniatura de phishing">
+            <img class="slot-img" alt="Miniatura de la guía de phishing" hidden>
+            <div class="slot-empty"><span>Subir imagen</span></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+            <button class="play-button" aria-label="Reproducir guía de phishing">▶</button><em class="duration">02:14</em>
+          </div>
+          <div class="video-body">
+            <div class="video-meta"><b>PHISHING</b><span>GUÍA EN VIDEO ↗</span></div>
+            <h3 class="video-title">El enlace que no era lo que parecía</h3>
+            <p class="video-desc">Aprende a identificar correos y mensajes falsos: revisa el remitente, desconfía de la urgencia y comprueba el enlace antes de hacer clic.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <div class="video-image img-slot" data-slot="video-ransomware" data-label="miniatura de ransomware">
+            <img class="slot-img" alt="Miniatura de la guía de ransomware" hidden>
+            <div class="slot-empty"><span>Subir imagen</span></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+            <button class="play-button" aria-label="Reproducir guía de ransomware">▶</button><em class="duration">01:48</em>
+          </div>
+          <div class="video-body">
+            <div class="video-meta"><b>RANSOMWARE</b><span>GUÍA EN VIDEO ↗</span></div>
+            <h3 class="video-title">Un archivo. Todo bloqueado.</h3>
+            <p class="video-desc">Entiende cómo un archivo infectado puede bloquear todo tu equipo y qué hábitos, como las copias de seguridad y las descargas seguras, te protegen.</p>
+          </div>
+        </article>
+        <article class="video-card">
+          <div class="video-image img-slot" data-slot="video-identidad" data-label="miniatura de identidad digital">
+            <img class="slot-img" alt="Miniatura de la guía de identidad digital" hidden>
+            <div class="slot-empty"><span>Subir imagen</span></div>
+            <button type="button" class="slot-edit" hidden>Cambiar imagen</button>
+            <input type="file" accept="image/*" hidden>
+            <button class="play-button" aria-label="Reproducir guía de identidad digital">▶</button><em class="duration">03:06</em>
+          </div>
+          <div class="video-body">
+            <div class="video-meta"><b>IDENTIDAD DIGITAL</b><span>GUÍA EN VIDEO ↗</span></div>
+            <h3 class="video-title">Tu identidad en manos de otros</h3>
+            <p class="video-desc">Descubre cómo se usan tus datos para suplantarte y cómo proteger tus cuentas con contraseñas fuertes y verificación en dos pasos.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block section-rule" id="amenazas">
+      <div class="eyebrow-row"><span class="kicker">04 / CONOCE LAS AMENAZAS</span><span>INFORMACIÓN + DEFENSA</span></div>
+      <h2 class="wide-heading">Las amenazas digitales no siempre<br>son evidentes</h2>
+      <div class="risk-grid">
+        <article class="risk-card"><span>01 / AMENAZA <b>♧</b></span><h3>Phishing</h3><p>Un mensaje convincente. Un enlace falso. El phishing imita a personas y marcas de confianza para robar tus contraseñas o datos bancarios.</p><small>DESCONFÍA DE LA URGENCIA.</small></article>
+        <article class="risk-card"><span>02 / AMENAZA <b>⌘</b></span><h3>Malware/Ransomware</h3><p>Software que se infiltra en tu equipo para espiar, dañar o bloquear tus archivos. Un rescate no garantiza que recuperes lo que es tuyo.</p><small>NO DESCARGUES A CIEGAS.</small></article>
+        <article class="risk-card"><span>03 / AMENAZA <b>◎</b></span><h3>Robo de identidad digital</h3><p>Tus datos pueden usarse para suplantarte, acceder a tus cuentas o cometer fraudes en tu nombre.</p><small>TU IDENTIDAD NO ES PÚBLICA.</small></article>
+      </div>
+    </section>
+
+    <section class="about section-rule" id="que-es-das">
+      <div class="eyebrow-row"><span class="kicker">05 / ANTICÍPATE Y PROTÉGETE</span><span>DEFENSA ACTIVA, SIEMPRE.</span></div>
+      <blockquote><span>“</span>La mejor protección es la que activas<br>antes del peligro.</blockquote>
+      <div class="about-grid"><div><h2>¿Qué es DAS?</h2><strong>DEFENSA ACTIVA DE TU SEGURIDAD.</strong></div><div class="about-copy"><p>Proyecto DAS es software de ciberseguridad diseñado para ayudarte a decidir antes de hacer clic. Combina inspección de URLs, análisis heurístico y alertas automatizadas para detectar señales de riesgo y convertirlas en información que puedes entender.</p><dl><div><dt>INSPECCIÓN DE URLS</dt><dd>Revisa el destino y las señales sospechosas de un enlace antes de que accedas.</dd></div><div><dt>ANÁLISIS HEURÍSTICO</dt><dd>Identifica patrones y comportamientos que pueden revelar amenazas nuevas.</dd></div><div><dt>ALERTAS AUTOMATIZADAS</dt><dd>Te avisa cuando detecta un riesgo para que puedas actuar a tiempo.</dd></div></dl></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="index_InicioPresentacion.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <dialog class="auth-dialog" aria-labelledby="auth-title"><button class="dialog-close" aria-label="Cerrar">×</button><div class="auth-brand">DAS <span>DEFENSA ACTIVA</span></div><span class="kicker" id="auth-kicker">TU SEGURIDAD EMPIEZA AQUÍ</span><h2 id="auth-title">Inicia sesión</h2><p class="auth-description">Continúa con tu cuenta DAS.</p><form id="auth-form"><label>Correo electrónico<input type="email" name="email" placeholder="tu@correo.com" autocomplete="email" required></label><label class="password-label">Contraseña<input type="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" autocomplete="current-password" required></label><label class="name-field" hidden>Tu nombre<input type="text" name="name" placeholder="Nombre y apellido" autocomplete="name"></label><button class="button button-red submit-button" type="submit">Entrar <span>↗</span></button><p class="form-message" aria-live="polite"></p></form><p class="auth-switch"><span>¿No tienes cuenta?</span> <button type="button" class="text-button" data-auth="register">Regístrate</button></p><p class="auth-switch register-switch" hidden>¿Ya tienes cuenta? <button type="button" class="text-button" data-auth="login">Inicia sesión</button></p></dialog>
+</body>
+</html>

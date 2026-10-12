@@ -1,0 +1,118 @@
+:root{color-scheme:light;--bg:#f3f0e8;--surface:#faf8f2;--text:#111110;--muted:#6d6a64;--line:#a9a59c;--red:#ec1d24;--card:#f6f3ec;--shadow:0 18px 60px #0002;font-family:"DM Sans",Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);transition:background .25s,color .25s}
+body.dark{color-scheme:dark;--bg:#0d0d0d;--surface:#151515;--text:#f1eee7;--muted:#aaa69e;--line:#55534f;--card:#111;--shadow:0 18px 60px #0008}
+
+/* ---------- Encabezado ---------- */
+.site-header{min-height:84px;padding:0 4.25%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:28px;position:relative}
+.brand{display:flex;align-items:center;gap:11px;color:var(--text);text-decoration:none;flex-shrink:0}
+.brand strong{font:900 44px/1 "Barlow Condensed",sans-serif;letter-spacing:-2px}
+.brand span{font-size:10px;font-weight:700;line-height:1.25}
+.main-nav{display:flex;align-items:center;gap:22px;margin-left:auto}
+.account-actions,.nav-links{display:flex;align-items:center;gap:14px}
+.nav-links{gap:30px}
+.nav-links a,.hero-foot a,footer>a{font-size:16px;font-weight:500;color:var(--text);text-decoration:none}
+.nav-links a:hover,footer>a:hover{color:var(--red)}
+
+.button{border:0;cursor:pointer;text-transform:uppercase;font:700 13px "DM Sans",sans-serif;letter-spacing:.01em}
+.button-red{background:var(--red);color:white;padding:15px 20px;min-width:130px;display:inline-flex;align-items:center;justify-content:space-between;gap:18px;transition:filter .2s,transform .2s}
+.button-red:hover{filter:brightness(.9);transform:translateY(-1px)}
+.button-red span{font-size:20px;line-height:12px}
+/* Iniciar sesión: solo contorno, para que Registrarse sea el único rojo */
+.button-outline{background:transparent;color:var(--text);border:1px solid var(--text);padding:14px 19px;min-width:130px;display:inline-flex;align-items:center;justify-content:space-between;gap:18px;transition:background .2s,color .2s,transform .2s}
+.button-outline:hover{background:var(--text);color:var(--bg);transform:translateY(-1px)}
+.button-outline span{font-size:20px;line-height:12px}
+
+.icon-button,.menu-toggle{width:40px;height:40px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:22px;cursor:pointer}
+.theme-toggle{font-size:20px}
+.menu-toggle{display:none}
+
+/* ---------- Perfil (foto o iniciales) ---------- */
+.profile{position:relative;flex-shrink:0}
+.profile-button{width:46px;height:46px;padding:0;border:1px solid var(--line);border-radius:50%;background:var(--card);color:var(--text);cursor:pointer;overflow:hidden;display:grid;place-items:center;transition:border-color .2s}
+.profile-button:hover{border-color:var(--red)}
+.avatar-initials{font:800 22px/1 "Barlow Condensed",sans-serif;letter-spacing:.02em}
+.avatar-img{width:100%;height:100%;object-fit:cover;display:block}
+.avatar-img[hidden]{display:none}
+.profile-menu{position:absolute;right:0;top:56px;z-index:20;min-width:210px;padding:10px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px}
+.profile-menu[hidden]{display:none}
+.profile-name{font-size:14px;padding:8px 10px 10px;border-bottom:1px solid var(--line);margin-bottom:4px;overflow-wrap:anywhere}
+.menu-item{border:0;background:none;color:var(--text);font:500 15px "DM Sans",sans-serif;text-align:left;padding:10px;cursor:pointer}
+.menu-item:hover{color:var(--red)}
+
+/* ---------- Secciones ---------- */
+.section-rule{border-bottom:1px solid var(--line);padding:0 4.25%}
+.eyebrow-row{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:600;letter-spacing:.03em}
+.kicker{color:var(--red);font-size:12px;font-weight:700}
+
+/* ---------- Espacios para imágenes ---------- */
+.img-slot{position:relative;overflow:hidden;background:#d9d6cf;cursor:pointer}
+body.dark .img-slot{background:#1c1c1c}
+.slot-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.slot-img[hidden]{display:none}
+.slot-empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;color:var(--muted);border:1.5px dashed var(--line);margin:12px;transition:color .2s,border-color .2s}
+.img-slot:hover .slot-empty{color:var(--red);border-color:var(--red)}
+.slot-empty b{font:600 44px/1 "Barlow Condensed",sans-serif}
+.slot-empty span{font-size:15px;font-weight:700}
+.slot-empty small{font-size:12px}
+.slot-empty[hidden]{display:none}
+.slot-edit{position:absolute;top:10px;right:10px;z-index:3;border:0;background:var(--red);color:#fff;font:700 12px "DM Sans",sans-serif;padding:8px 11px;cursor:pointer;opacity:0;transition:opacity .2s}
+.img-slot:hover .slot-edit,.slot-edit:focus-visible{opacity:1}
+.slot-edit[hidden]{display:none}
+
+/* ---------- Ventana de acceso ---------- */
+.auth-dialog{width:min(460px,calc(100% - 32px));border:1px solid var(--line);padding:36px 40px;background:var(--surface);color:var(--text);box-shadow:var(--shadow)}
+.auth-dialog::backdrop{background:#080808b8;backdrop-filter:blur(3px)}
+.dialog-close{position:absolute;right:14px;top:11px;border:0;background:none;color:var(--text);font-size:30px;cursor:pointer}
+.auth-brand{font:900 40px/1 "Barlow Condensed",sans-serif;margin-bottom:26px}
+.auth-brand span{font:700 11px "DM Sans",sans-serif;vertical-align:middle}
+.auth-dialog h2{font:800 46px/.95 "Barlow Condensed",sans-serif;text-transform:uppercase;margin:9px 0}
+.auth-description,.auth-switch{font-size:14px;color:var(--muted)}
+.auth-dialog form{margin-top:24px}
+.auth-dialog label{display:block;font-size:13px;font-weight:700;margin:14px 0}
+.auth-dialog input{width:100%;padding:13px 12px;margin-top:7px;border:1px solid var(--line);background:var(--bg);color:var(--text);font:15px "DM Sans",sans-serif;outline-color:var(--red)}
+.submit-button{width:100%;margin-top:8px}
+.form-message{min-height:18px;color:var(--red);font-size:13px}
+.text-button{padding:0;border:0;background:none;color:var(--red);font:700 14px "DM Sans",sans-serif;cursor:pointer}
+.auth-switch{margin-top:22px}
+.auth-switch[hidden],label[hidden]{display:none!important}
+
+
+/* ---------- Pie de página ---------- */
+.site-footer{min-height:56px;padding:0 4.25%;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--muted);font-size:11px}
+.site-footer>a{font-size:12px}
+.footer-brand strong{font-size:26px}
+.nav-links a[aria-current="page"]{color:var(--red)}
+
+/* ---------- Adaptación ---------- */
+@media(max-width:1100px){
+  .nav-links{gap:20px}
+  .nav-links a{font-size:15px}
+  .main-nav{gap:14px}
+  .account-actions .button{min-width:0;padding-left:14px;padding-right:14px}
+}
+@media(max-width:900px){
+  .site-header{padding:0 3%;gap:16px}
+  .section-rule{padding-left:3%;padding-right:3%}
+}
+@media(max-width:680px){
+  .site-header{min-height:68px}
+  .menu-toggle{display:block}
+  .profile{margin-left:auto}
+  .profile-button{width:42px;height:42px}
+  .main-nav{display:none;position:absolute;z-index:5;top:100%;left:0;right:0;margin:0;padding:20px 5%;background:var(--surface);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch}
+  .main-nav.open{display:flex}
+  .account-actions{order:2;margin:0;justify-content:flex-start;flex-wrap:wrap}
+  .nav-links{order:1;justify-content:space-between;padding:5px 0}
+  .nav-links a{font-size:17px}
+  .search-button{display:none}
+  .theme-toggle{order:3;align-self:flex-start}
+  .eyebrow-row{font-size:11px;gap:10px}
+  .slot-edit{opacity:1}
+  .site-footer{flex-wrap:wrap;padding:10px 0;font-size:10px}
+  .auth-dialog{padding:30px 25px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}

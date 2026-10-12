@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Escaneo de pantalla — DAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Base/style_BaseFuncionalidad.css">
+  <link rel="stylesheet" href="style_PantallaFuncionalidad.css">
+  <script src="../Base/script_BaseFuncionalidad.js" defer></script>
+  <script src="script_PantallaFuncionalidad.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="../Links/index_LinksFuncionalidad.html" aria-label="DAS, inicio de la aplicación"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación de la aplicación">
+      <div class="nav-links"><a href="../Links/index_LinksFuncionalidad.html">Escaneo de links</a><a href="index_PantallaFuncionalidad.html" aria-current="page">Escaneo de pantalla</a><a href="../Cursos/index_CursosFuncionalidad.html">Cursos</a><a href="../Boveda/index_BovedaFuncionalidad.html">Bóveda</a></div>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Abrir menú de perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="site">Ir al sitio</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="view-head section-rule">
+      <div class="eyebrow-row"><span class="kicker">02 / ESCANEO DE PANTALLA</span><span>PRÓXIMAMENTE.</span></div>
+      <h1 class="view-title">Escaneo de pantalla</h1>
+      <p class="view-lead">Estamos construyendo una forma de revisar lo que ves en tu celular con un solo gesto. Aquí publicamos cómo va el avance.</p>
+    </section>
+
+    <section class="section-rule pad">
+      <article class="panel progress-card">
+        <div>
+          <span class="kicker">ESTADO DEL DESARROLLO</span>
+          <h2 class="panel-title">Avance general</h2>
+          <p class="progress-caption">En planificación. Esta barra irá subiendo a medida que avancemos.</p>
+        </div>
+        <div class="progress-big">
+          <strong class="percent" id="overall-percent">0%</strong>
+          <div class="progress" role="progressbar" aria-label="Avance general" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="overall-bar" data-progress="0"></span></div>
+        </div>
+      </article>
+    </section>
+
+    <section class="section-rule pad">
+      <h2 class="section-title">Cómo funcionará</h2>
+      <p class="section-desc">Pensado para el celular: sin copiar links ni abrir otra app.</p>
+      <div class="how-grid">
+        <article class="panel how-card"><span class="how-num">01</span><h3>Presiona el botón de encendido</h3><p>Con un gesto rápido, al estilo del asistente de Google, activas DAS sobre lo que tienes en pantalla.</p></article>
+        <article class="panel how-card"><span class="how-num">02</span><h3>DAS escanea la pantalla</h3><p>Captura lo que aparece y busca señales de riesgo: links dudosos, mensajes urgentes y formularios que piden datos.</p></article>
+        <article class="panel how-card"><span class="how-num">03</span><h3>El asistente te evalúa</h3><p>Recibes una evaluación clara y en tu idioma, con la esencia de DAS: sin tecnicismos y con el siguiente paso a seguir.</p></article>
+      </div>
+    </section>
+
+    <section class="section-rule pad">
+      <h2 class="section-title">Hoja de ruta</h2>
+      <p class="section-desc">Cada etapa tiene su propio avance.</p>
+      <ul class="roadmap">
+        <li class="road-item"><div><strong>Diseño de la experiencia</strong><small>Cómo se activa y cómo se ve el resultado</small></div><div class="road-bar"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress="0"></span></div><b>0%</b></div></li>
+        <li class="road-item"><div><strong>Captura de pantalla</strong><small>Tomar la imagen al pulsar el botón de encendido</small></div><div class="road-bar"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress="0"></span></div><b>0%</b></div></li>
+        <li class="road-item"><div><strong>Análisis y evaluación</strong><small>Detectar links, mensajes y formularios riesgosos</small></div><div class="road-bar"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress="0"></span></div><b>0%</b></div></li>
+        <li class="road-item"><div><strong>Asistente DAS</strong><small>Explicar el riesgo con la esencia de DAS</small></div><div class="road-bar"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress="0"></span></div><b>0%</b></div></li>
+        <li class="road-item"><div><strong>Pruebas con usuarios</strong><small>Ajustes antes del lanzamiento</small></div><div class="road-bar"><div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span data-progress="0"></span></div><b>0%</b></div></li>
+      </ul>
+    </section>
+
+    <section class="pad">
+      <h2 class="section-title">Noticias</h2>
+      <p class="section-desc">Novedades de esta función.</p>
+      <div class="news-grid two">
+        <article class="panel news-card"><span class="kicker">AVANCE</span><h3>Así imaginamos la evaluación</h3><p>Después de la captura, el asistente DAS explica qué ve y qué tan riesgoso es, como un profesor que te acompaña y no como una alarma que asusta.</p></article>
+        <article class="panel news-card"><span class="kicker">DISPONIBILIDAD</span><h3>Pensado para el celular</h3><p>Esta función necesita estar en el teléfono para reaccionar al botón de encendido. Cuando haya avances, los publicaremos aquí.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="index_LinksFuncionalidad.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <div class="boot" id="boot" role="status" aria-live="polite" hidden>
+    <div class="boot-card"><div class="boot-brand">DAS</div><div class="boot-bar"><span></span></div><p>Preparando interfaz</p></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Cursos — DAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style_BaseFuncionalidad.css">
+  <link rel="stylesheet" href="style_CursosFuncionalidad.css">
+  <script src="script_BaseFuncionalidad.js" defer></script>
+  <script src="script_CursosFuncionalidad.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="index_LinksFuncionalidad.html" aria-label="DAS, inicio de la aplicación"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación de la aplicación">
+      <div class="nav-links"><a href="index_LinksFuncionalidad.html">Escaneo de links</a><a href="index_PantallaFuncionalidad.html">Escaneo de pantalla</a><a href="index_CursosFuncionalidad.html" aria-current="page">Cursos</a><a href="index_BovedaFuncionalidad.html">Bóveda</a></div>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Abrir menú de perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="site">Ir al sitio</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="view-head section-rule">
+      <div class="eyebrow-row"><span class="kicker">03 / CURSOS</span><span>APRENDE A TU RITMO.</span></div>
+      <h1 class="view-title">Cursos</h1>
+      <p class="view-lead">Un catálogo organizado en cinco rutas, desde las bases hasta la estrategia. Los cursos listados son de ejemplo mientras se define el contenido final.</p>
+      <form class="course-search" id="course-search" role="search" novalidate>
+        <label class="sr-only" for="course-q">Buscar curso</label>
+        <input id="course-q" type="search" placeholder="Buscar un curso o una ruta…" autocomplete="off">
+      </form>
+    </section>
+
+    <section class="section-rule pad">
+      <div class="cat-grid" id="cat-grid">
+        <article class="cat-card panel">
+          <span class="kicker">01 / NIVEL BÁSICO</span>
+          <h2>Fundamentos de ciberseguridad</h2>
+          <p>Las bases para moverte seguro en internet: conceptos, amenazas comunes y buenos hábitos.</p>
+          <ul class="course-list"><li>Introducción a la ciberseguridad</li><li>Contraseñas y autenticación</li><li>Redes y navegación segura</li><li>Ingeniería social para principiantes</li></ul>
+          <div class="cat-foot"><span>4 cursos</span><span class="soon">Próximamente</span></div>
+        </article>
+        <article class="cat-card panel">
+          <span class="kicker">02 / NIVEL INTERMEDIO</span>
+          <h2>Hacking ético y pentesting</h2>
+          <p>Aprende a pensar como un atacante para encontrar las fallas antes que ellos.</p>
+          <ul class="course-list"><li>Reconocimiento y OSINT</li><li>Pruebas de intrusión web</li><li>Metodología de pentesting</li><li>Escalamiento de privilegios</li></ul>
+          <div class="cat-foot"><span>4 cursos</span><span class="soon">Próximamente</span></div>
+        </article>
+        <article class="cat-card panel">
+          <span class="kicker">03 / NIVEL AVANZADO</span>
+          <h2>Análisis de malware e ingeniería forense</h2>
+          <p>Entiende cómo funciona el software malicioso y cómo reconstruir lo que pasó en un incidente.</p>
+          <ul class="course-list"><li>Análisis estático de malware</li><li>Análisis de memoria y procesos</li><li>Evidencia digital y cadena de custodia</li><li>Informes forenses</li></ul>
+          <div class="cat-foot"><span>4 cursos</span><span class="soon">Próximamente</span></div>
+        </article>
+        <article class="cat-card panel">
+          <span class="kicker">04 / NIVEL INTERMEDIO</span>
+          <h2>Seguridad defensiva y cumplimiento</h2>
+          <p>Protege sistemas y organizaciones, y cumple las normas que aplican.</p>
+          <ul class="course-list"><li>Monitoreo y respuesta a incidentes</li><li>Hardening de sistemas</li><li>ISO 27001 en la práctica</li><li>Protección de datos personales (Ley 1581 de 2012)</li></ul>
+          <div class="cat-foot"><span>4 cursos</span><span class="soon">Próximamente</span></div>
+        </article>
+        <article class="cat-card panel">
+          <span class="kicker">05 / NIVEL AVANZADO</span>
+          <h2>Ciberseguridad estratégica</h2>
+          <p>Decisiones de seguridad a nivel de negocio: riesgo, gobierno y continuidad.</p>
+          <ul class="course-list"><li>Gestión de riesgos</li><li>Gobierno de la seguridad de la información</li><li>Continuidad del negocio</li><li>Seguridad en la nube</li></ul>
+          <div class="cat-foot"><span>4 cursos</span><span class="soon">Próximamente</span></div>
+        </article>
+      </div>
+      <p class="no-results" id="no-results" hidden>No encontramos cursos con ese nombre.</p>
+    </section>
+
+    <section class="pad">
+      <div class="eyebrow-row"><span class="kicker">NOVEDADES</span><span>NOTICIAS DE LOS CURSOS</span></div>
+      <h2 class="section-title news-title">Novedades de los cursos</h2>
+      <div class="news-grid">
+        <article class="panel news-card"><span class="kicker">NOVEDAD</span><h3>Catálogo en preparación</h3><p>Estamos organizando los cursos en cinco rutas. Pronto verás cuáles están disponibles para empezar.</p></article>
+        <article class="panel news-card"><span class="kicker">NOVEDAD</span><h3>Más rutas próximamente</h3><p>Cuando se sumen cursos nuevos a cada ruta, los anunciaremos en esta sección.</p></article>
+        <article class="panel news-card"><span class="kicker">NOVEDAD</span><h3>Cómo te avisaremos</h3><p>Las noticias de los cursos aparecerán aquí, al final del catálogo, para que no te pierdas nada.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="index_LinksFuncionalidad.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <div class="boot" id="boot" role="status" aria-live="polite" hidden>
+    <div class="boot-card"><div class="boot-brand">DAS</div><div class="boot-bar"><span></span></div><p>Preparando interfaz</p></div>
+  </div>
+</body>
+</html>

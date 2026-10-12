@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3f0e8">
+  <title>Precios — DAS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Base/style_BasePresentacion.css">
+  <link rel="stylesheet" href="style_precios_presentacion.css">
+  <script src="../Base/script_BasePresentacion.js" defer></script>
+  <script src="script_precios_presentacion.js" defer></script>
+</head>
+<body>
+  <header class="site-header" id="top">
+    <a class="brand" href="../Inicio/index_InicioPresentacion.html" aria-label="DAS, inicio"><strong>DAS</strong><span>DEFENSA ACTIVA<br>DE TU SEGURIDAD</span></a>
+
+    <nav class="main-nav" aria-label="Navegación principal">
+      <div class="nav-links"><a href="../Inicio/index_InicioPresentacion.html">Inicio</a><a href="../Inicio/index_InicioPresentacion.html#Cursos">Cursos</a><a href="../Blog/index_BlogPresentacion.html">Blog</a><a href="index_PreciosPresentacion.html" aria-current="page">Precios</a></div>
+      <button class="icon-button search-button" aria-label="Buscar">⌕</button>
+      <button class="icon-button theme-toggle" aria-label="Cambiar a modo oscuro" title="Cambiar tema"><span class="theme-icon">☾</span></button>
+      <div class="account-actions">
+        <button class="button button-outline" data-auth="login">Iniciar sesión <span>→</span></button>
+        <button class="button button-red" data-auth="register">Registrarse <span>→</span></button>
+      </div>
+    </nav>
+
+    <div class="profile">
+      <button class="profile-button" aria-label="Perfil" aria-haspopup="true" aria-expanded="false">
+        <img class="avatar-img" alt="Foto de perfil" hidden>
+        <span class="avatar-initials">◉</span>
+      </button>
+      <div class="profile-menu" hidden>
+        <strong class="profile-name"></strong>
+        <button type="button" class="menu-item" data-action="app">Ir a la aplicación</button>
+        <button type="button" class="menu-item" data-action="photo">Cambiar foto</button>
+        <button type="button" class="menu-item" data-action="logout">Cerrar sesión</button>
+      </div>
+      <input type="file" class="avatar-input" accept="image/*" hidden>
+    </div>
+
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="page-head section-rule">
+      <div class="eyebrow-row"><span class="kicker">PRECIOS / PLANES</span><span>DEFENSA ACTIVA, SIEMPRE.</span></div>
+      <h1 class="page-title">PRECIOS</h1>
+      <p class="page-lead">Elige cómo quieres defenderte. Los planes y precios se confirmarán antes del lanzamiento.</p>
+    </section>
+    <section class="plans section-rule">
+      <article class="plan">
+        <span class="kicker">PLAN</span>
+        <h2>BÁSICO</h2>
+        <p class="plan-sub">Para empezar a protegerte</p>
+        <p class="plan-price">Precio por definir</p>
+        <ul><li>Escaneo de links</li><li>Cursos de fundamentos</li><li>Alertas básicas</li></ul>
+        <button class="button button-red" data-auth="register">Elegir Básico <span>→</span></button>
+      </article>
+      <article class="plan featured">
+        <span class="kicker">RECOMENDADO</span>
+        <h2>PRO</h2>
+        <p class="plan-sub">Para defender todo lo tuyo</p>
+        <p class="plan-price">Precio por definir</p>
+        <ul><li>Todo lo del plan Básico</li><li>Bóveda de contraseñas</li><li>Escaneo de pantalla</li><li>Catálogo completo de cursos</li></ul>
+        <button class="button button-red" data-auth="register">Elegir Pro <span>→</span></button>
+      </article>
+      <article class="plan">
+        <span class="kicker">PLAN</span>
+        <h2>EQUIPOS</h2>
+        <p class="plan-sub">Para grupos y organizaciones</p>
+        <p class="plan-price">Precio por definir</p>
+        <ul><li>Todo lo del plan Pro</li><li>Varias cuentas bajo un mismo plan</li><li>Soporte prioritario</li></ul>
+        <button class="button button-red" data-auth="register">Elegir Equipos <span>→</span></button>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="brand footer-brand" href="../Inicio/index_InicioPresentacion.html"><strong>DAS</strong></a><span>PROYECTO DAS / LA SEGURIDAD NO SE IMPROVISA.</span><a href="#top">VOLVER ARRIBA ↑</a></footer>
+
+  <dialog class="auth-dialog" aria-labelledby="auth-title"><button class="dialog-close" aria-label="Cerrar">×</button><div class="auth-brand">DAS <span>DEFENSA ACTIVA</span></div><span class="kicker" id="auth-kicker">TU SEGURIDAD EMPIEZA AQUÍ</span><h2 id="auth-title">Inicia sesión</h2><p class="auth-description">Continúa con tu cuenta DAS.</p><form id="auth-form"><label>Correo electrónico<input type="email" name="email" placeholder="tu@correo.com" autocomplete="email" required></label><label class="password-label">Contraseña<input type="password" name="password" placeholder="Mínimo 8 caracteres" minlength="8" autocomplete="current-password" required></label><label class="name-field" hidden>Tu nombre<input type="text" name="name" placeholder="Nombre y apellido" autocomplete="name"></label><button class="button button-red submit-button" type="submit">Entrar <span>↗</span></button><p class="form-message" aria-live="polite"></p></form><p class="auth-switch"><span>¿No tienes cuenta?</span> <button type="button" class="text-button" data-auth="register">Regístrate</button></p><p class="auth-switch register-switch" hidden>¿Ya tienes cuenta? <button type="button" class="text-button" data-auth="login">Inicia sesión</button></p></dialog>
+</body>
+</html>
